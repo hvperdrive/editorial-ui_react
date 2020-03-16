@@ -1,6 +1,6 @@
 import { addons } from '@storybook/addons';
 
-import editorialTheme from './editorial-theme';
+import editorialTheme from './theme';
 
 addons.setConfig({
 	theme: editorialTheme,
