@@ -3,4 +3,8 @@ module.exports = {
 		'react-app',
 		'eslint:recommended',
 	],
+	ignorePatterns: [
+		'node_modules/',
+		'dist/',
+	],
 };
