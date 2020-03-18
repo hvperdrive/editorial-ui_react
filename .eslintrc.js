@@ -19,6 +19,7 @@ const rules = {
 		'newlines-between': 'always',
 	}],
 	'import/prefer-default-export': 'off',
+	'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
 	'react/jsx-indent': ['error', 'tab'],
 	'react/require-default-props': ['error', { ignoreFunctionalComponents: true }]
