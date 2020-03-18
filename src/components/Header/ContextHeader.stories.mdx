@@ -1,0 +1,34 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Button, Breadcrumbs } from '@acpaas-ui/react-components';
+
+import {
+	CONTEXT_HEADER_MOCK_BADGES,
+	CONTEXT_HEADER_MOCK_TABS,
+	CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS,
+} from './ContextHeader.mock.js';
+import ContextHeader, { ContextHeaderTopSection, ContextHeaderActionsSection } from './ContextHeader.jsx';
+
+<Meta title="ContextHeader" component={ContextHeader} />
+
+# Context header
+
+Some Explanation about our context header
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title="Header title">
+			<ContextHeaderTopSection>
+				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
+			</ContextHeaderTopSection>
+			<ContextHeaderActionsSection>
+				<Button>Action</Button>
+			</ContextHeaderActionsSection>
+		</ContextHeader>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={ContextHeader} />

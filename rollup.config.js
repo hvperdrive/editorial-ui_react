@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy'
+import postcss from 'rollup-plugin-postcss';
 import { terser } from "rollup-plugin-terser";
 
 import pkg from './package.json';
@@ -12,8 +13,11 @@ export default {
 		{ file: pkg.module, format: 'es' },
 	],
 	plugins: [
+		postcss({
+			modules: true,
+		}),
 		resolve({
-			extensions: ['.js', '.jsx'],
+			extensions: ['.js', '.jsx', '.scss'],
 		}),
 		babel(),
 		terser(),
