@@ -1,21 +1,27 @@
 import { Badge, Tabs } from '@acpaas-ui/react-components';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useSlot } from '../../hooks/useSlot';
 
-import { headerPropTypes } from './ContextHeader.const';
 import styles from './ContextHeader.module.scss';
 
 export const ContextHeaderTopSection = ({ children }) => <>{children}</>;
 export const ContextHeaderActionsSection = ({ children }) => <>{children}</>;
 
 ContextHeaderActionsSection.propTypes = {
-	children: React.children,
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
 };
 
 ContextHeaderTopSection.propTypes = {
-	children: React.children,
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
 };
 
 const cx = classNames.bind(styles);
@@ -23,7 +29,7 @@ const cx = classNames.bind(styles);
 const ContextHeader = ({
 	className,
 	children,
-	title,
+	title = '',
 	linkProps = (props) => props,
 	badges = [],
 	tabs = [],
@@ -34,10 +40,9 @@ const ContextHeader = ({
 	const renderBadges = () => {
 		if (badges && badges.length > 0) {
 			return (
-				<div>
+				<div data-testid="o-context-header__badges">
 					{
 						badges.map((badge, index) => (
-							// eslint-disable-next-line react/no-array-index-key
 							<Badge className="u-margin-right-xs u-margin-top-xs u-margin-bottom-xs" key={index} type={badge.type}>
 								{badge.name}
 							</Badge>
@@ -52,7 +57,7 @@ const ContextHeader = ({
 
 	const renderTabs = () => {
 		if (tabs && tabs.length > 0) {
-			return <Tabs linkProps={linkProps} align="left" items={tabs} />;
+			return <Tabs data-testid="o-context-header__tabs" linkProps={linkProps} align="left" items={tabs} />;
 		}
 
 		return null;
@@ -92,6 +97,37 @@ const ContextHeader = ({
 	);
 };
 
-ContextHeader.propTypes = { ...headerPropTypes };
+ContextHeader.propTypes = {
+	/**
+	 * Class name that will be added to the root element
+	 * of the component
+	 */
+	className: PropTypes.string,
+	/**
+	 * Children
+	 */
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
+	/** The title */
+	title: PropTypes.string.isRequired,
+	/** Badges, which are shown on the right side of the title */
+	badges: PropTypes.arrayOf(PropTypes.shape({
+		type: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger']).isRequired,
+		name: PropTypes.string.isRequired,
+	})),
+	/** tabs, which are shown on the bottom of the component */
+	tabs: PropTypes.arrayOf(PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		target: PropTypes.string.isRequired,
+		active: PropTypes.bool,
+		disabled: PropTypes.bool,
+	})),
+	/**
+	 * Use this to pass a custom link-component to override the default <a> tag used inside the tabs
+	 * */
+	linkProps: PropTypes.func,
+};
 
 export default ContextHeader;

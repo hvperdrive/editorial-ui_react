@@ -1,3 +1,5 @@
+export const CONTEXT_HEADER_MOCK_TITLE = 'Header title';
+
 export const CONTEXT_HEADER_MOCK_BADGES = [
 	{
 		name: 'label',
