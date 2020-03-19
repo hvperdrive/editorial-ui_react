@@ -23,6 +23,7 @@ export const getHeaderProps = (col, activeSorting, onSortClick) => {
 		key: `${keyPrefix}-${col.label}`,
 		component: col.headerComponent,
 		classList: col.classList,
+		disableSorting: col.disableSorting,
 		label: col.label,
 		value: col.value,
 		activeSorting,

@@ -6,6 +6,7 @@ export const TABLE_MOCK_COLUMNS = [
 	{
 		label: '#',
 		value: 'id',
+		disableSorting: true,
 	},
 	{
 		label: 'First name',
@@ -17,6 +18,7 @@ export const TABLE_MOCK_COLUMNS = [
 	},
 	{
 		label: 'Full name',
+		value: 'fullName',
 		format(data, col, rowData) {
 			const { firstName, lastName } = rowData;
 
@@ -31,6 +33,7 @@ export const TABLE_MOCK_COLUMNS = [
 			return <Button onClick={action(`Row id is ${id}`)} size="small">Click me!</Button>;
 		},
 		classList: ['is-condensed'],
+		disableSorting: true,
 	},
 ];
 

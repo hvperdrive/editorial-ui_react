@@ -1,4 +1,6 @@
+import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { useState } from 'react';
 
 import Table from './Table';
 import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
@@ -8,22 +10,23 @@ import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
 
 # Table
 
-Some Explanation about our Table component
+Some explanation about our Table component
 
 ## Preview of component
 
 <Preview>
 	<Story name='Base'>
-		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 5)} />
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 5)}/>
 	</Story>
 </Preview>
-
 
 ## Props
 
 <Props of={Table} />
 
 ## Stories
+
+Group stories based on props
 
 ### Placeholder messages
 
@@ -36,6 +39,28 @@ Some Explanation about our Table component
 	</Story>
 	<Story name='No data'>
 		<Table columns={TABLE_MOCK_COLUMNS} />
+	</Story>
+</Preview>
+
+### Sortable columns
+
+<Preview>
+	<Story name='Sortable'>
+		{() => {
+			const [sorting, setSorting] = useState({ key: 'firstName', order: 'asc' });
+			const onOrderBy = (orderBy) => {
+				action('Sort column');
+				setSorting(orderBy);
+			};
+			return (
+				<Table
+					columns={TABLE_MOCK_COLUMNS}
+					rows={TABLE_MOCK_ROWS.slice(0, 5)}
+					activeSorting={sorting}
+					orderBy={setSorting}
+				/>
+			);
+		}}
 	</Story>
 </Preview>
 
