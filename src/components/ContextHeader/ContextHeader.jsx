@@ -43,7 +43,6 @@ const ContextHeader = ({
 				<div data-testid="o-context-header__badges">
 					{
 						badges.map((badge, index) => (
-							// eslint-disable-next-line react/no-array-index-key
 							<Badge className="u-margin-right-xs u-margin-top-xs u-margin-bottom-xs" key={index} type={badge.type}>
 								{badge.name}
 							</Badge>
