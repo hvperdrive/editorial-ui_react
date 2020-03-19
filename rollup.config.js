@@ -1,7 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import autoprefixer from 'autoprefixer';
 import babel from 'rollup-plugin-babel';
-import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 
@@ -25,10 +24,6 @@ export default {
 		}),
 		babel(),
 		terser(),
-		copy({
-			targets: [{ src: 'src/**/*.d.ts', dest: 'dist/types' }],
-			flatten: false,
-		}),
 	],
 	external: [
 		'@acpaas-ui/react-components',
