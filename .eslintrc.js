@@ -25,7 +25,19 @@ const rules = {
 	'react/jsx-props-no-spreading': 'off',
 	'react/jsx-indent-props': ['error', 'tab'],
 	'react/no-array-index-key': 'off',
-	'import/no-extraneous-dependencies': 'off',
+	'import/no-extraneous-dependencies': [
+		'error',
+		{
+			'devDependencies': [
+				'**/*.test.{js,jsx}',
+				'**/*.spec.{js,jsx}',
+				'**/*.stories.mdx',
+				'**/*.mock.{js,jsx}',
+				'rollup.config.js',
+				'src/setupTests.js',
+			],
+		},
+	],
 };
 
 module.exports = {
