@@ -17,8 +17,8 @@ const TableRow = ({
 );
 
 TableRow.propTypes = {
-	children: PropTypes.node,
 	className: PropTypes.string,
+	children: PropTypes.node,
 	hasClickAction: PropTypes.bool,
 	onClick: PropTypes.func,
 };

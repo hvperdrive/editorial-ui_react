@@ -10,10 +10,10 @@ const TableCell = ({
 	<td>{component ? component(value, rowData, rowIndex) : value}</td>
 );
 
+
 TableCell.propTypes = {
 	component: PropTypes.func,
-	// eslint-disable-next-line react/forbid-prop-types
-	rowData: PropTypes.any,
+	rowData: PropTypes.oneOfType([PropTypes.object]),
 	rowIndex: PropTypes.number,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };

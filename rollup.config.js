@@ -27,6 +27,8 @@ export default {
 		}),
 	],
 	external: [
+		'@acpaas-ui/react-components',
+		'classnames',
 		'prop-types',
 		'react',
 	],
