@@ -39,7 +39,7 @@ export interface TableProps extends DefaultComponentProps {
 	responsive?: boolean;
 	hasClickAction?: boolean;
 	activeSorting?: TableOrderBy;
-	noDataMesssage?: string;
+	noDataMessage?: string;
 	loadDataMessage?: string;
 	noColumnsMessage?: string;
 	orderBy?: (value: TableOrderBy) => void;
