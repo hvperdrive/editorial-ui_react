@@ -36,6 +36,7 @@ const rules = {
 				'**/*.mock.{js,jsx}',
 				'rollup.config.js',
 				'src/setupTests.js',
+				'scripts/jest-setup.js',
 			],
 		},
 	],
