@@ -1,8 +1,8 @@
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-import { DEFAULT_MESSAGE, tablePropTypes } from './Table.const';
-import { getHeaderProps, getCellProps } from './Table.helpers';
+import { getCellProps, getHeaderProps } from './Table.helpers';
 import TableCell from './TableCell/TableCell';
 import TableHeader from './TableHeader/TableHeader';
 import TablePlaceholder from './TablePlaceholder/TablePlaceholder';
@@ -20,9 +20,9 @@ const Table = ({
 	rowClicked,
 	striped = true,
 	type,
-	loadDataMessage = DEFAULT_MESSAGE.loading,
-	noColumnsMessage = DEFAULT_MESSAGE.noColumns,
-	noDataMesssage = DEFAULT_MESSAGE.noData,
+	loadDataMessage = 'Loading data...',
+	noColumnsMessage = 'No columns available.',
+	noDataMessage = 'No data available.',
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -58,7 +58,7 @@ const Table = ({
 				{columns.length > 0 && (
 					<thead>
 						<TableRow>
-							{columns.map(col => (
+							{columns.map((col) => (
 								<TableHeader {...getHeaderProps(col, activeSorting, onSortClick)} />
 							))}
 						</TableRow>
@@ -71,7 +71,7 @@ const Table = ({
 							hasCols={hasCols}
 							hasData={hasData}
 							loading={loading}
-							noDataMesssage={noDataMesssage}
+							noDataMessage={noDataMessage}
 							loadDataMessage={loadDataMessage}
 							noColumnsMessage={noColumnsMessage}
 						/>
@@ -82,7 +82,7 @@ const Table = ({
 								hasClickAction={hasClickAction}
 								onClick={() => onRowClick(row)}
 							>
-								{columns.map(col => (
+								{columns.map((col) => (
 									<TableCell {...getCellProps(col, row, rowIndex)} />
 								))}
 							</TableRow>
@@ -94,6 +94,37 @@ const Table = ({
 	);
 };
 
-Table.propTypes = {...tablePropTypes};
+Table.propTypes = {
+	className: PropTypes.string,
+	rows: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
+	columns: PropTypes.arrayOf(PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.shape({
+			label: PropTypes.string.isRequired,
+			value: PropTypes.string,
+			component: PropTypes.func,
+			headerComponent: PropTypes.func,
+			format: PropTypes.func,
+			hidden: PropTypes.bool,
+			disabled: PropTypes.bool,
+			disableSorting: PropTypes.bool,
+			classList: PropTypes.arrayOf(PropTypes.string),
+		}),
+	])),
+	loading: PropTypes.bool,
+	responsive: PropTypes.bool,
+	hasClickAction: PropTypes.bool,
+	activeSorting: PropTypes.shape({
+		key: PropTypes.string,
+		order: PropTypes.oneOf(['asc', 'desc']),
+	}),
+	noDataMessage: PropTypes.string,
+	loadDataMessage: PropTypes.string,
+	noColumnsMessage: PropTypes.string,
+	orderBy: PropTypes.func,
+	rowClicked: PropTypes.func,
+	striped: PropTypes.bool,
+	type: PropTypes.oneOf(['primary', 'secondary']),
+};
 
 export default Table;

@@ -2,7 +2,12 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const TableRow = ({ children, className, hasClickAction, onClick }) => (
+const TableRow = ({
+	children,
+	className,
+	hasClickAction,
+	onClick,
+}) => (
 	<tr
 		className={classnames(className, { 'a-table--clickable': hasClickAction })}
 		onClick={onClick}
@@ -12,6 +17,8 @@ const TableRow = ({ children, className, hasClickAction, onClick }) => (
 );
 
 TableRow.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.node,
 	hasClickAction: PropTypes.bool,
 	onClick: PropTypes.func,
 };
