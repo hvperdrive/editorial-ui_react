@@ -6,6 +6,7 @@
   "types": "dist/types/index.d.ts",
   "private": true,
   "dependencies": {
+    "@a-ui/core": "^4.1.1",
     "@acpaas-ui/react-components": "^4.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -60,6 +61,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest": "^25.1.0",
+    "node-sass": "^4.13.1",
     "regenerator-runtime": "^0.13.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.0.6",
