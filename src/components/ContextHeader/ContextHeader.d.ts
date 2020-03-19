@@ -20,7 +20,7 @@ export interface ContextHeaderProps extends DefaultComponentProps {
 	badges?: ContextHeaderBadge[];
 	tabs?: ContextHeaderTab[];
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	linkProps: (props: any) => any;
+	linkProps?: (props: any) => any;
 }
 
 declare const ContextHeader: React.FC<ContextHeaderProps>;
