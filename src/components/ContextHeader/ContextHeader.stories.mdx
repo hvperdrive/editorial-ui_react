@@ -5,6 +5,7 @@ import {
 	CONTEXT_HEADER_MOCK_BADGES,
 	CONTEXT_HEADER_MOCK_TABS,
 	CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS,
+	CONTEXT_HEADER_MOCK_TITLE,
 } from './ContextHeader.mock.js';
 import ContextHeader, { ContextHeaderTopSection, ContextHeaderActionsSection } from './ContextHeader.jsx';
 
@@ -12,13 +13,13 @@ import ContextHeader, { ContextHeaderTopSection, ContextHeaderActionsSection } f
 
 # Context header
 
-Some Explanation about our context header
+The context header can be used as a secondary header.
 
-## Preview of component
+## Preview of context header with only a title
 
 <Preview>
 	<Story name='Base'>
-		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title="Header title">
+		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title={CONTEXT_HEADER_MOCK_TITLE}>
 			<ContextHeaderTopSection>
 				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
 			</ContextHeaderTopSection>
