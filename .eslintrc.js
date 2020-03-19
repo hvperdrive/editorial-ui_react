@@ -19,12 +19,13 @@ const rules = {
 		'newlines-between': 'always',
 	}],
 	'import/prefer-default-export': 'off',
+	'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
 	'react/jsx-indent': ['error', 'tab'],
 	'react/require-default-props': ['error', { ignoreFunctionalComponents: true }],
-	'react/jsx-props-no-spreading': 'off',
 	'react/jsx-indent-props': ['error', 'tab'],
 	'react/no-array-index-key': 'off',
+	'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
 	'import/no-extraneous-dependencies': [
 		'error',
 		{
@@ -69,19 +70,26 @@ module.exports = {
 				warnOnUnsupportedTypeScriptVersion: true,
 			},
 
-			plugins: ['@typescript-eslint'],
+			plugins: ['@typescript-eslint', 'import'],
 			extends: [
 				'eslint:recommended',
 				'plugin:@typescript-eslint/eslint-recommended',
 				'airbnb',
 				'airbnb/hooks',
 				'plugin:@typescript-eslint/recommended',
+				'plugin:import/typescript',
 			],
 			rules: {
 				...rules,
 
 				indent: 'off',
 				'@typescript-eslint/indent': ['error', 'tab'],
+
+				'import/extensions': ['error', 'ignorePackages', {
+					'js': 'never',
+					'jsx': 'never',
+					'ts': 'never',
+				}],
 			}
 		}
 	],

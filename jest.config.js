@@ -1,4 +1,5 @@
 module.exports = {
+	setupFiles: ['./scripts/jest-setup.js'],
 	setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
 	moduleNameMapper: {
 		// This is needed to mock css Modules

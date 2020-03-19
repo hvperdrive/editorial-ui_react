@@ -28,7 +28,7 @@ export const TABLE_MOCK_COLUMNS = [
 		component: (value, rowData) => {
 			const { id } = rowData;
 
-			return <Button onClick={action(`Row id is ${id}`)}>Data</Button>;
+			return <Button onClick={action(`Row id is ${id}`)}>Click me!</Button>;
 		},
 	},
 ];
@@ -84,4 +84,5 @@ export const TABLE_MOCK_ROWS = [
 		firstName: 'Griffin',
 		lastName: 'Navarro',
 	},
+
 ];
