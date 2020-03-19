@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { getNodeText, render } from '@testing-library/react';
 import React from 'react';
 
 import Table from './Table';
@@ -61,8 +61,8 @@ describe('<Table />', () => {
 		const componentData = componentCol.component(componentValue, mockRowData);
 		const { container: componentContainer } = render(componentData);
 
-		expect(regularCell.innerHTML).toBe(regularData);
-		expect(formattedCell.innerHTML).toBe(formattedData);
+		expect(getNodeText(regularCell)).toBe(regularData);
+		expect(getNodeText(formattedCell)).toBe(formattedData);
 		expect(componentCell.innerHTML).toBe(componentContainer.innerHTML);
 	});
 });
