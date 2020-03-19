@@ -15,7 +15,7 @@ import ContextHeader, { ContextHeaderTopSection, ContextHeaderActionsSection } f
 
 The context header can be used as a secondary header.
 
-## Preview of context header with only a title
+## Preview of component
 
 <Preview>
 	<Story name='Base'>
@@ -33,3 +33,38 @@ The context header can be used as a secondary header.
 ## Props
 
 <Props of={ContextHeader} />
+
+## Stories
+
+### Props
+
+<Preview isColumn>
+	<Story name="title">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} />
+	</Story>
+	<Story name="title with badge">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} badges={CONTEXT_HEADER_MOCK_BADGES} />
+	</Story>
+	<Story name="title with tabs">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} tabs={CONTEXT_HEADER_MOCK_TABS} />
+	</Story>
+</Preview>
+
+### Slots
+
+<Preview isColumn>
+	<Story name="top section">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE}>
+			<ContextHeaderTopSection>
+				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
+			</ContextHeaderTopSection>
+		</ContextHeader>
+	</Story>
+	<Story name="action section">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE}>
+			<ContextHeaderActionsSection>
+				<Button>Action</Button>
+			</ContextHeaderActionsSection>
+		</ContextHeader>
+	</Story>
+</Preview>
