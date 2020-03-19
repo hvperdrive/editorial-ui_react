@@ -28,8 +28,9 @@ export const TABLE_MOCK_COLUMNS = [
 		component: (value, rowData) => {
 			const { id } = rowData;
 
-			return <Button onClick={action(`Row id is ${id}`)}>Click me!</Button>;
+			return <Button onClick={action(`Row id is ${id}`)} size="small">Click me!</Button>;
 		},
+		classList: ['is-condensed'],
 	},
 ];
 
