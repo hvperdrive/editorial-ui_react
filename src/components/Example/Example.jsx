@@ -4,7 +4,7 @@ import React from 'react';
 const Example = ({ onClick, text = 'Hello world!' }) => (
 	<div>
 		<p>{text}</p>
-		<button onClick={onClick}>Click me</button>
+		<button type="button" onClick={onClick}>Click me</button>
 	</div>
 );
 

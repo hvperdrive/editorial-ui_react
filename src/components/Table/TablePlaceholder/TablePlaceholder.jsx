@@ -10,22 +10,20 @@ const TablePlaceholder = ({
 	loadDataMessage,
 	noColumnsMessage,
 	noDataMesssage,
-}) => {
-	return (
-		<tr>
-			<td colSpan={colSpan}>
-				{loading && (
-					<div className="table-loading">
-						{loadDataMessage}
-						<Spinner />
-					</div>
-				)}
-				{!hasCols && <div>{noColumnsMessage}</div>}
-				{!hasData && <div>{noDataMesssage}</div>}
-			</td>
-		</tr>
-	);
-};
+}) => (
+	<tr>
+		<td colSpan={colSpan}>
+			{loading && (
+				<div className="table-loading">
+					{loadDataMessage}
+					<Spinner />
+				</div>
+			)}
+			{!hasCols && <div>{noColumnsMessage}</div>}
+			{!hasData && <div>{noDataMesssage}</div>}
+		</td>
+	</tr>
+);
 
 TablePlaceholder.propTypes = {
 	colSpan: PropTypes.number,

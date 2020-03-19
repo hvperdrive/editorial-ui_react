@@ -16,7 +16,7 @@ export const getHeaderProps = (col, activeSorting, onSortClick) => {
 	const keyPrefix = 'table-header';
 
 	if (typeof col === 'string') {
-		return { key: `${keyPrefix}-${col}`, label: col }
+		return { key: `${keyPrefix}-${col}`, label: col };
 	}
 
 	return {
@@ -26,14 +26,14 @@ export const getHeaderProps = (col, activeSorting, onSortClick) => {
 		value: col.value,
 		activeSorting,
 		onSortClick,
-	}
+	};
 };
 
 export const getCellProps = (col, rowData, rowIndex) => {
 	const keyPrefix = 'table-cell';
 
 	if (typeof col === 'string') {
-		return { key: `${keyPrefix}-${col}`, label: col }
+		return { key: `${keyPrefix}-${col}`, label: col };
 	}
 
 	return {
@@ -42,5 +42,5 @@ export const getCellProps = (col, rowData, rowIndex) => {
 		rowData,
 		rowIndex,
 		value: getFormatValue(rowData, col, rowIndex),
-	}
+	};
 };

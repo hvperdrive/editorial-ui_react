@@ -20,7 +20,7 @@ export const tablePropTypes = {
 			disabled: PropTypes.bool,
 			disableSorting: PropTypes.bool,
 			classList: PropTypes.arrayOf(PropTypes.string),
-		})
+		}),
 	])),
 	loading: PropTypes.bool,
 	responsive: PropTypes.bool,
@@ -33,7 +33,7 @@ export const tablePropTypes = {
 	rowClicked: PropTypes.func,
 	striped: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
-}
+};
 
 export const DEFAULT_MESSAGE = {
 	loading: 'Loading data...',

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import { DEFAULT_MESSAGE, tablePropTypes } from './Table.const';
-import { getHeaderProps, getCellProps } from './Table.helpers';
+import { getCellProps, getHeaderProps } from './Table.helpers';
 import TableCell from './TableCell/TableCell';
 import TableHeader from './TableHeader/TableHeader';
 import TablePlaceholder from './TablePlaceholder/TablePlaceholder';
@@ -49,16 +49,15 @@ const Table = ({
 	 */
 	return (
 		<div className={classnames(className, { 'a-table__wrapper-responsive': responsive })}>
-			<table
-				className={classnames('a-table', {
-					'a-table--striped': striped,
-					[`a-table--${type}`]: type,
-				})}
+			<table className={classnames('a-table', {
+				'a-table--striped': striped,
+				[`a-table--${type}`]: type,
+			})}
 			>
 				{columns.length > 0 && (
 					<thead>
 						<TableRow>
-							{columns.map(col => (
+							{columns.map((col) => (
 								<TableHeader {...getHeaderProps(col, activeSorting, onSortClick)} />
 							))}
 						</TableRow>
@@ -82,7 +81,7 @@ const Table = ({
 								hasClickAction={hasClickAction}
 								onClick={() => onRowClick(row)}
 							>
-								{columns.map(col => (
+								{columns.map((col) => (
 									<TableCell {...getCellProps(col, row, rowIndex)} />
 								))}
 							</TableRow>
@@ -94,6 +93,6 @@ const Table = ({
 	);
 };
 
-Table.propTypes = {...tablePropTypes};
+Table.propTypes = { ...tablePropTypes };
 
 export default Table;

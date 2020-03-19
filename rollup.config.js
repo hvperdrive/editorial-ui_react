@@ -1,8 +1,8 @@
 import resolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
-import { terser } from "rollup-plugin-terser";
+import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
