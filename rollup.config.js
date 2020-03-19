@@ -1,6 +1,8 @@
 import resolve from '@rollup/plugin-node-resolve';
+import autoprefixer from 'autoprefixer';
 import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
+import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
@@ -14,6 +16,12 @@ export default {
 	plugins: [
 		resolve({
 			extensions: ['.js', '.jsx'],
+		}),
+		postcss({
+			extensions: ['.css', '.scss'],
+			plugins: [
+				autoprefixer(),
+			],
 		}),
 		babel(),
 		terser(),
