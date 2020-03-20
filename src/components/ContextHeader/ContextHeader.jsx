@@ -87,14 +87,10 @@ ContextHeader.propTypes = {
 	 * of the component
 	 */
 	className: PropTypes.string,
-	/**
-	 * Children
-	 */
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
-	/** The title */
 	title: PropTypes.string.isRequired,
 	/** Badges, which are shown on the right side of the title */
 	badges: PropTypes.arrayOf(PropTypes.shape({
