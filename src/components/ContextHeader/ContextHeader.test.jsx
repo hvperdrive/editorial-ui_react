@@ -1,12 +1,13 @@
 import { getNodeText, render } from '@testing-library/react';
 import React from 'react';
 
-import ContextHeader, { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader';
+import ContextHeader from './ContextHeader';
 import {
 	CONTEXT_HEADER_MOCK_BADGES,
 	CONTEXT_HEADER_MOCK_TABS,
 	CONTEXT_HEADER_MOCK_TITLE,
 } from './ContextHeader.mock';
+import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
 
 const renderContextHeader = (props, TopSectionComponent, ActionSectionComponent) => {
 	const defaultProps = {
