@@ -1,5 +1,5 @@
 import { Badge, Tabs } from '@acpaas-ui/react-components';
-import classNames from 'classnames/bind';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
