@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { getNodeText, render } from '@testing-library/react';
 import React from 'react';
 
 import Table from './Table';
@@ -33,7 +33,9 @@ describe('<Table />', () => {
 		);
 		const tableHeaders = container.querySelectorAll('th');
 
-		expect(tableHeaders[2].innerHTML).toBe(TABLE_MOCK_COLUMNS[2].label);
+		const colIndex = TABLE_MOCK_COLUMNS.findIndex((col) => !col.format && !col.headerComponent);
+
+		expect(tableHeaders[colIndex].innerHTML).toBe(TABLE_MOCK_COLUMNS[colIndex].label);
 	});
 
 	it('Should display data', () => {
@@ -61,8 +63,8 @@ describe('<Table />', () => {
 		const componentData = componentCol.component(componentValue, mockRowData);
 		const { container: componentContainer } = render(componentData);
 
-		expect(regularCell.innerHTML).toBe(regularData);
-		expect(formattedCell.innerHTML).toBe(formattedData);
+		expect(getNodeText(regularCell)).toBe(regularData);
+		expect(getNodeText(formattedCell)).toBe(formattedData);
 		expect(componentCell.innerHTML).toBe(componentContainer.innerHTML);
 	});
 });

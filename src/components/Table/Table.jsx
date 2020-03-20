@@ -7,6 +7,7 @@ import TableCell from './TableCell/TableCell';
 import TableHeader from './TableHeader/TableHeader';
 import TablePlaceholder from './TablePlaceholder/TablePlaceholder';
 import TableRow from './TableRow/TableRow';
+import './Table.scss';
 
 const Table = ({
 	className,
