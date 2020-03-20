@@ -12,6 +12,9 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
+  "peerDependencies": {
+    "@acpaas-ui/react-components": "^4.0.0"
+  },
   "scripts": {
     "start": "start-storybook -p 9009 -s public",
     "build": "rimraf dist/ && rollup -c",
