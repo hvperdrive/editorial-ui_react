@@ -1,0 +1,28 @@
+import { Fragment } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import ActionBar, { ActionBarContentSection } from './ActionBar';
+
+<Meta title="ActionBar" component={ActionBar} />
+
+# ActionBar
+
+A simple bar where content can be fitted in
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<ActionBar>
+			<ActionBarContentSection>
+				<button className="a-button a-button--primary">Save</button>
+				<button className="a-button a-button--warning u-margin-left-xs">Cancel</button>
+			</ActionBarContentSection>
+		</ActionBar>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={ActionBar} />
