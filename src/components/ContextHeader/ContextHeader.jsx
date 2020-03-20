@@ -1,28 +1,12 @@
 import { Badge, Tabs } from '@acpaas-ui/react-components';
-import classNames from 'classnames/bind';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useSlot } from '../../hooks/useSlot';
 
 import styles from './ContextHeader.module.scss';
-
-export const ContextHeaderTopSection = ({ children }) => <>{children}</>;
-export const ContextHeaderActionsSection = ({ children }) => <>{children}</>;
-
-ContextHeaderActionsSection.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
-
-ContextHeaderTopSection.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
 
 const cx = classNames.bind(styles);
 
@@ -103,14 +87,10 @@ ContextHeader.propTypes = {
 	 * of the component
 	 */
 	className: PropTypes.string,
-	/**
-	 * Children
-	 */
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
-	/** The title */
 	title: PropTypes.string.isRequired,
 	/** Badges, which are shown on the right side of the title */
 	badges: PropTypes.arrayOf(PropTypes.shape({

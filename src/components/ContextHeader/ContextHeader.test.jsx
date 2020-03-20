@@ -1,12 +1,13 @@
 import { getNodeText, render } from '@testing-library/react';
 import React from 'react';
 
-import ContextHeader, { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader';
+import ContextHeader from './ContextHeader';
 import {
 	CONTEXT_HEADER_MOCK_BADGES,
 	CONTEXT_HEADER_MOCK_TABS,
 	CONTEXT_HEADER_MOCK_TITLE,
 } from './ContextHeader.mock';
+import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
 
 const renderContextHeader = (props, TopSectionComponent, ActionSectionComponent) => {
 	const defaultProps = {
@@ -43,7 +44,7 @@ describe('<ContextHeader/>', () => {
 
 		expect(getNodeText(title)).toBe(CONTEXT_HEADER_MOCK_TITLE);
 		expect(wrapperBadges).toBeDefined();
-		expect(badges.length).toBe(2);
+		expect(badges).toHaveLength(2);
 		expect(getNodeText(badges[0])).toBe(CONTEXT_HEADER_MOCK_BADGES[0].name);
 		expect(getNodeText(badges[1])).toBe(CONTEXT_HEADER_MOCK_BADGES[1].name);
 	});
@@ -61,7 +62,7 @@ describe('<ContextHeader/>', () => {
 
 			expect(getNodeText(title)).toBe(CONTEXT_HEADER_MOCK_TITLE);
 			expect(wrapperTabs).toBeDefined();
-			expect(tabs.length).toBe(4);
+			expect(tabs).toHaveLength(4);
 			expect(getNodeText(tabs[0])).toBe(CONTEXT_HEADER_MOCK_TABS[0].name);
 			expect(getNodeText(tabs[1])).toBe(CONTEXT_HEADER_MOCK_TABS[1].name);
 			expect(getNodeText(tabs[2])).toBe(CONTEXT_HEADER_MOCK_TABS[2].name);
@@ -77,7 +78,7 @@ describe('<ContextHeader/>', () => {
 			const customLinks = queryAllByTestId('custom-link-component');
 
 			expect(customLinks).toBeDefined();
-			expect(customLinks.length).toBe(4);
+			expect(customLinks).toHaveLength(4);
 		});
 	});
 
