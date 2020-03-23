@@ -1,0 +1,22 @@
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Example from './Example';
+
+<Meta title="Example" component={Example} />
+
+# Example
+
+Some Explanation about our Example component
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Example onClick={action()} />
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Example} />
