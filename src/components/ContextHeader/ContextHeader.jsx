@@ -24,7 +24,7 @@ const ContextHeader = ({
 	const renderBadges = () => {
 		if (badges && badges.length > 0) {
 			return (
-				<div data-testid="o-context-header__badges">
+				<div className="o-context-header__badges">
 					{
 						badges.map((badge, index) => (
 							<Badge className="u-margin-right-xs u-margin-top-xs u-margin-bottom-xs" key={index} type={badge.type}>
@@ -41,7 +41,7 @@ const ContextHeader = ({
 
 	const renderTabs = () => {
 		if (tabs && tabs.length > 0) {
-			return <Tabs data-testid="o-context-header__tabs" linkProps={linkProps} align="left" items={tabs} />;
+			return <Tabs className="o-context-header__tabs" linkProps={linkProps} align="left" items={tabs} />;
 		}
 
 		return null;
