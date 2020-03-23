@@ -18,7 +18,9 @@
     "start": "start-storybook -p 9009 -s public",
     "build": "rimraf dist/ && rollup -c",
     "test": "jest --verbose",
-    "lint": "eslint --ext js,jsx,ts .",
+    "lint:js": "eslint --ext js,jsx,ts .",
+    "lint:scss": "stylelint '?(.)**/*.{css,scss}' --aei",
+    "lint": "npm run lint:scss && npm run lint:js",
     "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
