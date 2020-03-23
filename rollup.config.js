@@ -31,5 +31,6 @@ export default {
 		'classnames',
 		'prop-types',
 		'react',
+		'classnames/bind',
 	],
 };
