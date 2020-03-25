@@ -3,18 +3,50 @@ import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 import Filter from './Filter';
+import FilterItemText from './FilterItemText/FilterItemText';
+import { TextField } from '@acpaas-ui/react-components';
 
 <Meta title="Filter" component={Filter} />
 
 # Filter
 
-A simple bar where content can be fitted in
+A generic filter component that can be used anywhere
 
 ## Preview of component
 
 <Preview>
-	<Story name='Base'>
-		<Filter />
+	<Story name='No filters'>
+		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()} />
+	</Story>
+	<Story name='Filters'>
+		{() => {
+			const Form = () => {
+				return (
+					<div className="row">
+						<div className="col-xs-8">
+							<TextField
+								label="zoeken"
+								id="zoeken"
+								name="zoeken"
+								className="textfield-class"
+								placeholder={`Zoeken op`}
+								onChange={(value) => console.log('Filteren op:', value)}
+								iconright="search"
+							/>
+						</div>
+					</div>
+				)
+			}
+			return <Filter filters={<Form />} title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()} />
+		}}
+	</Story>
+	<Story name='Active filter'>
+		{() => {
+			const array = [{label:'Naam', value:'Maxim'}];
+			return(
+				<Filter title='Filter' onConfirm={action()} onClear={action()} activeFilters={array} onFilterRemove={action()} />
+			)
+		}}
 	</Story>
 </Preview>
 
