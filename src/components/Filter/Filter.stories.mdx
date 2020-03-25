@@ -3,8 +3,8 @@ import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 import Filter from './Filter';
-import FilterItemText from './FilterItemText/FilterItemText';
 import { TextField } from '@acpaas-ui/react-components';
+import { FilterBody } from './Filter.slots.jsx';
 
 <Meta title="Filter" component={Filter} />
 
@@ -15,15 +15,40 @@ A generic filter component that can be used anywhere
 ## Preview of component
 
 <Preview>
-	<Story name='No filters'>
-		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()} />
+	<Story name='Base'>
+		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()}>
+			<FilterBody>
+				<div className="col-xs-8">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+			</FilterBody>
+		</Filter>
 	</Story>
-	<Story name='Filters'>
-		{() => {
-			const Form = () => {
-				return (
+	<Story name='Multiple input fields'>
+		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()}>
+			<FilterBody>
+				<div className="col-xs">
 					<div className="row">
-						<div className="col-xs-8">
+						<div className="col-xs">
+							<TextField
+								label="zoeken"
+								id="zoeken"
+								name="zoeken"
+								className="textfield-class"
+								placeholder={`Zoeken op`}
+								onChange={(value) => console.log('Filteren op:', value)}
+								iconright="search"
+							/>
+						</div>
+						<div className="col-xs">
 							<TextField
 								label="zoeken"
 								id="zoeken"
@@ -35,16 +60,18 @@ A generic filter component that can be used anywhere
 							/>
 						</div>
 					</div>
-				)
-			}
-			return <Filter filters={<Form />} title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()} />
-		}}
+				</div>
+			</FilterBody>
+		</Filter>
 	</Story>
-	<Story name='Active filter'>
+	<Story name='No input fields'>
+		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()} />
+	</Story>
+	<Story name='Active filter items'>
 		{() => {
-			const array = [{label:'Naam', value:'Maxim'}];
+			const array = [{label:'Naam', value:'Lorem'}, {label:'iets', value: 'Ipsum'}];
 			return(
-				<Filter title='Filter' onConfirm={action()} onClear={action()} activeFilters={array} onFilterRemove={action()} />
+				<Filter title='Filter' onConfirm={action('add filter')} onClear={action('remove all filters')} activeFilters={array} onFilterRemove={action('remove filter item')} />
 			)
 		}}
 	</Story>

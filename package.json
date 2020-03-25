@@ -40,6 +40,7 @@
     "@acpaas-ui:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
   },
   "devDependencies": {
+    "@a-ui/flexboxgrid": "^1.0.1",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "@rollup/plugin-node-resolve": "^7.1.1",
