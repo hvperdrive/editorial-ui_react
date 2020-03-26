@@ -1,5 +1,15 @@
 @import '~@a-ui/core/dist/assets/styles/_quarks';
 
+.m-accordion__header {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+
+	&:hover {
+		background-color: #fff;
+	}
+}
+
 .m-filter-form {
 	pointer-events: none;
 
