@@ -34,12 +34,12 @@ const CustomLinkComponent = () => (<div data-testid="custom-link-component" />);
 
 describe('<ContextHeader/>', () => {
 	it('should show a title with badges', () => {
-		const { queryByText, queryByTestId } = renderContextHeader({
+		const { queryByText, container } = renderContextHeader({
 			badges: CONTEXT_HEADER_MOCK_BADGES,
 		});
 
 		const title = queryByText(CONTEXT_HEADER_MOCK_TITLE);
-		const wrapperBadges = queryByTestId('o-context-header__badges');
+		const wrapperBadges = container.querySelector('.o-context-header__badges');
 		const badges = wrapperBadges.querySelectorAll('span');
 
 		expect(getNodeText(title)).toBe(CONTEXT_HEADER_MOCK_TITLE);
