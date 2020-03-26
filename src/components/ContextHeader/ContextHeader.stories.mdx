@@ -1,0 +1,71 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Button, Breadcrumbs } from '@acpaas-ui/react-components';
+
+import {
+	CONTEXT_HEADER_MOCK_BADGES,
+	CONTEXT_HEADER_MOCK_TABS,
+	CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS,
+	CONTEXT_HEADER_MOCK_TITLE,
+} from './ContextHeader.mock.js';
+import ContextHeader from './ContextHeader.jsx';
+import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots.jsx';
+
+<Meta title="ContextHeader" component={ContextHeader} />
+
+# Context header
+
+The context header can be used as a secondary header.
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title={CONTEXT_HEADER_MOCK_TITLE}>
+			<ContextHeaderTopSection>
+				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
+			</ContextHeaderTopSection>
+			<ContextHeaderActionsSection>
+				<Button>Action</Button>
+			</ContextHeaderActionsSection>
+		</ContextHeader>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={ContextHeader} />
+
+## Stories
+
+### Different variations
+
+<Preview isColumn>
+	<Story name="title">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} />
+	</Story>
+	<Story name="title with badge">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} badges={CONTEXT_HEADER_MOCK_BADGES} />
+	</Story>
+	<Story name="title with tabs">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} tabs={CONTEXT_HEADER_MOCK_TABS} />
+	</Story>
+</Preview>
+
+### Slots
+
+<Preview isColumn>
+	<Story name="top section">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE}>
+			<ContextHeaderTopSection>
+				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
+			</ContextHeaderTopSection>
+		</ContextHeader>
+	</Story>
+	<Story name="action section">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE}>
+			<ContextHeaderActionsSection>
+				<Button>Action</Button>
+			</ContextHeaderActionsSection>
+		</ContextHeader>
+	</Story>
+</Preview>

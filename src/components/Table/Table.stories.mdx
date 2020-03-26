@@ -1,0 +1,89 @@
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { useState } from 'react';
+
+import Table from './Table';
+import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
+
+
+<Meta title="Table" component={Table} />
+
+# Table
+
+Some explanation about our Table component
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 5)}/>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Table} />
+
+## Stories
+
+Group stories based on props
+
+### Placeholder messages
+
+<Preview isColumn>
+	<Story name='Loading'>
+		<Table loading />
+	</Story>
+	<Story name='No columns'>
+		<Table rows={[]} />
+	</Story>
+	<Story name='No data'>
+		<Table columns={TABLE_MOCK_COLUMNS} />
+	</Story>
+</Preview>
+
+### Sortable columns
+
+<Preview>
+	<Story name='Sortable'>
+		{() => {
+			const [sorting, setSorting] = useState({ key: 'id', order: 'asc' });
+			const sortedRows = TABLE_MOCK_ROWS.slice(0, 5).sort((a, b) => {
+				{/* Simple string sorting based on our active table sort */}
+				if (a[sorting.key] < b[sorting.key]) {
+					return sorting.order === 'asc' ? 1 : -1;
+				}
+				if (a[sorting.key] > b[sorting.key]) {
+					return sorting.order === 'asc' ? -1 : 1;
+				}
+				return 0;
+			});
+			const onOrderBy = (orderBy) => {
+				action('Sort column');
+				setSorting(orderBy);
+			};
+			return (
+				<Table
+					columns={TABLE_MOCK_COLUMNS}
+					rows={sortedRows}
+					activeSorting={sorting}
+					orderBy={setSorting}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Styles
+
+<Preview isColumn>
+	<Story name='No stripes'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 4)} striped={false} />
+	</Story>
+	<Story name='Primary head'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="primary" />
+	</Story>
+	<Story name='Secondary head'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="secondary" />
+	</Story>
+</Preview>

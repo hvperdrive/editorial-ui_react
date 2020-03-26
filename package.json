@@ -3,24 +3,26 @@
   "version": "0.1.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
-  "types": "dist/types/index.d.ts",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "@a-ui/core": "^4.1.1",
+    "@acpaas-ui/react-components": "^4.0.0",
+    "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
+    "react-dom": "^16.13.0"
+  },
+  "peerDependencies": {
+    "@acpaas-ui/react-components": "^4.0.0"
   },
   "scripts": {
     "start": "start-storybook -p 9009 -s public",
     "build": "rimraf dist/ && rollup -c",
-    "test": "jest --verbose",
+    "test": "jest --runInBand --verbose",
+    "test:watch": "jest --watchAll",
+    "lint": "npm run lint:scss && npm run lint:js",
     "lint:js": "eslint --ext js,jsx,ts .",
     "lint:scss": "stylelint '?(.)**/*.{css,scss}' --aei",
-    "lint": "npm run lint:scss && npm run lint:js",
     "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
@@ -46,26 +48,34 @@
     "@storybook/addons": "^5.3.14",
     "@storybook/preset-create-react-app": "^2.0.0",
     "@storybook/react": "^5.3.14",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^25.1.4",
     "@types/react": "^16.9.23",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.24.0",
+    "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.1.0",
+    "core-js": "^3.6.4",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
+    "node-sass": "^4.13.1",
+    "react-scripts": "3.4.0",
+    "regenerator-runtime": "^0.13.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.0.6",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-terser": "^5.3.0",
     "stylelint": "^13.2.1",
     "stylelint-config-standard": "^20.0.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "rollup-plugin-postcss": "^2.5.0",
+    "rollup-plugin-terser": "^5.3.0"
   }
 }
