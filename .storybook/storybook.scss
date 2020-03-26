@@ -1,0 +1,11 @@
+/*
+ * Storybook styles global overrides
+ */
+
+.sbdocs-preview {
+	// Reset <code> to storybook values because of a-ui/core global styling
+	code {
+		background-color: inherit;
+		color: inherit;
+	}
+}
