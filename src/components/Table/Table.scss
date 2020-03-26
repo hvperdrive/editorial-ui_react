@@ -3,8 +3,12 @@
 .a-table {
 	&.a-table--primary,
 	&.a-table--secondary {
-		th > .a-button {
+		th > .a-table__header__button {
 			color: $white;
 		}
+	}
+
+	th > .a-table__header__button {
+		padding-left: 0;
 	}
 }
