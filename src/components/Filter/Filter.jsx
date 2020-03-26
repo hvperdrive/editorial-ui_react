@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-len
 import {
 	Accordion, AccordionTab, AccordionTabContent, AccordionTabHeader, Button, TagList, TagListItem,
 } from '@acpaas-ui/react-components';
@@ -7,13 +6,17 @@ import React from 'react';
 
 import { useSlot } from '../../hooks/useSlot';
 
+import './Filter.scss';
 import { FilterBody } from './Filter.slots';
 
 const Filter = ({
 	title,
 	children,
+	noFilterText,
 	onConfirm,
+	confirmText,
 	onClean,
+	cleanText,
 	activeFilters = [],
 	onFilterRemove,
 }) => {
@@ -26,15 +29,15 @@ const Filter = ({
 					<AccordionTab>
 						<AccordionTabHeader><h3 className="u-text-primary">{title}</h3></AccordionTabHeader>
 						<AccordionTabContent className="m-filter-form">
-							<div className="row between-xs">
+							<div className="m-filter-form__row row">
 								{filterSlot ? (
 									<>{ filterSlot }</>
 								) : (
-									<p>Geen filters beschikbaar</p>
+									<p className="m-filter-form__text">{noFilterText}</p>
 								)}
-								<div className="u-margin-top end-xs">
-									<Button type="primary" onClick={onClean} negative>Alles leegmaken</Button>
-									<Button type="primary" iconRight="angle-right" onClick={onConfirm} outline>Toepassen</Button>
+								<div className="m-filter-form__buttons">
+									<Button type="primary" onClick={onClean} negative>{cleanText}</Button>
+									<Button type="primary" iconRight="angle-right" onClick={onConfirm} outline>{confirmText}</Button>
 								</div>
 							</div>
 						</AccordionTabContent>
@@ -46,7 +49,7 @@ const Filter = ({
 							{activeFilters.map((filter) => (
 								<TagListItem
 									value={filter.value}
-									key={filter.key}
+									key={filter.label}
 									closable
 									onClick={onFilterRemove}
 								/>
@@ -63,8 +66,11 @@ const Filter = ({
 
 Filter.propTypes = {
 	title: PropTypes.string,
+	noFilterText: PropTypes.string,
 	onConfirm: PropTypes.func,
+	confirmText: PropTypes.string,
 	onClean: PropTypes.func,
+	cleanText: PropTypes.string,
 	activeFilters: PropTypes.arrayOf(PropTypes.shape({
 		label: PropTypes.string,
 		value: PropTypes.string,

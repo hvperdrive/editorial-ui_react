@@ -1,5 +1,5 @@
 import { TextField } from '@acpaas-ui/react-components';
-import { getNodeText, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 
 import Filter from './Filter';
@@ -7,7 +7,7 @@ import { FilterBody } from './Filter.slots';
 
 const noop = () => {};
 
-const filterItems = [{label:'lorem', value:'Lorem'}, {label:'ipsum', value: 'Ipsum'}];
+const filterItems = [{ label: 'lorem', value: 'Lorem' }, { label: 'ipsum', value: 'Ipsum' }];
 
 const renderFilterInput = () => render((
 	<Filter title="Filter" onConfirm={noop} onClear={noop} onFilterRemove={noop}>
@@ -19,7 +19,7 @@ const renderFilterInput = () => render((
 					name="Zoeken"
 					className="textfield-class"
 					placeholder="Zoeken op naam"
-					onChange={(value) => console.log('Filteren op:', value)}
+					onChange={noop}
 					iconright="search"
 				/>
 			</div>

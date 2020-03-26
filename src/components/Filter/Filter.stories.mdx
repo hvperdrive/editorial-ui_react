@@ -16,7 +16,7 @@ A generic filter component that can be used anywhere
 
 <Preview>
 	<Story name='Base'>
-		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()}>
+		<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action()} onClear={action()} confirmText='Toepassen' cleanText='Alles leegmaken' onFilterRemove={action()}>
 			<FilterBody>
 				<div className="col-xs-8">
 					<TextField
@@ -33,45 +33,63 @@ A generic filter component that can be used anywhere
 		</Filter>
 	</Story>
 	<Story name='Multiple input fields'>
-		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()}>
+		<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action()} confirmText='Toepassen' cleanText='Alles leegmaken' onClear={action()} onFilterRemove={action()}>
 			<FilterBody>
-				<div className="col-xs">
-					<div className="row">
-						<div className="col-xs">
-							<TextField
-								label="zoeken"
-								id="zoeken"
-								name="zoeken"
-								className="textfield-class"
-								placeholder={`Zoeken op`}
-								onChange={(value) => console.log('Filteren op:', value)}
-								iconright="search"
-							/>
-						</div>
-						<div className="col-xs">
-							<TextField
-								label="zoeken"
-								id="zoeken"
-								name="zoeken"
-								className="textfield-class"
-								placeholder={`Zoeken op`}
-								onChange={(value) => console.log('Filteren op:', value)}
-								iconright="search"
-							/>
-						</div>
-					</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
 				</div>
 			</FilterBody>
 		</Filter>
 	</Story>
 	<Story name='No input fields'>
-		<Filter title='Filter' onConfirm={action()} onClear={action()} onFilterRemove={action()} />
+		<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action()} onClear={action()} confirmText='Toepassen' cleanText='Alles leegmaken' onFilterRemove={action()} />
 	</Story>
 	<Story name='Active filter items'>
 		{() => {
 			const array = [{label:'Naam', value:'Lorem'}, {label:'iets', value: 'Ipsum'}];
 			return(
-				<Filter title='Filter' onConfirm={action('add filter')} onClear={action('remove all filters')} activeFilters={array} onFilterRemove={action('remove filter item')} />
+				<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action('add filter')} onClear={action('remove all filters')} confirmText='Toepassen' cleanText='Alles leegmaken' activeFilters={array} onFilterRemove={action('remove filter item')} />
 			)
 		}}
 	</Story>
