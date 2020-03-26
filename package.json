@@ -1,9 +1,8 @@
 {
-  "name": "editorial-ui_react",
-  "version": "0.1.0",
+  "name": "@acpaas-ui/react-editorial-components",
+  "version": "0.0.1-5",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
-  "private": true,
   "dependencies": {
     "@a-ui/core": "^4.1.1",
     "@acpaas-ui/react-components": "^4.0.0",
@@ -16,6 +15,7 @@
     "@acpaas-ui/react-components": "^4.0.0"
   },
   "scripts": {
+    "prepublish": "npm run test && npm run build",
     "start": "start-storybook -p 9009 -s public",
     "build": "rimraf dist/ && rollup -c",
     "test": "jest --runInBand --verbose",
@@ -24,6 +24,9 @@
     "lint:js": "eslint --ext js,jsx,ts .",
     "lint:scss": "stylelint '?(.)**/*.{css,scss}' --aei",
     "build-storybook": "build-storybook -s public"
+  },
+  "publishConfig": {
+    "@acpaas-ui:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
   },
   "browserslist": {
     "production": [
