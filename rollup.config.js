@@ -14,9 +14,10 @@ export default {
 	],
 	plugins: [
 		resolve({
-			extensions: ['.js', '.jsx'],
+			extensions: ['.js', '.jsx', '.scss'],
 		}),
 		postcss({
+			modules: true,
 			extensions: ['.css', '.scss'],
 			plugins: [
 				autoprefixer(),
@@ -30,5 +31,6 @@ export default {
 		'classnames',
 		'prop-types',
 		'react',
+		'classnames/bind',
 	],
 };

@@ -50,11 +50,10 @@ const Table = ({
 	 */
 	return (
 		<div className={classnames(className, { 'a-table__wrapper-responsive': responsive })}>
-			<table
-				className={classnames('a-table', {
-					'a-table--striped': striped,
-					[`a-table--${type}`]: type,
-				})}
+			<table className={classnames('a-table', {
+				'a-table--striped': striped,
+				[`a-table--${type}`]: type,
+			})}
 			>
 				{columns.length > 0 && (
 					<thead>
