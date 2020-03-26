@@ -47,14 +47,14 @@ const ContextHeader = ({
 		return null;
 	};
 
-	const classNameRoot = cx(className, 'u-bg-light', 'u-wrapper', 'o-context-header');
+	const classNameRoot = cx(className, 'u-bg-light', 'o-context-header');
 	const classNameTopSection = cx('o-context-header__top-section');
 	const classNameBody = cx('o-context-header__body');
 	const classNameBodyTitle = cx('o-context-header__body__title');
 
 	return (
 		<div className={classNameRoot}>
-			<div className="u-container">
+			<div className="u-container u-wrapper">
 				{
 					topSectionSlot && (
 						<div className={classNameTopSection}>
