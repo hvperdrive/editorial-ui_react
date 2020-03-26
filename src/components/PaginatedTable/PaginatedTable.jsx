@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Table from '../Table/Table';
+import { Table } from '../Table';
 
 import './PaginatedTable.scss';
 
