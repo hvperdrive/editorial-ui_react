@@ -22,6 +22,8 @@ export const getHeaderProps = (col, activeSorting, onSortClick) => {
 	return {
 		key: `${keyPrefix}-${col.label}`,
 		component: col.headerComponent,
+		classList: col.classList,
+		disableSorting: col.disableSorting,
 		label: col.label,
 		value: col.value,
 		activeSorting,
@@ -38,6 +40,7 @@ export const getCellProps = (col, rowData, rowIndex) => {
 
 	return {
 		key: `${keyPrefix}-${col.label}`,
+		classList: col.classList,
 		component: col.component,
 		rowData,
 		rowIndex,

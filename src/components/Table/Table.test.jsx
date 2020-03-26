@@ -33,7 +33,9 @@ describe('<Table />', () => {
 		);
 		const tableHeaders = container.querySelectorAll('th');
 
-		expect(tableHeaders[2].innerHTML).toBe(TABLE_MOCK_COLUMNS[2].label);
+		const colIndex = TABLE_MOCK_COLUMNS.findIndex((col) => !col.format && !col.headerComponent);
+
+		expect(tableHeaders[colIndex].innerHTML).toBe(TABLE_MOCK_COLUMNS[colIndex].label);
 	});
 
 	it('Should display data', () => {
