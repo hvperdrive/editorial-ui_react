@@ -25,6 +25,9 @@
     "lint:scss": "stylelint '?(.)**/*.{css,scss}' --aei",
     "build-storybook": "build-storybook -s public"
   },
+  "publishConfig": {
+    "@acpaas-ui:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
