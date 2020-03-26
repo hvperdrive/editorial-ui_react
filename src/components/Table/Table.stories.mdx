@@ -1,0 +1,54 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Table from './Table';
+import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
+
+
+<Meta title="Table" component={Table} />
+
+# Table
+
+Some Explanation about our Table component
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 5)} />
+	</Story>
+</Preview>
+
+
+## Props
+
+<Props of={Table} />
+
+## Stories
+
+### Placeholder messages
+
+<Preview isColumn>
+	<Story name='Loading'>
+		<Table loading />
+	</Story>
+	<Story name='No columns'>
+		<Table rows={[]} />
+	</Story>
+	<Story name='No data'>
+		<Table columns={TABLE_MOCK_COLUMNS} />
+	</Story>
+</Preview>
+
+### Styles
+
+<Preview isColumn>
+	<Story name='No stripes'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 4)} striped={false} />
+	</Story>
+	<Story name='Primary head'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="primary" />
+	</Story>
+	<Story name='Secondary head'>
+		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="secondary" />
+	</Story>
+</Preview>

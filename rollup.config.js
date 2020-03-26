@@ -1,6 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
-import copy from 'rollup-plugin-copy';
 import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
@@ -17,12 +16,10 @@ export default {
 		}),
 		babel(),
 		terser(),
-		copy({
-			targets: [{ src: 'src/**/*.d.ts', dest: 'dist/types' }],
-			flatten: false,
-		}),
 	],
 	external: [
+		'@acpaas-ui/react-components',
+		'classnames',
 		'prop-types',
 		'react',
 	],
