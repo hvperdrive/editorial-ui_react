@@ -5,7 +5,7 @@ import ActionBar from './ActionBar';
 import { ActionBarContentSection } from './ActionBar.slots';
 
 describe('<ActionBar />', () => {
-	it('should render content', () => {
+	it('Should render content', () => {
 		const { findByText } = render(
 			<ActionBar>
 				<ActionBarContentSection>
@@ -16,5 +16,24 @@ describe('<ActionBar />', () => {
 		const button = findByText('Submit');
 
 		expect(button).not.toBeNull();
+	});
+
+	it('Should portal to a given container', () => {
+		const actionBarRootId = 'action-bar-root';
+		const childTestId = 'action-bar-child';
+		document.body.append(`<div id="${actionBarRootId}"></div>`);
+		const actionBarContainer = document.getElementById(actionBarRootId);
+
+		render(
+			<ActionBar container={actionBarContainer}>
+				<ActionBarContentSection>
+					<div data-testid={childTestId} />
+				</ActionBarContentSection>
+			</ActionBar>,
+		);
+		const { findByTestId } = render(null, { container: actionBarContainer });
+		const actionBarChild = findByTestId(childTestId);
+
+		expect(actionBarChild).toBeDefined();
 	});
 });
