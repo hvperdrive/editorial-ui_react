@@ -2,17 +2,13 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useSlot } from '../../hooks/useSlot';
+import { useSlot } from '../../hooks';
 
 import styles from './ActionBar.module.scss';
-
-export const ActionBarContentSection = ({ children }) => <>{children}</>;
+import { ActionBarContentSection } from './ActionBar.slots';
 
 const cx = classNames.bind(styles);
 
-ActionBarContentSection.propTypes = {
-	children: PropTypes.node,
-};
 
 const ActionBar = ({ children }) => {
 	const contentSlot = useSlot(ActionBarContentSection, children);

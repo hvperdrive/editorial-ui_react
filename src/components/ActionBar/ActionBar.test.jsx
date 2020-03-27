@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import ActionBar, { ActionBarContentSection } from './ActionBar';
+import ActionBar from './ActionBar';
+import { ActionBarContentSection } from './ActionBar.slots';
 
 describe('<ActionBar />', () => {
 	it('should render content', () => {
