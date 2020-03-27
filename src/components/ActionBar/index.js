@@ -1,1 +1,1 @@
-export { default as ActionBar } from './ActionBar';
+export { ActionBarContentSection, default as ActionBar } from './ActionBar';
