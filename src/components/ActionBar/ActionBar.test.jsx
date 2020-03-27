@@ -4,10 +4,12 @@ import React from 'react';
 import ActionBar from './ActionBar';
 import { ActionBarContentSection } from './ActionBar.slots';
 
+const childTestId = 'action-bar-child';
+
 describe('<ActionBar />', () => {
 	it('Should render content', () => {
 		const { findByText } = render(
-			<ActionBar>
+			<ActionBar isOpen>
 				<ActionBarContentSection>
 					<button className="a-button" type="submit">Submit</button>
 				</ActionBarContentSection>
@@ -19,21 +21,40 @@ describe('<ActionBar />', () => {
 	});
 
 	it('Should portal to a given container', () => {
-		const actionBarRootId = 'action-bar-root';
-		const childTestId = 'action-bar-child';
-		document.body.append(`<div id="${actionBarRootId}"></div>`);
-		const actionBarContainer = document.getElementById(actionBarRootId);
+		const rootId = 'action-bar-root';
+		document.body.append(`<div id="${rootId}"></div>`);
+		const rootContainer = document.getElementById(rootId);
 
 		render(
-			<ActionBar container={actionBarContainer}>
+			<ActionBar container={rootContainer} isOpen>
 				<ActionBarContentSection>
 					<div data-testid={childTestId} />
 				</ActionBarContentSection>
 			</ActionBar>,
 		);
-		const { findByTestId } = render(null, { container: actionBarContainer });
-		const actionBarChild = findByTestId(childTestId);
+		const { findByTestId } = render(null, { container: rootContainer });
+		const childEl = findByTestId(childTestId);
 
-		expect(actionBarChild).toBeDefined();
+		expect(childEl).toBeDefined();
+	});
+
+	it('Should show the component based on `isOpen` prop', () => {
+		const { queryByTestId, rerender } = render(
+			<ActionBar isOpen={false}>
+				<ActionBarContentSection>
+					<div data-testid={childTestId} />
+				</ActionBarContentSection>
+			</ActionBar>,
+		);
+
+		expect(queryByTestId(childTestId)).toBeNull();
+		rerender(
+			<ActionBar isOpen>
+				<ActionBarContentSection>
+					<div data-testid={childTestId} />
+				</ActionBarContentSection>
+			</ActionBar>,
+		);
+		expect(queryByTestId(childTestId)).not.toBeNull();
 	});
 });

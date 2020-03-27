@@ -10,7 +10,12 @@ import { ActionBarContentSection } from './ActionBar.slots';
 
 const cx = classNames.bind(styles);
 
-const ActionBar = ({ children, container, disablePortal = false }) => {
+const ActionBar = ({
+	children,
+	container,
+	disablePortal = false,
+	isOpen,
+}) => {
 	const [mountNode, setMountNode] = useState(null);
 	const contentSlot = useSlot(ActionBarContentSection, children);
 
@@ -21,7 +26,7 @@ const ActionBar = ({ children, container, disablePortal = false }) => {
 		}
 	}, [container, disablePortal]);
 
-	const renderActionBar = () => (
+	const renderActionBar = () => (isOpen ? (
 		<div className={cx('o-action-bar')}>
 			<div className="u-container">
 				<div className="o-action-bar__content u-margin-top-xs u-margin-bottom-xs">
@@ -29,7 +34,7 @@ const ActionBar = ({ children, container, disablePortal = false }) => {
 				</div>
 			</div>
 		</div>
-	);
+	) : null);
 
 	return !disablePortal && mountNode
 		? createPortal(renderActionBar(), mountNode)
@@ -40,6 +45,7 @@ ActionBar.propTypes = {
 	children: PropTypes.node,
 	container: PropTypes.node,
 	disablePortal: PropTypes.bool,
+	isOpen: PropTypes.bool.isRequired,
 };
 
 export default ActionBar;
