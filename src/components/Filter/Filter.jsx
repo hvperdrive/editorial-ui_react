@@ -57,7 +57,7 @@ const Filter = ({
 						</TagList>
 					</div>
 				) : (
-					''
+					null
 				)}
 			</div>
 		</div>
