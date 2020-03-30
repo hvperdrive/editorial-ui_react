@@ -22,6 +22,12 @@ const Filter = ({
 }) => {
 	const filterSlot = useSlot(FilterBody, children);
 
+	// Prevent accordion from closing when the
+	// user interacts with the filters inside the AccordionTabContent
+	const preventClosingAccordion = (e) => {
+		e.stopPropagation();
+	};
+
 	return (
 		<div>
 			<div className="u-container">
@@ -29,7 +35,13 @@ const Filter = ({
 					<AccordionTab>
 						<AccordionTabHeader><h3 className="u-text-primary">{title}</h3></AccordionTabHeader>
 						<AccordionTabContent className="m-filter-form">
-							<div className="m-filter-form__row row">
+							<div
+								className="m-filter-form__row row"
+								role="button"
+								tabIndex="0"
+								onClick={preventClosingAccordion}
+								onKeyPress={preventClosingAccordion}
+							>
 								{filterSlot ? (
 									<>{ filterSlot }</>
 								) : (
