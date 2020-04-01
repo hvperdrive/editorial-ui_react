@@ -1,0 +1,37 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks';
+
+.m-accordion {
+	&__header {
+		border-top: none;
+		border-left: none;
+		border-right: none;
+
+		&:hover {
+			background-color: #fff;
+		}
+	}
+}
+
+.m-filter-form {
+	&__row {
+		justify-content: flex-end;
+	}
+
+	&__text {
+		width: 50%;
+		text-align: left;
+		align-self: center;
+	}
+
+	&__col {
+		flex-basis: 50%;
+		margin-bottom: $spacer;
+	}
+
+	&__buttons {
+		align-self: flex-end;
+		padding-left: $spacer-lg;
+		flex-basis: auto;
+		margin-right: 0.9rem;
+	}
+}
