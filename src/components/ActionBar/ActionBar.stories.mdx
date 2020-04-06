@@ -2,7 +2,8 @@ import { Fragment } from 'react';
 import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
-import ActionBar, { ActionBarContentSection } from './ActionBar';
+import ActionBar from './ActionBar';
+import { ActionBarContentSection } from './ActionBar.slots';
 
 <Meta title="ActionBar" component={ActionBar} />
 
@@ -14,7 +15,7 @@ A simple bar where content can be fitted in
 
 <Preview>
 	<Story name='Base'>
-		<ActionBar>
+		<ActionBar disablePortal isOpen>
 			<ActionBarContentSection>
 				<button className="a-button a-button--primary">Save</button>
 				<button className="a-button a-button--warning u-margin-left-xs">Cancel</button>
