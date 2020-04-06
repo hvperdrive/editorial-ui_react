@@ -1,0 +1,100 @@
+import { Fragment } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Filter from './Filter';
+import { TextField } from '@acpaas-ui/react-components';
+import { FilterBody } from './Filter.slots.jsx';
+
+<Meta title="Filter" component={Filter} />
+
+# Filter
+
+A generic filter component that can be used anywhere
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action()} onClear={action()} confirmText='Toepassen' cleanText='Alles leegmaken' onFilterRemove={action()}>
+			<FilterBody>
+				<div className="col-xs-8">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+			</FilterBody>
+		</Filter>
+	</Story>
+	<Story name='Multiple input fields'>
+		<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action()} confirmText='Toepassen' cleanText='Alles leegmaken' onClear={action()} onFilterRemove={action()}>
+			<FilterBody>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+				<div className="m-filter-form__col col-xs">
+					<TextField
+						label="zoeken"
+						id="zoeken"
+						name="zoeken"
+						className="textfield-class"
+						placeholder={`Zoeken op`}
+						onChange={(value) => console.log('Filteren op:', value)}
+						iconright="search"
+					/>
+				</div>
+			</FilterBody>
+		</Filter>
+	</Story>
+	<Story name='No input fields'>
+		<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action()} onClear={action()} confirmText='Toepassen' cleanText='Alles leegmaken' onFilterRemove={action()} />
+	</Story>
+	<Story name='Active filter items'>
+		{() => {
+			const array = [{label:'Naam', value:'Lorem'}, {label:'iets', value: 'Ipsum'}];
+			return(
+				<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action('add filter')} onClear={action('remove all filters')} confirmText='Toepassen' cleanText='Alles leegmaken' activeFilters={array} onFilterRemove={action('remove filter item')} />
+			)
+		}}
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Filter} />
