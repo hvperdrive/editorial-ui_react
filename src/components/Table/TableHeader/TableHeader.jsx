@@ -25,6 +25,7 @@ const TableHeader = ({
 
 		return (
 			<Button
+				className="a-table__header__button"
 				iconRight={sortIcon}
 				onClick={() => onSortClick(value, newOrder)}
 				size="tiny"

@@ -17,7 +17,6 @@ export default {
 			extensions: ['.js', '.jsx', '.scss'],
 		}),
 		postcss({
-			modules: true,
 			extensions: ['.css', '.scss'],
 			plugins: [
 				autoprefixer(),
