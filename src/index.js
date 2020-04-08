@@ -1,2 +1,2 @@
 export * from './components';
-export * from './hooks/useSlot';
+export * from './hooks';

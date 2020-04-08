@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useSlot } from '../../hooks/useSlot';
+import { useSlot } from '../../hooks';
 
 import styles from './ContextHeader.module.scss';
 import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
