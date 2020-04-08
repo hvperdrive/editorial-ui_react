@@ -30,7 +30,7 @@ export default {
 		'classnames',
 		'classnames/bind',
 		'prop-types',
-		'react-dom',
 		'react',
+		'react-dom',
 	],
 };
