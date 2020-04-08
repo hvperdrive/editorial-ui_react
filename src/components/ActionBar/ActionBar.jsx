@@ -12,6 +12,7 @@ const cx = classNames.bind(styles);
 
 const ActionBar = ({
 	children,
+	className,
 	container,
 	disablePortal = false,
 	isOpen,
@@ -27,7 +28,7 @@ const ActionBar = ({
 	}, [container, disablePortal]);
 
 	const renderActionBar = () => (isOpen ? (
-		<div className={cx('o-action-bar')}>
+		<div className={cx(className, 'o-action-bar')}>
 			<div className="u-container">
 				<div className="o-action-bar__content u-margin-top-xs u-margin-bottom-xs">
 					{contentSlot}
@@ -42,6 +43,7 @@ const ActionBar = ({
 };
 
 ActionBar.propTypes = {
+	className: PropTypes.string,
 	children: PropTypes.node,
 	container: PropTypes.node,
 	disablePortal: PropTypes.bool,

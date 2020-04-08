@@ -28,9 +28,9 @@ export default {
 	external: [
 		'@acpaas-ui/react-components',
 		'classnames',
-		'prop-types',
-		'react',
-		'react-dom',
 		'classnames/bind',
+		'prop-types',
+		'react-dom',
+		'react',
 	],
 };
