@@ -7,6 +7,11 @@ import { FilterBody } from './Filter.slots';
 
 const noop = () => {};
 
+const deleteFilter = (filter) => {
+	// eslint-disable-next-line no-console
+	console.log(filter);
+};
+
 const filterItems = [{ label: 'lorem', value: 'Lorem' }, { label: 'ipsum', value: 'Ipsum' }];
 
 const renderFilterInput = () => render((
@@ -47,5 +52,10 @@ describe('<Filter />', () => {
 		const tagEl = document.querySelector('m-tag');
 
 		expect(tagEl).toBeDefined();
+	});
+	it('Should delete a single filter item', () => {
+		render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={deleteFilter} />);
+
+		expect(deleteFilter).toBeDefined();
 	});
 });

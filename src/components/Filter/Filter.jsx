@@ -63,7 +63,7 @@ const Filter = ({
 									value={filter.value}
 									key={filter.label}
 									closable
-									onClick={onFilterRemove}
+									onClick={() => onFilterRemove(filter)}
 								/>
 							))}
 						</TagList>
