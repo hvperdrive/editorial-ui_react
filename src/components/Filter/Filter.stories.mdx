@@ -90,7 +90,14 @@ A generic filter component that can be used anywhere
 			const array = [{label:'Naam', value:'Lorem'}, {label:'iets', value: 'Ipsum'}];
 			const deleteFilter = (filter) => {console.log(filter)};
 			return(
-				<Filter title='Filter' noFilterText='Geen filters beschikbaar' onConfirm={action('add filter')} onClear={action('remove all filters')} confirmText='Toepassen' cleanText='Alles leegmaken' activeFilters={array} onFilterRemove={deleteFilter} />
+				<Filter
+					title='Filter'
+					noFilterText='Geen filters beschikbaar'
+					onConfirm={action('add filter')}
+					onClean={action('remove all filters')}
+					confirmText='Toepassen' cleanText='Alles leegmaken'
+					activeFilters={array} onFilterRemove={deleteFilter}
+				/>
 			)
 		}}
 	</Story>

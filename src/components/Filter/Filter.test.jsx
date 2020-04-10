@@ -1,16 +1,11 @@
 import { TextField } from '@acpaas-ui/react-components';
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import Filter from './Filter';
 import { FilterBody } from './Filter.slots';
 
 const noop = () => {};
-
-const deleteFilter = (filter) => {
-	// eslint-disable-next-line no-console
-	console.log(filter);
-};
 
 const filterItems = [{ label: 'lorem', value: 'Lorem' }, { label: 'ipsum', value: 'Ipsum' }];
 
@@ -53,9 +48,11 @@ describe('<Filter />', () => {
 
 		expect(tagEl).toBeDefined();
 	});
-	it('Should delete a single filter item', () => {
-		render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={deleteFilter} />);
+	it('Should click a single filter item', () => {
+		const deleteFilter = jest.fn();
+		const { container } = render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={deleteFilter} />);
+		fireEvent.click(container.querySelector('.a-button'));
 
-		expect(deleteFilter).toBeDefined();
+		expect(deleteFilter).toHaveBeenCalled();
 	});
 });
