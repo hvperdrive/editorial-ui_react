@@ -1,0 +1,26 @@
+import { Fragment } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import ScrollableTabs from './ScrollableTabs';
+import { MOCK_TABS } from './ScrollableTabs.mock'
+
+<Meta title="ScrollableTabs" component={ScrollableTabs} />
+
+# ScrollableTabs
+
+A vertically scrollable tab bar
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<div style={{ width: '480px' }}>
+			<ScrollableTabs items={MOCK_TABS} />
+		</div>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={ScrollableTabs} />
