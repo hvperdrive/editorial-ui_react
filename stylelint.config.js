@@ -6,5 +6,6 @@ module.exports = {
 	],
 	rules: {
 		indentation: 'tab',
+		'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['global', 'local'] }],
 	},
 };
