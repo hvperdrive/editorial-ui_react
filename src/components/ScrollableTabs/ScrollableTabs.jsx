@@ -9,7 +9,7 @@ import styles from './ScrollableTabs.module.scss';
 
 const cx = classnames.bind(styles);
 
-const ScrollableTabs = ({ items = [], linkProps = (props) => props }) => {
+const ScrollableTabs = ({ className, items = [], linkProps = (props) => props }) => {
 	/**
 	 * Hooks
 	 */
@@ -83,7 +83,7 @@ const ScrollableTabs = ({ items = [], linkProps = (props) => props }) => {
 	 */
 	return (
 		<div
-			className={cx('o-scrollable-tabs', {
+			className={cx(className, 'o-scrollable-tabs', {
 				'o-scrollable-tabs--gradient-left': showLeftGradient,
 				'o-scrollable-tabs--gradient-right': showRightGradient,
 			})}
@@ -96,6 +96,7 @@ const ScrollableTabs = ({ items = [], linkProps = (props) => props }) => {
 };
 
 ScrollableTabs.propTypes = {
+	className: PropTypes.string,
 	items: PropTypes.arrayOf(PropTypes.shape({
 		name: PropTypes.string.isRequired,
 		target: PropTypes.string.isRequired,
