@@ -16,7 +16,8 @@ const ScrollableTabs = ({ className, items = [], linkProps = (props) => props })
 	const hasInitialised = useRef(false);
 	const scrollContainerRef = useRef(null);
 	const tabsRef = useRef(null);
-	const [tabsHeight, setTabsHeight] = useState();
+	const [activeEl, setActiveEl] = useState(null);
+	const [tabsHeight, setTabsHeight] = useState(0);
 	const [showLeftGradient, setShowLeftGradient] = useState(false);
 	const [showRightGradient, setShowRightGradient] = useState(false);
 
@@ -29,7 +30,32 @@ const ScrollableTabs = ({ className, items = [], linkProps = (props) => props })
 		}
 	}, []);
 
-	// TODO: Set active tab visible in scroll area
+	// Set active element
+	useEffect(() => {
+		if (tabsRef.current && items.length) {
+			setActiveEl(tabsRef.current.querySelector('.is-active'));
+		}
+	}, [items]);
+
+	// Scroll active tab into view
+	const scrollToActive = useCallback(() => {
+		if (activeEl) {
+			const containerWidth = tabsRef.current.clientWidth;
+			const rect = activeEl.getBoundingClientRect();
+
+			const isInView = rect.left >= 0 && rect.right <= containerWidth;
+
+			if (isInView) {
+				return;
+			}
+			// scrollTo is not supported on IE and Safari (iOS)
+			if (tabsRef.current.scrollTo) {
+				tabsRef.current.scrollTo({ top: 0, left: rect.left, behavior: 'smooth' });
+			} else {
+				tabsRef.current.scrollLeft = rect.left;
+			}
+		}
+	}, [activeEl]);
 
 	// Set gradients to indicate it's scrollable
 	const setGradients = useCallback((element) => {
@@ -76,7 +102,13 @@ const ScrollableTabs = ({ className, items = [], linkProps = (props) => props })
 			setGradients(tabsRef.current);
 			hasInitialised.current = true;
 		}
-	}, [setGradients]);
+	}, [items.length, setGradients]);
+
+	useEffect(() => {
+		if (items.length && hasInitialised.current && activeEl) {
+			scrollToActive();
+		}
+	}, [activeEl, items.length, scrollToActive]);
 
 	/**
 	 * Render
