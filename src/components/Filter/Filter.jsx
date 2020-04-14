@@ -31,48 +31,46 @@ const Filter = ({
 
 	return (
 		<div className={className}>
-			<div className="u-container">
-				<Accordion>
-					<AccordionTab>
-						<AccordionTabHeader><h3 className="u-text-primary">{title}</h3></AccordionTabHeader>
-						<AccordionTabContent className="m-filter-form">
-							<div
-								className="m-filter-form__row row"
-								role="button"
-								tabIndex="0"
-								onClick={preventClosingAccordion}
-								onKeyPress={preventClosingAccordion}
-							>
-								{filterSlot ? (
-									<>{ filterSlot }</>
-								) : (
-									<p className="m-filter-form__text">{noFilterText}</p>
-								)}
-								<div className="m-filter-form__buttons">
-									<Button type="primary" onClick={onClean} negative>{cleanText}</Button>
-									<Button type="primary" iconRight="angle-right" onClick={onConfirm} outline>{confirmText}</Button>
-								</div>
+			<Accordion>
+				<AccordionTab>
+					<AccordionTabHeader><h5 className="u-text-primary">{title}</h5></AccordionTabHeader>
+					<AccordionTabContent className="m-filter-form">
+						<div
+							className="m-filter-form__row row"
+							role="button"
+							tabIndex="0"
+							onClick={preventClosingAccordion}
+							onKeyPress={preventClosingAccordion}
+						>
+							{filterSlot ? (
+								<>{ filterSlot }</>
+							) : (
+								<p className="m-filter-form__text">{noFilterText}</p>
+							)}
+							<div className="m-filter-form__buttons">
+								<Button type="primary" onClick={onClean} negative>{cleanText}</Button>
+								<Button type="primary" iconRight="angle-right" onClick={onConfirm} outline>{confirmText}</Button>
 							</div>
-						</AccordionTabContent>
-					</AccordionTab>
-				</Accordion>
-				{ activeFilters.length > 0 ? (
-					<div className="u-margin-top">
-						<TagList>
-							{activeFilters.map((filter) => (
-								<TagListItem
-									value={filter.value}
-									key={filter.label}
-									closable
-									onClick={() => onFilterRemove(filter)}
-								/>
-							))}
-						</TagList>
-					</div>
-				) : (
-					null
-				)}
-			</div>
+						</div>
+					</AccordionTabContent>
+				</AccordionTab>
+			</Accordion>
+			{ activeFilters.length > 0 ? (
+				<div className="u-margin-top">
+					<TagList>
+						{activeFilters.map((filter) => (
+							<TagListItem
+								value={filter.value}
+								key={filter.label}
+								closable
+								onClick={() => onFilterRemove(filter)}
+							/>
+						))}
+					</TagList>
+				</div>
+			) : (
+				null
+			)}
 		</div>
 	);
 };
