@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import ScrollableTabs from './ScrollableTabs';
+import { MOCK_TABS } from './ScrollableTabs.mock'
+
+<Meta title="ScrollableTabs" component={ScrollableTabs} />
+
+# ScrollableTabs
+
+A vertically scrollable tab bar
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		{() => {
+			const [hash, setHash] = useState(MOCK_TABS.find(t => t.active).target);
+			const [activeTabs, setActiveTabs] = useState(MOCK_TABS);
+			const listenToHashChange = () => {
+				setHash(window.location.hash);
+			};
+			useEffect(() => {
+				window.addEventListener("hashchange", listenToHashChange);
+				return () => {
+					window.removeEventListener("hashchange", listenToHashChange);
+				};
+			}, []);
+			useEffect(() => {
+				setActiveTabs(activeTabs.map((tab) => ({
+					...tab,
+					active: tab.target === hash,
+				})))
+			}, [hash]);
+			return (
+				<div style={{ width: '480px' }}>
+					<ScrollableTabs items={activeTabs} />
+				</div>
+			);
+		}}
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={ScrollableTabs} />
