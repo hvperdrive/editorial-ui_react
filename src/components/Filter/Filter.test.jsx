@@ -1,5 +1,5 @@
 import { TextField } from '@acpaas-ui/react-components';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import Filter from './Filter';
@@ -53,6 +53,6 @@ describe('<Filter />', () => {
 		const { container } = render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={deleteFilter} />);
 		fireEvent.click(container.querySelector('.a-button'));
 
-		expect(deleteFilter).toHaveBeenCalled();
+		expect(deleteFilter).toHaveBeenCalledWith({ label: 'lorem', value: 'Lorem' });
 	});
 });
