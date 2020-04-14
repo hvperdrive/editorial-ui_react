@@ -40,19 +40,16 @@ const ScrollableTabs = ({ className, items = [], linkProps = (props) => props })
 	// Scroll active tab into view
 	const scrollToActive = useCallback(() => {
 		if (activeEl) {
-			const containerWidth = tabsRef.current.clientWidth;
+			const tabsEl = tabsRef.current;
 			const rect = activeEl.getBoundingClientRect();
+			// - 24 = width of gradient, so the active tab will be fully visible
+			const newX = rect.left + tabsEl.scrollLeft - 24;
 
-			const isInView = rect.left >= 0 && rect.right <= containerWidth;
-
-			if (isInView) {
-				return;
-			}
 			// scrollTo is not supported on IE and Safari (iOS)
-			if (tabsRef.current.scrollTo) {
-				tabsRef.current.scrollTo({ top: 0, left: rect.left, behavior: 'smooth' });
+			if (tabsEl.scrollTo) {
+				tabsEl.scrollTo({ top: 0, left: newX, behavior: 'smooth' });
 			} else {
-				tabsRef.current.scrollLeft = rect.left;
+				tabsEl.scrollLeft = newX;
 			}
 		}
 	}, [activeEl]);
