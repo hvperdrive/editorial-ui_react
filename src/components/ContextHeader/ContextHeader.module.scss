@@ -18,4 +18,14 @@
 	&__body {
 		padding-bottom: $spacer;
 	}
+
+	&__tabs {
+		&::before {
+			background: linear-gradient(to right, $background-color-light, rgba($background-color-light, 0.1));
+		}
+
+		&::after {
+			background: linear-gradient(to left, $background-color-light, rgba($background-color-light, 0.1));
+		}
+	}
 }

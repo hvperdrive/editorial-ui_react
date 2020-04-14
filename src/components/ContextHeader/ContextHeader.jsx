@@ -1,9 +1,10 @@
-import { Badge, Tabs } from '@acpaas-ui/react-components';
+import { Badge } from '@acpaas-ui/react-components';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useSlot } from '../../hooks';
+import { ScrollableTabs } from '../ScrollableTabs';
 
 import styles from './ContextHeader.module.scss';
 import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
@@ -27,7 +28,11 @@ const ContextHeader = ({
 				<div className="o-context-header__badges">
 					{
 						badges.map((badge, index) => (
-							<Badge className="u-margin-right-xs u-margin-top-xs u-margin-bottom-xs" key={index} type={badge.type}>
+							<Badge
+								className="u-margin-right-xs u-margin-top-xs u-margin-bottom-xs"
+								key={index}
+								type={badge.type}
+							>
 								{badge.name}
 							</Badge>
 						))
@@ -41,7 +46,13 @@ const ContextHeader = ({
 
 	const renderTabs = () => {
 		if (tabs && tabs.length > 0) {
-			return <Tabs className="o-context-header__tabs" linkProps={linkProps} align="left" items={tabs} />;
+			return (
+				<ScrollableTabs
+					className={cx('o-context-header__tabs')}
+					items={tabs}
+					linkProps={linkProps}
+				/>
+			);
 		}
 
 		return null;
