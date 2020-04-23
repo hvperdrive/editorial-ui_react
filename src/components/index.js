@@ -3,3 +3,4 @@ export * from './ContextHeader';
 export * from './Filter';
 export * from './PaginatedTable';
 export * from './Table';
+export * from './Status';
