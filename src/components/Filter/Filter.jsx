@@ -10,6 +10,7 @@ import './Filter.scss';
 import { FilterBody } from './Filter.slots';
 
 const Filter = ({
+	className,
 	title,
 	children,
 	noFilterText,
@@ -29,7 +30,7 @@ const Filter = ({
 	};
 
 	return (
-		<div>
+		<div className={className}>
 			<div className="u-container">
 				<Accordion>
 					<AccordionTab>
@@ -77,6 +78,7 @@ const Filter = ({
 };
 
 Filter.propTypes = {
+	className: PropTypes.string,
 	title: PropTypes.string,
 	noFilterText: PropTypes.string,
 	onConfirm: PropTypes.func,
