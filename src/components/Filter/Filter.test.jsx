@@ -1,5 +1,5 @@
 import { TextField } from '@acpaas-ui/react-components';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import Filter from './Filter';
@@ -47,5 +47,12 @@ describe('<Filter />', () => {
 		const tagEl = document.querySelector('m-tag');
 
 		expect(tagEl).toBeDefined();
+	});
+	it('Should click a single filter item', () => {
+		const deleteFilter = jest.fn();
+		const { container } = render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={deleteFilter} />);
+		fireEvent.click(container.querySelector('.a-button'));
+
+		expect(deleteFilter).toHaveBeenCalledWith({ label: 'lorem', value: 'Lorem' });
 	});
 });
