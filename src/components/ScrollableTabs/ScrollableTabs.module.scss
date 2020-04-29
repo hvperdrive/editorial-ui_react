@@ -1,0 +1,105 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks';
+
+.o-scrollable-tabs {
+	overflow: hidden;
+	position: relative;
+
+	:global {
+		.m-nav-tabs {
+			border-top: none;
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: center;
+			overflow-x: scroll;
+
+			> li {
+				> a,
+				> button {
+					border-bottom: 3px solid transparent;
+					text-decoration: none;
+					transition-property: border, color;
+					white-space: nowrap;
+
+					&:focus {
+						box-shadow: inset 0 0 0 3px $input-border-focus;
+					}
+
+					&:hover,
+					&:active {
+						background-color: transparent;
+						border-color: $nav-color-active;
+						color: $nav-color;
+						text-decoration: none;
+					}
+
+					&.is-active {
+						&,
+						&:hover,
+						&:active {
+							background-color: $nav-bg-active;
+							border-color: $nav-color-active;
+							color: $nav-color-active;
+							text-decoration: none;
+						}
+					}
+
+					&.is-disabled {
+						&,
+						&:hover,
+						&:active {
+							background-color: $nav-bg;
+							border-color: transparent;
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * NAVIGATION LIST MODIFIERS
+		 * -------------------------------------------------------------------
+		 */
+		.m-nav-tabs--left {
+			justify-content: flex-start;
+		}
+
+		.m-nav-tabs--right {
+			justify-content: flex-end;
+		}
+	}
+
+	&::before,
+	&::after {
+		position: absolute;
+		top: 0;
+		width: $spacer;
+		height: 100%;
+		transition: transform 100ms ease-in-out;
+		content: '';
+		pointer-events: none;
+	}
+
+	&::before {
+		left: 0;
+		background: linear-gradient(to right, $white, rgba($white, 0.1));
+		transform: translateX(-$spacer);
+	}
+
+	&::after {
+		right: 0;
+		background: linear-gradient(to left, $white, rgba($white, 0.1));
+		transform: translateX($spacer);
+	}
+}
+
+.o-scrollable-tabs--gradient-left {
+	&::before {
+		transform: translateX(0);
+	}
+}
+
+.o-scrollable-tabs--gradient-right {
+	&::after {
+		transform: translateX(0);
+	}
+}
