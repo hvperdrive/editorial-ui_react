@@ -1,0 +1,25 @@
+import { Fragment } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Container from './Container';
+
+<Meta title="Container" component={Container} />
+
+# Container
+
+Default container for content
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Container>
+			<p>This is inside a container</p>
+		</Container>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Container} />
