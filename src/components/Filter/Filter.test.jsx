@@ -29,7 +29,9 @@ const renderFilterInput = () => render((
 
 describe('<Filter />', () => {
 	it('Should display default text', () => {
-		const { findByText } = render(<Filter title="Filter" onConfirm={noop} onClean={noop} onFilterRemove={noop} />);
+		const { findByText } = render(
+			<Filter title="Filter" onConfirm={noop} onClean={noop} onFilterRemove={noop} />,
+		);
 		const textEl = findByText('Geen filters beschikbaar');
 
 		expect(textEl).not.toBeNull();
@@ -43,16 +45,35 @@ describe('<Filter />', () => {
 	});
 
 	it('Should display filter items', () => {
-		render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={noop} />);
-		const tagEl = document.querySelector('m-tag');
+		const { container } = render(
+			<Filter
+				title="Filter"
+				onConfirm={noop}
+				onClean={noop}
+				activeFilters={filterItems}
+				onFilterRemove={noop}
+			/>,
+		);
+		const tagEl = container.querySelector('.m-tag');
 
 		expect(tagEl).toBeDefined();
 	});
+
 	it('Should click a single filter item', () => {
 		const deleteFilter = jest.fn();
-		const { container } = render(<Filter title="Filter" onConfirm={noop} onClean={noop} activeFilters={filterItems} onFilterRemove={deleteFilter} />);
-		fireEvent.click(container.querySelector('.a-button'));
+		const { container } = render(
+			<Filter
+				title="Filter"
+				onConfirm={noop}
+				onClean={noop}
+				activeFilters={filterItems}
+				onFilterRemove={deleteFilter}
+			/>,
+		);
 
-		expect(deleteFilter).toHaveBeenCalledWith({ label: 'lorem', value: 'Lorem' });
+		fireEvent.click(container.querySelectorAll('.m-tag .a-button')[1]);
+
+		expect(deleteFilter).toHaveBeenCalledTimes(1);
+		expect(deleteFilter).toHaveBeenCalledWith(filterItems[1]);
 	});
 });
