@@ -60,10 +60,10 @@ const Filter = ({
 					<TagList>
 						{activeFilters.map((filter, index) => (
 							<TagListItem
-								value={filter.label ? (
+								value={filter.valuePrefix ? (
 									<>
 										<span className="m-tag__label-prefix">
-											{`${filter.label}: `}
+											{`${filter.valuePrefix}: `}
 										</span>
 										{filter.value}
 									</>
@@ -91,7 +91,7 @@ Filter.propTypes = {
 	onClean: PropTypes.func,
 	cleanText: PropTypes.string,
 	activeFilters: PropTypes.arrayOf(PropTypes.shape({
-		label: PropTypes.string,
+		valuePrefix: PropTypes.string,
 		value: PropTypes.string,
 		key: PropTypes.string,
 	})),
