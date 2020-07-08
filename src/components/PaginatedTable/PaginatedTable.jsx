@@ -16,7 +16,7 @@ const PaginatedTable = ({
 	...tableProps
 }) => {
 	const resultCount = `Resultaat (${totalValues})`;
-	const showPagination = totalValues > 0 && Math.ceil(totalValues / itemsPerPage) > 0;
+	const showPagination = totalValues > itemsPerPage;
 
 	return (
 		<div className={classnames(className, 'o-paginated-table')}>
