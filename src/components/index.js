@@ -6,3 +6,4 @@ export * from './PaginatedTable';
 export * from './ScrollableTabs';
 export * from './Table';
 export * from './Status';
+export * from './Timepicker';

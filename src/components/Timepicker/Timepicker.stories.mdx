@@ -1,0 +1,28 @@
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { HOURS, MINUTES } from './Timepicker.mock.js';
+import Timepicker from './Timepicker.jsx';
+
+<Meta title="Timepicker" component={Timepicker} />
+
+# Timepicker
+
+Some explanation about our Timepicker component
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Timepicker
+			id="time"
+			value={new Date().toString()}
+			hourOptions={HOURS}
+			minuteOptions={MINUTES}
+			onChange={action()}
+		/>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Timepicker} />
