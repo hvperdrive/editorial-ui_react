@@ -1,6 +1,5 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { HOURS, MINUTES } from './Timepicker.mock.js';
 import Timepicker from './Timepicker.jsx';
 
 <Meta title="Timepicker" component={Timepicker} />
@@ -15,9 +14,7 @@ Some explanation about our Timepicker component
 	<Story name='Base'>
 		<Timepicker
 			id="time"
-			value={new Date().toString()}
-			hourOptions={HOURS}
-			minuteOptions={MINUTES}
+			value="10:30"
 			onChange={action()}
 		/>
 	</Story>

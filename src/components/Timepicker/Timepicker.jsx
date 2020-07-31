@@ -3,6 +3,10 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import {
+	getTimeArray, getTimeString, mapToObject, setInitialValues,
+} from './Timepicker.helpers';
+
 const Timepicker = ({
 	id,
 	className,
@@ -10,31 +14,33 @@ const Timepicker = ({
 	value,
 	hourLabel = 'Uren',
 	minuteLabel = 'Minuten',
+	secondLabel = 'Seconden',
+	millisecondLabel = 'Milliseconden',
 	hourPlaceholder = 'hh',
 	minutePlaceholder = 'mm',
-	hourOptions,
-	minuteOptions,
+	secondPlaceholder = 'ss',
+	millisecondPlaceholder = 'ms',
+	hourStep = 1,
+	minuteStep = 5,
+	secondStep,
+	millisecondStep,
 	onChange,
 }) => {
+	const timeArray = getTimeArray(value) || [];
+
 	/**
 	* Methods
 	*/
-	const mapToObject = (items) => items.map((item) => ({
-		key: item,
-		value: item,
-		label: item,
-	}));
+	const handleChange = (indexValue, index) => {
+		let prevValue = getTimeArray(value);
 
-	const getFormattedTime = (dateString) => {
-		if (!dateString || dateString.length === 0) {
-			return null;
+		if (timeArray.length < index - 1) {
+			prevValue = setInitialValues(index);
 		}
 
-		const date = new Date(dateString);
-		return {
-			hours: date.getHours().toString(),
-			minutes: date.getMinutes().toString(),
-		};
+		prevValue[index] = indexValue;
+
+		onChange(getTimeString(prevValue));
 	};
 
 	/**
@@ -46,25 +52,49 @@ const Timepicker = ({
 				id={`${id}-hours`}
 				required={required}
 				label={hourLabel}
-				options={mapToObject(hourOptions)}
-				placeholder={
-						getFormattedTime(value || null)?.hours
-						|| hourPlaceholder
-				}
-				onChange={onChange}
+				options={mapToObject(24, hourStep)}
+				placeholder={hourPlaceholder}
+				value={timeArray[0]}
+				onChange={(event) => handleChange(event.target.value, 0)}
 			/>
 			<span className="a-timepicker__separator">:</span>
 			<Select
 				id={`${id}-minutes`}
 				required={required}
 				label={minuteLabel}
-				options={mapToObject(minuteOptions)}
-				placeholder={
-						getFormattedTime(value || null)?.minutes
-						|| minutePlaceholder
-				}
-				onChange={onChange}
+				options={mapToObject(60, minuteStep)}
+				placeholder={minutePlaceholder}
+				value={timeArray[1]}
+				onChange={(event) => handleChange(event.target.value, 1)}
 			/>
+			{secondStep && (
+				<>
+					<span className="a-timepicker__separator">:</span>
+					<Select
+						id={`${id}-seconds`}
+						required={required}
+						label={secondLabel}
+						options={mapToObject(60, secondStep)}
+						placeholder={secondPlaceholder}
+						value={timeArray[2]}
+						onChange={(event) => handleChange(event.target.value, 2)}
+					/>
+				</>
+			)}
+			{millisecondStep && (
+				<>
+					<span className="a-timepicker__separator">:</span>
+					<Select
+						id={`${id}-milliseconds`}
+						required={required}
+						label={millisecondLabel}
+						options={mapToObject(1, millisecondStep)}
+						placeholder={millisecondPlaceholder}
+						value={timeArray[3]}
+						onChange={(event) => handleChange(event.target.value, 3)}
+					/>
+				</>
+			)}
 		</div>
 	);
 };
@@ -76,10 +106,16 @@ Timepicker.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	hourLabel: PropTypes.string,
 	minuteLabel: PropTypes.string,
+	secondLabel: PropTypes.string,
+	millisecondLabel: PropTypes.string,
 	hourPlaceholder: PropTypes.string,
 	minutePlaceholder: PropTypes.string,
-	hourOptions: PropTypes.arrayOf(PropTypes.string),
-	minuteOptions: PropTypes.arrayOf(PropTypes.string),
+	secondPlaceholder: PropTypes.string,
+	millisecondPlaceholder: PropTypes.string,
+	hourStep: PropTypes.number,
+	minuteStep: PropTypes.number,
+	secondStep: PropTypes.number,
+	millisecondStep: PropTypes.number,
 	onChange: PropTypes.func,
 };
 
