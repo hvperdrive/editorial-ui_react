@@ -16,14 +16,14 @@ describe('<Timepicker />', () => {
 	});
 
 	it('Should display the correct values', async () => {
-		const { findByText } = render(
+		const { findByText, findAllByText } = render(
 			<Timepicker id="time" value="10:30" />,
 		);
 
-		const hour = await findByText('10');
+		const hour = await findAllByText('10');
 		const minute = await findByText('30');
 
-		expect(hour).not.toBeNull();
+		expect(hour).toHaveLength(2);
 		expect(minute).not.toBeNull();
 	});
 });
