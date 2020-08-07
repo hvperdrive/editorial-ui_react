@@ -1,5 +1,5 @@
 import { TextField } from '@acpaas-ui/react-components';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, getNodeText, render } from '@testing-library/react';
 import React from 'react';
 
 import Filter from './Filter';
@@ -7,7 +7,17 @@ import { FilterBody } from './Filter.slots';
 
 const noop = () => {};
 
-const filterItems = [{ label: 'lorem', value: 'Lorem' }, { label: 'ipsum', value: 'Ipsum' }];
+const filterItems = [
+	{
+		valuePrefix: 'Search',
+		value: 'search term',
+		key: 'search',
+	},
+	{
+		valuePrefix: 'User',
+		value: 'John Doe',
+		key: 'user',
+	}];
 
 const renderFilterInput = () => render((
 	<Filter title="Filter" onConfirm={noop} onClear={noop} onFilterRemove={noop}>
@@ -54,9 +64,14 @@ describe('<Filter />', () => {
 				onFilterRemove={noop}
 			/>,
 		);
-		const tagEl = container.querySelector('.m-tag');
 
-		expect(tagEl).toBeDefined();
+		const tagElValuePrefix = container.querySelector('.m-tag__label-prefix');
+		const tagElValue = container.querySelector('.m-tag__label');
+
+		expect(tagElValuePrefix).toBeDefined();
+		expect(tagElValue).toBeDefined();
+		expect(getNodeText(tagElValuePrefix)).toBe(`${filterItems[0].valuePrefix}: `);
+		expect(getNodeText(tagElValue)).toBe(filterItems[0].value);
 	});
 
 	it('Should click a single filter item', () => {
