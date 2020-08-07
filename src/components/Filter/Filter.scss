@@ -18,7 +18,6 @@
 	}
 
 	&__text {
-		width: 50%;
 		text-align: left;
 		align-self: center;
 	}
@@ -29,9 +28,34 @@
 	}
 
 	&__buttons {
+		width: 100%;
 		align-self: flex-end;
-		padding-left: $spacer-lg;
 		flex-basis: auto;
-		margin-right: 0.9rem;
+		padding-left: 0;
+		margin: 0 0.9rem;
+
+		button {
+			margin-top: $spacer;
+		}
+
+		@include at($screen-xs) {
+			width: unset;
+		}
+
+		@include at($screen-sm) {
+			align-self: flex-end;
+			padding-left: $spacer-lg;
+
+			button {
+				margin-top: 0;
+				margin-right: $spacer-xs;
+			}
+		}
+	}
+
+	.m-filter-form__col + &__buttons {
+		button {
+			margin-top: 0;
+		}
 	}
 }
