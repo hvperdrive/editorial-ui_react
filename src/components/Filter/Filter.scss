@@ -35,3 +35,10 @@
 		margin-right: 0.9rem;
 	}
 }
+
+.m-tag {
+	&__label-prefix {
+		color: $text-color;
+		font-weight: normal;
+	}
+}

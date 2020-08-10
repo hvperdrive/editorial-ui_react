@@ -49,7 +49,7 @@ const Filter = ({
 							)}
 							<div className="m-filter-form__buttons">
 								<Button type="primary" onClick={onClean} negative>{cleanText}</Button>
-								<Button type="primary" iconRight="angle-right" onClick={onConfirm} outline>{confirmText}</Button>
+								<Button type="primary" iconRight="angle-right" onClick={onConfirm}>{confirmText}</Button>
 							</div>
 						</div>
 					</AccordionTabContent>
@@ -58,10 +58,17 @@ const Filter = ({
 			{ activeFilters.length > 0 ? (
 				<div className="u-margin-top">
 					<TagList>
-						{activeFilters.map((filter) => (
+						{activeFilters.map((filter, index) => (
 							<TagListItem
-								value={filter.value}
-								key={filter.label}
+								value={filter.valuePrefix ? (
+									<>
+										<span className="m-tag__label-prefix">
+											{`${filter.valuePrefix}: `}
+										</span>
+										{filter.value}
+									</>
+								) : filter.value}
+								key={filter.key ? filter.key : `${index}_${filter.value}`}
 								closable
 								onClick={() => onFilterRemove(filter)}
 							/>
@@ -84,8 +91,9 @@ Filter.propTypes = {
 	onClean: PropTypes.func,
 	cleanText: PropTypes.string,
 	activeFilters: PropTypes.arrayOf(PropTypes.shape({
-		label: PropTypes.string,
+		valuePrefix: PropTypes.string,
 		value: PropTypes.string,
+		key: PropTypes.string,
 	})),
 	onFilterRemove: PropTypes.func,
 	children: PropTypes.oneOfType([
