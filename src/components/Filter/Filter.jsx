@@ -45,7 +45,7 @@ const Filter = ({
 							{filterSlot ? (
 								<>{ filterSlot }</>
 							) : (
-								<p className="m-filter-form__text">{noFilterText}</p>
+								<p className="m-filter-form__text col-xs-12 col-sm">{noFilterText}</p>
 							)}
 							<div className="m-filter-form__buttons">
 								<Button type="primary" onClick={onClean} negative>{cleanText}</Button>
