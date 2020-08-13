@@ -1,0 +1,35 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import NavList from './NavList';
+import { MOCK_ITEMS, MOCK_ITEMS_ERROR } from './NavList.mock'
+
+<Meta title="NavList" component={NavList} />
+
+# NavList
+
+The nav list component can be used as a secondary navigation menu
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<NavList items={MOCK_ITEMS} />
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={NavList} />
+
+## Variations
+
+### Items with error state
+
+Useful for having views with forms to indicate errors.
+Set the item's `hasError` property to `true` to add the correct styling.
+
+<Preview>
+	<Story name='With error state'>
+		<NavList items={MOCK_ITEMS_ERROR} />
+	</Story>
+</Preview>
