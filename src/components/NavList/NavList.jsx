@@ -6,14 +6,19 @@ import './NavList.scss';
 
 const NavList = ({ className, linkComponent: LinkComponent = 'a', items }) => (
 	<ul className={classnames(className, 'm-nav-list')}>
-		{items.map(({ hasError, label, ...linkProps }, index) => (
+		{items.map(({
+			description,
+			hasError,
+			label,
+			...linkProps
+		}, index) => (
 			<li
 				key={`nav-list-${index}`}
 				className={classnames({ 'm-nav-list__item--error': hasError })}
 			>
 				<LinkComponent {...linkProps}>
-					{label}
-					{hasError && '*'}
+					<span>{`${label}${hasError ? '*' : ''}`}</span>
+					{description && <p className="m-nav-list__item-description u-text-light">{description}</p>}
 				</LinkComponent>
 			</li>
 		))}
@@ -24,7 +29,9 @@ NavList.propTypes = {
 	className: PropTypes.string,
 	linkComponent: PropTypes.elementType,
 	items: PropTypes.arrayOf(PropTypes.shape({
-		hasError: PropTypes.boolean, label: PropTypes.string.isRequired,
+		hasError: PropTypes.boolean,
+		label: PropTypes.string.isRequired,
+		description: PropTypes.string,
 	})).isRequired,
 };
 
