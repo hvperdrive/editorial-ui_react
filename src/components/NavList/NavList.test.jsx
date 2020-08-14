@@ -32,8 +32,17 @@ describe('<NavList />', () => {
 		const { getByText } = render(navListComponent);
 
 		const itemEl = getByText(`${itemWithError.label}*`);
-		const listItemEl = itemEl.parentElement;
+		const listItemEl = itemEl.closest('li');
 
 		expect(listItemEl.classList.contains('m-nav-list__item--error')).toBeTruthy();
+	});
+
+	it('Should show a description when given', () => {
+		const itemWithDescription = MOCK_ITEMS_ERROR.find((item) => item.description);
+		const { getByText } = render(navListComponent);
+
+		const itemEl = getByText(itemWithDescription.description);
+
+		expect(itemEl).not.toBeNull();
 	});
 });
