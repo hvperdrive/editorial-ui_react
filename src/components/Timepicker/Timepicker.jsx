@@ -27,6 +27,8 @@ const Timepicker = ({
 	onChange,
 }) => {
 	const timeArray = getTimeArray(value) || [];
+	const roundedSecondStep = (typeof secondStep !== 'undefined') ? Math.round(secondStep) : null;
+	const roundedMillisecondSecondStep = (typeof millisecondStep !== 'undefined') ? Math.round(millisecondStep) : null;
 
 	/**
 	* Methods
@@ -67,34 +69,34 @@ const Timepicker = ({
 				value={timeArray[1]}
 				onChange={(event) => handleChange(event.target.value, 1)}
 			/>
-			{secondStep && (
+			{roundedSecondStep && roundedSecondStep > 0 ? (
 				<>
 					<span className="a-timepicker__separator">:</span>
 					<Select
 						id={`${id}-seconds`}
 						required={required}
 						label={secondLabel}
-						options={mapToObject(60, secondStep)}
+						options={mapToObject(60, roundedSecondStep)}
 						placeholder={secondPlaceholder}
 						value={timeArray[2]}
 						onChange={(event) => handleChange(event.target.value, 2)}
 					/>
 				</>
-			)}
-			{millisecondStep && (
+			) : null}
+			{roundedMillisecondSecondStep && roundedMillisecondSecondStep > 0 ? (
 				<>
 					<span className="a-timepicker__separator">:</span>
 					<Select
 						id={`${id}-milliseconds`}
 						required={required}
 						label={millisecondLabel}
-						options={mapToObject(1, millisecondStep)}
+						options={mapToObject(1000, roundedMillisecondSecondStep)}
 						placeholder={millisecondPlaceholder}
 						value={timeArray[3]}
 						onChange={(event) => handleChange(event.target.value, 3)}
 					/>
 				</>
-			)}
+			) : null}
 		</div>
 	);
 };
