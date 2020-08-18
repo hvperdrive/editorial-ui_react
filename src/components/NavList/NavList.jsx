@@ -14,7 +14,7 @@ const NavList = ({ className, linkComponent: LinkComponent = 'a', items }) => (
 		}, index) => (
 			<li
 				key={`nav-list-${index}`}
-				className={classnames({ 'm-nav-list__item--error': hasError })}
+				className={classnames('m-nav-list__item', { 'm-nav-list__item--error': hasError })}
 			>
 				<LinkComponent {...linkProps}>
 					<span>{`${label}${hasError ? '*' : ''}`}</span>
