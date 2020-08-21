@@ -1,6 +1,7 @@
 import {
 	Accordion, AccordionTab, AccordionTabContent, AccordionTabHeader, Button, TagList, TagListItem,
 } from '@acpaas-ui/react-components';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -10,6 +11,7 @@ import './Filter.scss';
 import { FilterBody } from './Filter.slots';
 
 const Filter = ({
+	actionsClassName,
 	className,
 	title,
 	children,
@@ -51,7 +53,7 @@ const Filter = ({
 									{noFilterText}
 								</p>
 							)}
-							<div className="m-filter-form__buttons">
+							<div className={classnames(actionsClassName, 'm-filter-form__buttons')}>
 								<Button
 									type="primary"
 									onClick={onClean}
@@ -100,6 +102,7 @@ const Filter = ({
 };
 
 Filter.propTypes = {
+	actionsClassName: PropTypes.string,
 	className: PropTypes.string,
 	title: PropTypes.string,
 	noFilterText: PropTypes.string,
