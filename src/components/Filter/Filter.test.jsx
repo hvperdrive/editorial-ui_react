@@ -91,4 +91,14 @@ describe('<Filter />', () => {
 		expect(deleteFilter).toHaveBeenCalledTimes(1);
 		expect(deleteFilter).toHaveBeenCalledWith(filterItems[1]);
 	});
+
+	it('Should pass `actionsClassName` when given', () => {
+		const actionsClassName = 'm-custom-filter-actions';
+		const { container } = render(
+			<Filter actionsClassName={actionsClassName} title="Filter" />,
+		);
+		const actionsEl = container.querySelector('.m-filter-form__buttons');
+
+		expect(actionsEl.classList.contains(actionsClassName)).toBeTruthy();
+	});
 });
