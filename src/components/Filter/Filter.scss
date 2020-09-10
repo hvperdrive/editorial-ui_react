@@ -32,11 +32,7 @@
 		align-self: flex-end;
 		flex-basis: auto;
 		padding-left: 0;
-		margin: 0 0.9rem;
-
-		button {
-			margin-top: $spacer;
-		}
+		margin: $spacer 0.9rem 0;
 
 		@include at($screen-xs) {
 			width: unset;
@@ -45,10 +41,14 @@
 		@include at($screen-sm) {
 			align-self: flex-end;
 			padding-left: $spacer-lg;
+			margin: 0 0.9rem;
+		}
 
-			button {
-				margin-top: 0;
-				margin-right: $spacer-xs;
+		button {
+			&:not(:last-child) {
+				@include at($screen-sm) {
+					margin-right: $spacer-xs;
+				}
 			}
 		}
 	}
