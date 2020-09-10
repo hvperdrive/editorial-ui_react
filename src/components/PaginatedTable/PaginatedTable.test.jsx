@@ -53,4 +53,32 @@ describe('<PaginatedTable />', () => {
 		fireEvent.click(pagesEl[1]);
 		expect(clickFn).toHaveBeenCalledWith(2);
 	});
+
+	it('Should show a custom `resultsMessage` when given', () => {
+		const { queryByText } = render(
+			<PaginatedTable
+				rows={TABLE_MOCK_ROWS}
+				itemsPerPage={3}
+				totalValues={TABLE_MOCK_ROWS.length}
+				resultsMessage={(total) => `Total result: ${total}`}
+			/>,
+		);
+		const resultsMessageEl = queryByText(`Total result: ${TABLE_MOCK_ROWS.length}`);
+
+		expect(resultsMessageEl).not.toBeNull();
+	});
+
+	it('Should hide result message when `hideResultsMessage` is given', () => {
+		const { container } = render(
+			<PaginatedTable
+				rows={TABLE_MOCK_ROWS}
+				itemsPerPage={3}
+				totalValues={TABLE_MOCK_ROWS.length}
+				hideResultsMessage
+			/>,
+		);
+		const resultsMessageEl = container.querySelector('.o-paginated-table__count');
+
+		expect(resultsMessageEl).toBeNull();
+	});
 });

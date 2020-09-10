@@ -13,14 +13,19 @@ const PaginatedTable = ({
 	itemsPerPage,
 	totalValues,
 	onPageChange,
+	resultsMessage = (total) => `Resultaat (${total})`,
+	hideResultsMessage = false,
 	...tableProps
 }) => {
-	const resultCount = `Resultaat (${totalValues})`;
 	const showPagination = totalValues > itemsPerPage;
 
 	return (
 		<div className={classnames(className, 'o-paginated-table')}>
-			<p className="o-paginated-table__count h6 u-margin-bottom">{resultCount}</p>
+			{!hideResultsMessage && (
+				<p className="o-paginated-table__count h6 u-margin-bottom">
+					{resultsMessage(totalValues)}
+				</p>
+			)}
 			<Table {...tableProps} className="o-paginated-table__table" />
 			{showPagination && (
 				<div className="o-paginated-table__pagination u-margin-top">
@@ -39,6 +44,8 @@ const PaginatedTable = ({
 
 PaginatedTable.propTypes = {
 	className: PropTypes.string,
+	hideResultsMessage: PropTypes.bool,
+	resultsMessage: PropTypes.func,
 	// Pagination props
 	currentPage: PropTypes.number,
 	itemsPerPage: PropTypes.number,
