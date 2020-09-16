@@ -9,7 +9,8 @@
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "rxjs": "^6.6.3"
   },
   "peerDependencies": {
     "@acpaas-ui/react-components": "^4.0.0"
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@a-ui/flexboxgrid": "^1.0.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "@rollup/plugin-node-resolve": "^7.1.1",
