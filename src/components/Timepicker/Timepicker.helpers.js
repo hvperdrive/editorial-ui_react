@@ -8,7 +8,7 @@ export const setInitialValues = (index) => {
 	return initialValues;
 };
 
-export const mapToObject = (amount, step) => {
+export const mapToObject = (amount, step, disabled = false) => {
 	const a = [];
 	let b = 0;
 	while (b < amount) {
@@ -16,6 +16,7 @@ export const mapToObject = (amount, step) => {
 			key: b,
 			value: b,
 			label: b,
+			disabled,
 		});
 		b += step;
 	}
