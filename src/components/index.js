@@ -7,3 +7,5 @@ export * from './ScrollableTabs';
 export * from './Table';
 export * from './Status';
 export * from './Timepicker';
+export * from './ProgressBar';
+export * from './FileUpload';

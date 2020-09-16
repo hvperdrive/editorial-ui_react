@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 const ProgressBar = ({
 	value = 0,
 	max = 0,
 }) => {
-	const progressStyle = useMemo(() => {
+	const progressStyle = () => {
 		if (max > 0 && value > 0) {
 			const res = (value / max);
 			return {
@@ -17,7 +17,7 @@ const ProgressBar = ({
 		return {
 			width: 0,
 		};
-	}, [value, max]);
+	};
 
 	return (
 		<>
@@ -26,7 +26,7 @@ const ProgressBar = ({
 					<div
 						aria-valuemax={max}
 						aria-valuenow={value}
-						style={progressStyle}
+						style={progressStyle()}
 						aria-valuemin="0"
 						className="m-progress__bar"
 						role="progressbar"

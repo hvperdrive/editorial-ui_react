@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { VALIDATION_MESSAGES_DEFAULT } from '../FileUpload.const';
 
@@ -12,10 +12,7 @@ const ValidationList = ({
 	/**
 	 * Hooks
 	 */
-	const formatReasons = useCallback(
-		(reasons = []) => reasons.map((reason) => messages[reason] ?? VALIDATION_MESSAGES_DEFAULT[reason]).join(', '),
-		[messages],
-	);
+	const formatReasons = (reasons = []) => reasons.map((reason) => messages[reason] ?? VALIDATION_MESSAGES_DEFAULT[reason]).join(', ');
 
 	/**
 	 * Render

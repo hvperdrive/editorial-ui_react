@@ -54,7 +54,8 @@ const FileUploadZone = ({
 				}
 			},
 			(err) => {
-				console.log(err);
+				// eslint-disable-next-line no-console
+				console.error(err);
 			},
 			() => {
 				// setUploadProgress(0);
@@ -112,12 +113,8 @@ const FileUploadZone = ({
 		const isLast = (files.length - 1) === index;
 		return (
 			<span key={`${index}_${file.name}`}>
-				{ !isLast ? (
-					<>
-						{file.name}
-						,
-					</>
-				) : <>{file.name}</> }
+				{file.name}
+				{!isLast && ','}
 			</span>
 		);
 	});
@@ -159,9 +156,13 @@ const FileUploadZone = ({
 					</div>
 				</div>
 
-				<small className="m-upload__description">
-					{ fileUploadDescriptionSlot && <>{fileUploadDescriptionSlot}</> }
-				</small>
+				{
+					fileUploadDescriptionSlot && (
+						<small className="m-upload__description">
+							{fileUploadDescriptionSlot}
+						</small>
+					)
+				}
 			</div>
 		</>
 	);
