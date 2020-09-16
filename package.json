@@ -8,8 +8,10 @@
     "@acpaas-ui/react-components": "^4.0.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
+    "ramda": "^0.27.1",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "rxjs": "^6.6.3"
   },
   "peerDependencies": {
     "@acpaas-ui/react-components": "^4.0.0"

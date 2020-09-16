@@ -1,0 +1,49 @@
+import { useState } from 'react';
+import { action } from '@storybook/addon-actions'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import FileUpload from './FileUpload.jsx';
+import { FileUploadMessage, FileUploadDescription, FileUploadList } from './FileUpload.slots.jsx'
+
+<Meta title="File upload" component={FileUpload} />
+
+# File upload
+
+A file upload component
+
+## Preview of the component
+
+<Preview>
+	<Story name='Base'>
+		{() => {
+			const [files, setFiles] = useState([{
+				name: 'file 1',
+				id: 'file-1'
+			}, {
+				name: 'file 2',
+				id: 'file-2'
+			}])
+			return (
+				<FileUpload
+					id="my-upload"
+					options={{
+						allowedMimeTypes: ['image/jpeg'],
+						maxFileSize: 500,
+						url: 'api/upload',
+						fileLimit: 3,
+					}}
+					files={files}
+					removeFile={(id, index) => setFiles(files.filter(file => file.id === id))}
+					selectUploadedFiles={action()}
+				>
+					<FileUploadMessage>Drag your files here or click to upload</FileUploadMessage>
+					<FileUploadDescription>Optional description message</FileUploadDescription>
+				</FileUpload>
+			)
+		}}
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={FileUpload} />

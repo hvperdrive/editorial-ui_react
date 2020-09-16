@@ -49,7 +49,6 @@ describe('<ContextHeader/>', () => {
 		expect(getNodeText(badges[1])).toBe(CONTEXT_HEADER_MOCK_BADGES[1].name);
 	});
 
-
 	describe('tabs', () => {
 		it('should show a title with tabs', () => {
 			const { queryByText, container } = renderContextHeader({
@@ -81,7 +80,6 @@ describe('<ContextHeader/>', () => {
 			expect(customLinks).toHaveLength(4);
 		});
 	});
-
 
 	it('should show a component in the top section slot', () => {
 		const { findByTestId } = renderContextHeader({}, TopSectionComponent);
