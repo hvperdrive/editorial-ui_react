@@ -44,4 +44,20 @@ describe('<Timepicker />', () => {
 		expect(hour).toHaveLength(1);
 		expect(minute).not.toBeNull();
 	});
+
+	it('should disable all input fields when the disabled is set to true', async () => {
+		const { findByText } = render(
+			<Timepicker disabled id="time" value="12:22:30:40" />,
+		);
+
+		const hours = await findByText('12');
+		const minutes = await findByText('22');
+		const seconds = await findByText('30');
+		const milliseconds = await findByText('40');
+
+		expect(hours).toHaveAttribute('disabled');
+		expect(minutes).toHaveAttribute('disabled');
+		expect(seconds).toHaveAttribute('disabled');
+		expect(milliseconds).toHaveAttribute('disabled');
+	});
 });

@@ -11,6 +11,7 @@ const Timepicker = ({
 	id,
 	className,
 	required,
+	disabled = false,
 	value,
 	hourLabel = 'Uren',
 	minuteLabel = 'Minuten',
@@ -54,7 +55,8 @@ const Timepicker = ({
 				id={`${id}-hours`}
 				required={required}
 				label={hourLabel}
-				options={mapToObject(24, hourStep)}
+				disabled={disabled}
+				options={mapToObject(24, hourStep, disabled)}
 				placeholder={hourPlaceholder}
 				value={timeArray[0]}
 				onChange={(event) => handleChange(event.target.value, 0)}
@@ -63,8 +65,9 @@ const Timepicker = ({
 			<Select
 				id={`${id}-minutes`}
 				required={required}
+				disabled={disabled}
 				label={minuteLabel}
-				options={mapToObject(60, minuteStep)}
+				options={mapToObject(60, minuteStep, disabled)}
 				placeholder={minutePlaceholder}
 				value={timeArray[1]}
 				onChange={(event) => handleChange(event.target.value, 1)}
@@ -75,8 +78,9 @@ const Timepicker = ({
 					<Select
 						id={`${id}-seconds`}
 						required={required}
+						disabled={disabled}
 						label={secondLabel}
-						options={mapToObject(60, roundedSecondStep)}
+						options={mapToObject(60, roundedSecondStep, disabled)}
 						placeholder={secondPlaceholder}
 						value={timeArray[2]}
 						onChange={(event) => handleChange(event.target.value, 2)}
@@ -89,8 +93,9 @@ const Timepicker = ({
 					<Select
 						id={`${id}-milliseconds`}
 						required={required}
+						disabled={disabled}
 						label={millisecondLabel}
-						options={mapToObject(1000, roundedMillisecondSecondStep)}
+						options={mapToObject(1000, roundedMillisecondSecondStep, disabled)}
 						placeholder={millisecondPlaceholder}
 						value={timeArray[3]}
 						onChange={(event) => handleChange(event.target.value, 3)}
@@ -105,6 +110,7 @@ Timepicker.propTypes = {
 	id: PropTypes.string.isRequired,
 	className: PropTypes.string,
 	required: PropTypes.bool,
+	disabled: PropTypes.bool,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	hourLabel: PropTypes.string,
 	minuteLabel: PropTypes.string,
