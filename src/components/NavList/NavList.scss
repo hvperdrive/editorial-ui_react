@@ -1,0 +1,23 @@
+@import '~@a-ui/core/dist/assets/styles/quarks';
+
+.m-nav-list {
+	text-align: left;
+
+	> .m-nav-list__item {
+		text-align: unset;
+	}
+
+	.m-nav-list__item--error {
+		> a,
+		> a.is-active,
+		> a:hover,
+		> a.is-active:hover, {
+			color: $state-danger;
+		}
+	}
+
+	.m-nav-list__item-description {
+		font-size: $font-size-sm;
+		font-weight: $normal;
+	}
+}
