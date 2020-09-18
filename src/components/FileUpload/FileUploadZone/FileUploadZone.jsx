@@ -58,7 +58,7 @@ const FileUploadZone = ({
 				console.error(err);
 			},
 			() => {
-				// setUploadProgress(0);
+				setUploadProgress(0);
 				setUploadingFiles([]);
 				clearFileInput();
 			},

@@ -130,6 +130,10 @@ FileUpload.propTypes = {
 			INVALID_FILE_SIZE: PropTypes.string,
 			INVALID_MIME_TYPE: PropTypes.string,
 		}),
+		requestHeader: PropTypes.shape({
+			key: PropTypes.string,
+			value: PropTypes.any,
+		}),
 	}),
 	files: PropTypes.arrayOf(PropTypes.shape({
 		id: PropTypes.string.isRequired,

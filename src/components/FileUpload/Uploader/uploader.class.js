@@ -46,6 +46,11 @@ export class Uploader {
 			// Do request
 			xhr.responseType = 'json';
 			xhr.open('post', this.options.url);
+
+			if (this.options.requestHeader && this.options.requestHeader.key) {
+				xhr.setRequestHeader(this.options.requestHeader.key, this.options.requestHeader.value);
+			}
+
 			xhr.send(formData);
 		});
 	}
@@ -88,7 +93,16 @@ export class Uploader {
 			throw new Error('Define the upload url.');
 		}
 
-		files.forEach((file) => formData.append('file', file));
+		files.forEach((file) => {
+			formData.append('file', file);
+
+			// TODO: This should not be included in this file
+			formData.append('name', 'test');
+			formData.append('description', 'description');
+			formData.append('copyright', 'copyright');
+			formData.append('category', 'file');
+			formData.append('editor', 'some editor');
+		});
 
 		return formData;
 	}
