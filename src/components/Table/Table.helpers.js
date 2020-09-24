@@ -1,4 +1,4 @@
-import { isNill, isObject, isString } from '../../helpers';
+import { isNil, isObject, isString } from '../../helpers';
 
 const getCellValue = (rowData, key, fallback) => {
 	const value = rowData[key];
@@ -7,7 +7,7 @@ const getCellValue = (rowData, key, fallback) => {
 		return String(value);
 	}
 
-	if (isNill(value) && fallback) {
+	if (isNil(value) && fallback) {
 		return fallback;
 	}
 

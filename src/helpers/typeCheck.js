@@ -1,6 +1,6 @@
 export const isNull = (value) => value === null;
 export const isUndefined = (value) => value === undefined;
-export const isNill = (value) => isNull(value) || isUndefined(value);
+export const isNil = (value) => isNull(value) || isUndefined(value);
 
 export const isObject = (value) => {
 	const type = typeof value;
