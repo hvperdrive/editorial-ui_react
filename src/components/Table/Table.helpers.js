@@ -1,4 +1,4 @@
-const getCellValue = (rowData, key) => (rowData[key] ? String(rowData[key]) : '');
+const getCellValue = (rowData, key) => (rowData[key] ?? String(rowData[key]));
 
 const getFormatValue = (rowData, col, rowIndex) => {
 	if (typeof col === 'string') {
