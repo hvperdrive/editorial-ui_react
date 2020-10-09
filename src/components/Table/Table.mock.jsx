@@ -2,7 +2,7 @@ import { Button } from '@acpaas-ui/react-components';
 import { action } from '@storybook/addon-actions';
 import React from 'react';
 
-export const TABLE_MOCK_COLUMNS = [
+export const TABLE_MOCK_COLUMNS = (onExpand = (id) => action(`Row id is ${id}`)) => ([
 	{
 		label: '#',
 		value: 'id',
@@ -30,12 +30,12 @@ export const TABLE_MOCK_COLUMNS = [
 		component: (value, rowData) => {
 			const { id } = rowData;
 
-			return <Button onClick={action(`Row id is ${id}`)} size="small">Click me!</Button>;
+			return <Button onClick={() => onExpand(id)} size="small">Click me!</Button>;
 		},
 		classList: ['is-condensed'],
 		disableSorting: true,
 	},
-];
+]);
 
 export const TABLE_MOCK_ROWS = [
 	{
