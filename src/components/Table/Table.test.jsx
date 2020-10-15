@@ -18,7 +18,6 @@ describe('<Table />', () => {
 		rerender(<Table columns={TABLE_MOCK_COLUMNS} noDataMessage={message.noData} />);
 		const noDataMessageEl = await findByText(message.noData);
 
-
 		rerender(<Table loading loadDataMessage={message.loading} />);
 		const loadingMessageEl = await findByText(message.loading);
 

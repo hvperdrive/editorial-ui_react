@@ -8,7 +8,6 @@ const containerWidth = 320;
 const baseContainer = document.createElement('div');
 baseContainer.style.cssText = `max-width: ${containerWidth}px; width: 100%;`;
 
-
 describe('<ScrollableTabs />', () => {
 	const tabsComponent = <ScrollableTabs items={MOCK_TABS} />;
 
