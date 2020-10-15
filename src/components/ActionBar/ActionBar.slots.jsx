@@ -1,8 +1,3 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import { renderChildren } from '../../helpers';
 
-export const ActionBarContentSection = ({ children }) => <>{children}</>;
-
-ActionBarContentSection.propTypes = {
-	children: PropTypes.node,
-};
+export const ActionBarContentSection = renderChildren;

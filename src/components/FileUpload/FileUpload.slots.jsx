@@ -1,20 +1,4 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import { renderChildren } from '../../helpers';
 
-export const FileUploadMessage = ({ children }) => <>{children}</>;
-
-FileUploadMessage.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
-
-export const FileUploadDescription = ({ children }) => <>{children}</>;
-
-FileUploadDescription.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+export const FileUploadMessage = renderChildren;
+export const FileUploadDescription = renderChildren;

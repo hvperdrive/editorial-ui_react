@@ -1,11 +1,3 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import { renderChildren } from '../../helpers';
 
-export const FilterBody = ({ children }) => <>{children}</>;
-
-FilterBody.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+export const FilterBody = renderChildren;
