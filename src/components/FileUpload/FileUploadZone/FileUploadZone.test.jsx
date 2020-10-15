@@ -187,7 +187,7 @@ describe('<FileUploadZone/>', () => {
 			expect(validateFilesSpy).not.toHaveBeenCalled();
 		});
 
-		it('should call custom drag handler when given', () => {
+		it('should call custom drop handler when given', () => {
 			uploader.validateFiles.mockReturnValueOnce({
 				invalidFiles: [],
 				validFiles: [file],
@@ -195,14 +195,14 @@ describe('<FileUploadZone/>', () => {
 			uploader.uploadFiles.mockReturnValueOnce(of({
 				data: uploadResponse,
 			}));
-			const onCustomDrag = jest.fn();
+			const onCustomDrop = jest.fn();
 			const { container } = renderFileUploadZone({
 				uploader,
-				onCustomDrag,
+				onCustomDrop,
 			});
 			fireFileUploadOnDrop(container, file);
-			expect(onCustomDrag).toHaveBeenCalledTimes(1);
-			expect(onCustomDrag).toHaveBeenCalledWith([file]);
+			expect(onCustomDrop).toHaveBeenCalledTimes(1);
+			expect(onCustomDrop).toHaveBeenCalledWith([file]);
 		});
 	});
 

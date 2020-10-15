@@ -15,7 +15,7 @@ const FileUploadZone = ({
 	disabled = false,
 	multiple = false,
 	onCustomClick,
-	onCustomDrag,
+	onCustomDrop,
 	uploadedFiles = () => null,
 	invalidFiles = () => null,
 	children,
@@ -104,7 +104,7 @@ const FileUploadZone = ({
 		const { dataTransfer } = e;
 		setHasDragOver(false);
 		const files = fileListToArray(dataTransfer.files);
-		handleFiles(files, onCustomDrag);
+		handleFiles(files, onCustomDrop);
 	};
 
 	const updateFiles = (e) => {
@@ -191,7 +191,7 @@ FileUploadZone.propTypes = {
 	uploadedFiles: PropTypes.func,
 	invalidFiles: PropTypes.func,
 	onCustomClick: PropTypes.func,
-	onCustomDrag: PropTypes.func,
+	onCustomDrop: PropTypes.func,
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
