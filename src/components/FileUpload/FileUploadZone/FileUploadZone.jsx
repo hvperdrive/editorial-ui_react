@@ -72,13 +72,11 @@ const FileUploadZone = ({
 		const response = uploader.validateFiles(files);
 		invalidFiles(response.invalidFiles);
 
-		if (response.validFiles.length > 0) {
-			if (customHandler) {
-				customHandler(response.validFiles);
-			}
-			if (autoUpload) {
-				uploadFiles(response.validFiles);
-			}
+		if (customHandler) {
+			customHandler(response.validFiles);
+		}
+		if (autoUpload && response.validFiles.length > 0) {
+			uploadFiles(response.validFiles);
 		}
 	};
 
