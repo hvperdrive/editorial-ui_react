@@ -8,11 +8,14 @@ import { FileUploadDescription, FileUploadMessage } from '../FileUpload.slots';
 import { Uploader } from '../Uploader';
 
 const FileUploadZone = ({
+	autoUpload = true,
 	id = '',
 	ariaId = '',
 	uploader,
 	disabled = false,
 	multiple = false,
+	onCustomClick,
+	onCustomDrag,
 	uploadedFiles = () => null,
 	invalidFiles = () => null,
 	children,
@@ -65,13 +68,24 @@ const FileUploadZone = ({
 		);
 	};
 
-	const handleFiles = (files) => {
+	const handleFiles = (files, customHandler) => {
 		const response = uploader.validateFiles(files);
 		invalidFiles(response.invalidFiles);
 
 		if (response.validFiles.length > 0) {
-			uploadFiles(response.validFiles);
+			if (customHandler) {
+				customHandler(response.validFiles);
+			}
+			if (autoUpload) {
+				uploadFiles(response.validFiles);
+			}
 		}
+	};
+
+	const handleCustomClick = (e) => {
+		// Prevent native browser upload when custom click handler is present
+		e.preventDefault();
+		onCustomClick();
 	};
 
 	const handleDragOver = (e) => {
@@ -92,7 +106,7 @@ const FileUploadZone = ({
 		const { dataTransfer } = e;
 		setHasDragOver(false);
 		const files = fileListToArray(dataTransfer.files);
-		handleFiles(files);
+		handleFiles(files, onCustomDrag);
 	};
 
 	const updateFiles = (e) => {
@@ -136,6 +150,7 @@ const FileUploadZone = ({
 							onDragLeave={handleDragLeave}
 							onDrop={handleDrop}
 							onChange={updateFiles}
+							onClick={onCustomClick ? handleCustomClick : undefined}
 						/>
 						{ (!uploadProgress || uploadProgress === 0) && (
 							<div className="m-upload__content">
@@ -169,6 +184,7 @@ const FileUploadZone = ({
 };
 
 FileUploadZone.propTypes = {
+	autoUpload: PropTypes.bool,
 	id: PropTypes.string,
 	uploader: PropTypes.instanceOf(Uploader),
 	disabled: PropTypes.bool,
@@ -176,6 +192,8 @@ FileUploadZone.propTypes = {
 	ariaId: PropTypes.string,
 	uploadedFiles: PropTypes.func,
 	invalidFiles: PropTypes.func,
+	onCustomClick: PropTypes.func,
+	onCustomDrag: PropTypes.func,
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
