@@ -16,7 +16,7 @@ Some explanation about our Table component
 
 <Preview>
 	<Story name='Base'>
-		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 5)}/>
+		<Table columns={TABLE_MOCK_COLUMNS()} rows={TABLE_MOCK_ROWS.slice(0, 5)}/>
 	</Story>
 </Preview>
 
@@ -38,7 +38,7 @@ Group stories based on props
 		<Table rows={[]} />
 	</Story>
 	<Story name='No data'>
-		<Table columns={TABLE_MOCK_COLUMNS} />
+		<Table columns={TABLE_MOCK_COLUMNS()} />
 	</Story>
 </Preview>
 
@@ -64,10 +64,39 @@ Group stories based on props
 			};
 			return (
 				<Table
-					columns={TABLE_MOCK_COLUMNS}
+					columns={TABLE_MOCK_COLUMNS()}
 					rows={sortedRows}
 					activeSorting={sorting}
 					orderBy={setSorting}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Expandeble rows
+
+<Preview>
+	<Story name='Expandeble'>
+		{() => {
+			const [expandedRows, setExpandedRows] = useState({});
+			const expandedRowsTemplate = () => (
+				<div>
+					some really nice template :p
+				</div>
+			);
+			const onRowExpand = (rowId) => {
+				setExpandedRows({
+					[rowId]: true,
+				});
+			};
+			return (
+				<Table
+					dataKey="id"
+					columns={TABLE_MOCK_COLUMNS(onRowExpand)}
+					rows={TABLE_MOCK_ROWS}
+					expandedRows={expandedRows}
+					rowExpansionTemplate={expandedRowsTemplate}
 				/>
 			);
 		}}
@@ -78,12 +107,12 @@ Group stories based on props
 
 <Preview isColumn>
 	<Story name='No stripes'>
-		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 4)} striped={false} />
+		<Table columns={TABLE_MOCK_COLUMNS()} rows={TABLE_MOCK_ROWS.slice(0, 4)} striped={false} />
 	</Story>
 	<Story name='Primary head'>
-		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="primary" />
+		<Table columns={TABLE_MOCK_COLUMNS()} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="primary" />
 	</Story>
 	<Story name='Secondary head'>
-		<Table columns={TABLE_MOCK_COLUMNS} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="secondary" />
+		<Table columns={TABLE_MOCK_COLUMNS()} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="secondary" />
 	</Story>
 </Preview>
