@@ -13,6 +13,11 @@ jest.mock('../Uploader');
 const FileUploadDescriptionComponent = () => (<span data-testid="description" />);
 const FileUploadMessageComponent = () => (<span data-testid="message" />);
 const file = new File(['dummy content'], 'example.png', { type: 'image/png' });
+const uploadResponse = {
+	file: {
+		name: 'example.png',
+	},
+};
 
 const renderFileUploadZone = (props, MessageComponent, DescriptionComponent) => {
 	const defaultProps = {
@@ -38,8 +43,8 @@ const renderFileUploadZone = (props, MessageComponent, DescriptionComponent) => 
 };
 
 const fireFileUpload = (container, f) => {
-	const fileInput = container.getElementsByTagName('input');
-	fireEvent.change(fileInput[0],
+	const fileInput = container.querySelector('.m-upload__input');
+	fireEvent.change(fileInput,
 		{
 			target: {
 				files: [f],
@@ -48,7 +53,7 @@ const fireFileUpload = (container, f) => {
 };
 
 const fireFileUploadOnDrop = (container, f) => {
-	const fileInput = container.getElementsByTagName('input')[0];
+	const fileInput = container.querySelector('.m-upload__input');
 	const fileDropEvent = createEvent.drop(fileInput);
 	const fileList = [f];
 
@@ -95,11 +100,6 @@ describe('<FileUploadZone/>', () => {
 
 		describe('upload a valid file', () => {
 			const validFiles = [file];
-			const uploadResponse = {
-				file: {
-					name: 'example.png',
-				},
-			};
 			let validateFilesSpy;
 			let uploadFilesSpy;
 
@@ -160,6 +160,52 @@ describe('<FileUploadZone/>', () => {
 		});
 	});
 
+	describe('custom handlers', () => {
+		it('Should not upload when autoUpload is false', () => {
+			uploader.validateFiles.mockReturnValueOnce({
+				invalidFiles: [],
+			});
+			const uploadFilesSpy = jest.spyOn(uploader, 'uploadFiles');
+			const { container } = renderFileUploadZone({
+				uploader,
+				autoUpload: false,
+			});
+			fireFileUpload(container, file);
+			expect(uploadFilesSpy).not.toHaveBeenCalled();
+		});
+
+		it('should call custom click handler when given', () => {
+			const validateFilesSpy = jest.spyOn(uploader, 'validateFiles');
+			const onCustomClick = jest.fn();
+			const { container } = renderFileUploadZone({
+				uploader,
+				onCustomClick,
+			});
+			const inputEl = container.querySelector('.m-upload__input');
+			fireEvent.click(inputEl);
+			expect(onCustomClick).toHaveBeenCalledTimes(1);
+			expect(validateFilesSpy).not.toHaveBeenCalled();
+		});
+
+		it('should call custom drop handler when given', () => {
+			uploader.validateFiles.mockReturnValueOnce({
+				invalidFiles: [],
+				validFiles: [file],
+			});
+			uploader.uploadFiles.mockReturnValueOnce(of({
+				data: uploadResponse,
+			}));
+			const onCustomDrop = jest.fn();
+			const { container } = renderFileUploadZone({
+				uploader,
+				onCustomDrop,
+			});
+			fireFileUploadOnDrop(container, file);
+			expect(onCustomDrop).toHaveBeenCalledTimes(1);
+			expect(onCustomDrop).toHaveBeenCalledWith([file]);
+		});
+	});
+
 	describe('slots', () => {
 		it('should show an upload message', () => {
 			const { findByTestId } = renderFileUploadZone({
@@ -173,7 +219,7 @@ describe('<FileUploadZone/>', () => {
 		it('should show a description text', () => {
 			const { findByTestId } = renderFileUploadZone({
 				uploader,
-			}, FileUploadDescriptionComponent);
+			}, null, FileUploadDescriptionComponent);
 			const description = findByTestId('description');
 
 			expect(description).toBeDefined();
