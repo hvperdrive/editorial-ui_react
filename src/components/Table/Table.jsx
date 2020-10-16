@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { equals, path } from 'ramda';
 import React from 'react';
 
 import { getCellProps, getHeaderProps } from './Table.helpers';
@@ -10,6 +11,7 @@ import TableRow from './TableRow/TableRow';
 import './Table.scss';
 
 const Table = ({
+	dataKey,
 	className,
 	rows = [],
 	columns = [],
@@ -20,10 +22,12 @@ const Table = ({
 	orderBy,
 	rowClicked,
 	striped = true,
+	expandedRows,
 	type,
 	loadDataMessage = 'Loading data...',
 	noColumnsMessage = 'No columns available.',
 	noDataMessage = 'No data available.',
+	rowExpansionTemplate = () => null,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -45,9 +49,49 @@ const Table = ({
 		}
 	};
 
+	const findExpandedRowIndex = (row) => {
+		if (Array.isArray(expandedRows)) {
+			return expandedRows.findIndex((expandedRow) => equals(expandedRow, row));
+		}
+		return -1;
+	};
+
+	const isRowExpanded = (row) => {
+		if (dataKey) {
+			const dataKeyValue = path([`${dataKey}`], row);
+			return expandedRows && expandedRows[dataKeyValue] != null;
+		}
+		return findExpandedRowIndex(row) !== -1;
+	};
+
 	/**
 	 * Render
 	 */
+	const renderTableRow = (row, rowIndex) => {
+		const expanded = isRowExpanded(row);
+
+		return (
+			<>
+				<TableRow
+					key={`table-row-${rowIndex}`}
+					hasClickAction={hasClickAction}
+					onClick={() => onRowClick(row)}
+				>
+					{columns.map((col) => (
+						<TableCell {...getCellProps(col, row, rowIndex)} />
+					))}
+				</TableRow>
+				{ expanded && (
+					<tr className="a-table-expanded-row" key={`table-row-expanded-${rowIndex}`}>
+						<td colSpan={columns.length}>
+							{rowExpansionTemplate(row)}
+						</td>
+					</tr>
+				)}
+			</>
+		);
+	};
+
 	return (
 		<div className={classnames(className, { 'a-table__wrapper-responsive': responsive })}>
 			<table
@@ -77,17 +121,7 @@ const Table = ({
 							noColumnsMessage={noColumnsMessage}
 						/>
 					) : (
-						rows.map((row, rowIndex) => (
-							<TableRow
-								key={`table-row-${rowIndex}`}
-								hasClickAction={hasClickAction}
-								onClick={() => onRowClick(row)}
-							>
-								{columns.map((col) => (
-									<TableCell {...getCellProps(col, row, rowIndex)} />
-								))}
-							</TableRow>
-						))
+						rows.map(renderTableRow)
 					)}
 				</tbody>
 			</table>
@@ -96,6 +130,7 @@ const Table = ({
 };
 
 Table.propTypes = {
+	dataKey: PropTypes.string,
 	className: PropTypes.string,
 	rows: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
 	columns: PropTypes.arrayOf(PropTypes.oneOfType([
@@ -110,8 +145,10 @@ Table.propTypes = {
 			disabled: PropTypes.bool,
 			disableSorting: PropTypes.bool,
 			classList: PropTypes.arrayOf(PropTypes.string),
+			fallback: PropTypes.string,
 		}),
 	])),
+	expandedRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 	loading: PropTypes.bool,
 	responsive: PropTypes.bool,
 	hasClickAction: PropTypes.bool,
@@ -124,6 +161,7 @@ Table.propTypes = {
 	noColumnsMessage: PropTypes.string,
 	orderBy: PropTypes.func,
 	rowClicked: PropTypes.func,
+	rowExpansionTemplate: PropTypes.func,
 	striped: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
 };

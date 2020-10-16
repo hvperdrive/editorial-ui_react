@@ -19,7 +19,6 @@ const ValidationList = ({
 	 */
 	const renderInvalidFiles = (files = []) => files.map((file, index) => (
 		<li key={`${index}_${file.file.name}`} className="is-error">
-
 			<span className="fa fa-warning" />
 			<span className="m-upload__filename">{file.file.name}</span>
 			<span className="m-upload__error">{formatReasons(file.reasons)}</span>
