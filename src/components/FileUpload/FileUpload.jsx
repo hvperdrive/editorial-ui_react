@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 
+import { isNumber } from '../../helpers';
 import { useSlot } from '../../hooks/useSlot';
 
 import { UPLOAD_OPTIONS_DEFAULT } from './FileUpload.const';
@@ -34,7 +35,7 @@ const FileUpload = ({
 	}, [options, uploader]);
 
 	const uploadZoneIsDisabled = useMemo(() => {
-		if (options.fileLimit && typeof options.fileLimit === 'number') {
+		if (options.fileLimit && isNumber(options.fileLimit)) {
 			return files.length < options.fileLimit;
 		}
 

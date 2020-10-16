@@ -110,6 +110,7 @@ Table.propTypes = {
 			disabled: PropTypes.bool,
 			disableSorting: PropTypes.bool,
 			classList: PropTypes.arrayOf(PropTypes.string),
+			fallback: PropTypes.string,
 		}),
 	])),
 	loading: PropTypes.bool,

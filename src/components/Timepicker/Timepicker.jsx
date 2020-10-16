@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { isUndefined } from '../../helpers';
+
 import {
 	getTimeArray, getTimeString, mapToObject, setInitialValues,
 } from './Timepicker.helpers';
@@ -28,8 +30,10 @@ const Timepicker = ({
 	onChange,
 }) => {
 	const timeArray = getTimeArray(value) || [];
-	const roundedSecondStep = (typeof secondStep !== 'undefined') ? Math.round(secondStep) : null;
-	const roundedMillisecondSecondStep = (typeof millisecondStep !== 'undefined') ? Math.round(millisecondStep) : null;
+	const roundedSecondStep = !isUndefined(secondStep) ? Math.round(secondStep) : null;
+	const roundedMillisecondSecondStep = !isUndefined(millisecondStep)
+		? Math.round(millisecondStep)
+		: null;
 
 	/**
 	* Methods
