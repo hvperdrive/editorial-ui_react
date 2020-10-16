@@ -1,4 +1,9 @@
-import { renderChildren } from '../../helpers';
+import React from 'react';
 
-export const FileUploadMessage = renderChildren;
-export const FileUploadDescription = renderChildren;
+import { SLOT_PROP_TYPES } from '../../const';
+
+export const FileUploadMessage = ({ children }) => <>{children}</>;
+FileUploadMessage.propTypes = SLOT_PROP_TYPES;
+
+export const FileUploadDescription = ({ children }) => <>{children}</>;
+FileUploadDescription.propTypes = SLOT_PROP_TYPES;

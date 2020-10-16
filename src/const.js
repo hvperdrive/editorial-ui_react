@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
-export const renderChildren = ({ children }) => <>{children}</>;
-
-renderChildren.propTypes = {
+export const SLOT_PROP_TYPES = {
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,

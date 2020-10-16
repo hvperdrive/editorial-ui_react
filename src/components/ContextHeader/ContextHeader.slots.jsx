@@ -1,4 +1,9 @@
-import { renderChildren } from '../../helpers';
+import React from 'react';
 
-export const ContextHeaderTopSection = renderChildren;
-export const ContextHeaderActionsSection = renderChildren;
+import { SLOT_PROP_TYPES } from '../../const';
+
+export const ContextHeaderTopSection = ({ children }) => <>{children}</>;
+ContextHeaderTopSection.propTypes = SLOT_PROP_TYPES;
+
+export const ContextHeaderActionsSection = ({ children }) => <>{children}</>;
+ContextHeaderActionsSection.propTypes = SLOT_PROP_TYPES;
