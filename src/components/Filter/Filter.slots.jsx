@@ -1,11 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-export const FilterBody = ({ children }) => <>{children}</>;
+import { SLOT_PROP_TYPES } from '../../const';
 
-FilterBody.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+export const FilterBody = ({ children }) => <>{children}</>;
+FilterBody.propTypes = SLOT_PROP_TYPES;

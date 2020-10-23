@@ -1,0 +1,57 @@
+import { Button } from '@acpaas-ui/react-components';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { useState } from 'react';
+
+import ControlledModal from './ControlledModal';
+import {
+	ControlledModalBody, ControlledModalFooter, ControlledModalHeader
+} from './ControlledModal.slots';
+
+<Meta title="ControlledModal" component={ControlledModal} />
+
+# ControlledModal
+
+Some explanation about our ControlledModal component
+
+## Preview of component
+
+<Preview>
+	<Story name="base">
+		{() => {
+			const [showModal, setShowModal] = useState(false);
+			return (
+				<>
+					<Button onClick={() => setShowModal(true)}>Show modal</Button>
+					<ControlledModal onClose={() => setShowModal(false)} show={showModal}>
+						<ControlledModalHeader>
+							<h4>This is a header</h4>
+						</ControlledModalHeader>
+						<ControlledModalBody>This is a body</ControlledModalBody>
+						<ControlledModalFooter>This is a footer</ControlledModalFooter>
+					</ControlledModal>
+				</>
+			);
+		}}
+	</Story>
+</Preview>
+
+<Preview>
+	<Story name="Custom children">
+		{() => {
+			const [showModal, setShowModal] = useState(false);
+			return (
+				<>
+					<Button onClick={() => setShowModal(true)}>Show modal</Button>
+					<ControlledModal onClose={() => setShowModal(false)} show={showModal}>
+						<p>Custom child</p>
+					</ControlledModal>
+				</>
+			);
+		}}
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={ControlledModal} />

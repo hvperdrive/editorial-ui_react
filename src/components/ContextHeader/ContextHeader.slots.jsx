@@ -1,19 +1,9 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
+import { SLOT_PROP_TYPES } from '../../const';
+
 export const ContextHeaderTopSection = ({ children }) => <>{children}</>;
+ContextHeaderTopSection.propTypes = SLOT_PROP_TYPES;
+
 export const ContextHeaderActionsSection = ({ children }) => <>{children}</>;
-
-ContextHeaderActionsSection.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
-
-ContextHeaderTopSection.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+ContextHeaderActionsSection.propTypes = SLOT_PROP_TYPES;

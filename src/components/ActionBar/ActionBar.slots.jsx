@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-export const ActionBarContentSection = ({ children }) => <>{children}</>;
+import { SLOT_PROP_TYPES } from '../../const';
 
-ActionBarContentSection.propTypes = {
-	children: PropTypes.node,
-};
+export const ActionBarContentSection = ({ children }) => <>{children}</>;
+ActionBarContentSection.propTypes = SLOT_PROP_TYPES;

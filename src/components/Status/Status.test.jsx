@@ -4,7 +4,6 @@ import React from 'react';
 import Status from './Status';
 import { STATUS_MOCK_ACTIVE } from './Status.mock';
 
-
 describe('<Status/>', () => {
 	it('should show a label including the correct class', () => {
 		const { queryByText, container } = render(

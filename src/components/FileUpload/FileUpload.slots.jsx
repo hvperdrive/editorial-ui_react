@@ -1,20 +1,9 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
-export const FileUploadMessage = ({ children }) => <>{children}</>;
+import { SLOT_PROP_TYPES } from '../../const';
 
-FileUploadMessage.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+export const FileUploadMessage = ({ children }) => <>{children}</>;
+FileUploadMessage.propTypes = SLOT_PROP_TYPES;
 
 export const FileUploadDescription = ({ children }) => <>{children}</>;
-
-FileUploadDescription.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
-};
+FileUploadDescription.propTypes = SLOT_PROP_TYPES;
