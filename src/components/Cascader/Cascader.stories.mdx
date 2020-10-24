@@ -1,0 +1,25 @@
+import { Fragment } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Cascader from './Cascader';
+
+<Meta title="Cascader" component={Cascader} />
+
+# Cascader
+
+Simple Cascader
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<Cascader>
+			<p>This is inside a container</p>
+		</Cascader>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Container} />
