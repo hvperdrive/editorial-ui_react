@@ -125,7 +125,6 @@ const Cascader = ({
 			&& e.keyCode !== KeyCode.UP
 			&& e.keyCode !== KeyCode.ENTER
 			&& e.keyCode !== KeyCode.SPACE
-			//
 			&& e.keyCode !== KeyCode.LEFT
 			&& e.keyCode !== KeyCode.RIGHT
 			&& e.keyCode !== KeyCode.BACKSPACE
