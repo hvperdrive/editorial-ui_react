@@ -1,0 +1,67 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks';
+
+.o-cascader-menus {
+	overflow: hidden;
+	background: $white;
+	position: absolute;
+	display: flex;
+	border: 1px solid $border-color;
+	box-shadow: 0.75rem 0.75rem 0 rgba(0, 0, 0, 0.1);
+	white-space: nowrap;
+
+	&-hidden {
+		display: none;
+	}
+}
+
+.o-cascader-menu {
+	display: inline-block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	border-right: 1px solid $border-color;
+
+	&:last-child {
+		border-right: 0;
+	}
+
+	&-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: $spacer-md;
+		line-height: $spacer-md;
+		padding: $spacer $spacer-xs;
+		cursor: pointer;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		transition: all 0.3s ease;
+		position: relative;
+
+		&:hover {
+			background-color: $background-color;
+			color: $brand-primary;
+		}
+
+		&-expand-icon {
+			padding-left: $spacer-xs;
+		}
+
+		&--active {
+			color: $brand-primary;
+			background-color: $background-color-light;
+		}
+
+		&--disabled {
+			cursor: not-allowed;
+			color: $state-disabled;
+
+			&:hover {
+				background: transparent;
+				color: $grey-dark;
+			}
+		}
+	}
+}

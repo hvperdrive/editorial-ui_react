@@ -1,24 +1,15 @@
+import { Spinner } from '@acpaas-ui/react-components';
 import arrayTreeFilter from 'array-tree-filter';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect } from 'react';
-import useDynamicRefs from 'use-dynamic-refs';
-
-import { usePrevious } from '../../../hooks';
-import { CasCaderOption } from '../Cascader';
+import React from 'react';
 
 const Menus = ({
 	value = [],
 	options = [],
 	onSelect = () => null,
-	isVisible = false,
+	prefixCls = 'o-cascader',
 }) => {
-	/**
-	 * Hooks
-	 */
-	const [getRef, setRef] = useDynamicRefs();
-	const previousIsVisible = usePrevious(isVisible);
-
 	/**
 	 * Functions
 	 */
@@ -28,108 +19,123 @@ const Menus = ({
 		(option, level) => option.value === menuValue[level],
 	);
 
-	const getShowOptions = (menuOptions, menuValue) => getActiveOptions(menuOptions, menuValue)
-		.map((menuOption) => menuOption.children)
-		.filter((menuOption) => !!menuOption)
-		.unshift(menuOptions);
+	const getShowOptions = (menuOptions, menuValue) => {
+		const activeOptions = getActiveOptions(menuOptions, menuValue)
+			.map((menuOption) => menuOption.children)
+			.filter((menuOption) => !!menuOption);
+		activeOptions.unshift(menuOptions);
+		return activeOptions;
+	};
 
 	const isActiveOption = (menuValue, menuOption, menuIndex) => menuValue[menuIndex]
 		=== menuOption.value;
-
-	const scrollActiveItemToView = () => {
-		// scroll into view
-		const showOptions = getShowOptions(options, value);
-
-		showOptions.forEach((option, index) => {
-			const menuItemRef = getRef(index);
-
-			if (menuItemRef && menuItemRef.parentElement) {
-				menuItemRef.parentElement.scrollTop = menuItemRef.offsetTop;
-			}
-		});
-	};
-
-	useLayoutEffect(() => {
-		scrollActiveItemToView();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useLayoutEffect(() => {
-		if (!previousIsVisible && isVisible) {
-			scrollActiveItemToView();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isVisible, previousIsVisible]);
 
 	/**
 	 * Render
 	 */
 
-	const renderExpandIconNode = (option) => {
-		if (option.loading) {
+	const renderExpandIconNode = (hasChildren, isNoLeaf, isLoading) => {
+		if ((!hasChildren && !isNoLeaf) || isLoading) {
 			return null;
 		}
-		return <span className="o-cascade-menu-item-expand-icon">{'>'}</span>;
+		return <span className={`${prefixCls}-menu-item-expand-icon fa fa-angle-right`} />;
 	};
 
-	const renderLoadingIconNode = (option) => {
-		if (!option.loading) {
+	const renderLoadingIconNode = (isLoading) => {
+		if (!isLoading) {
 			return null;
 		}
-		return <div className="a-spinner a-spinner--sm" role="alert" aria-busy="true" />;
+		return <Spinner className="u-margin-left-xs" size="small" />;
 	};
 
 	const renderOption = (menuValue, option, menuIndex) => {
 		const hasChildren = Array.isArray(option.children) && option.children.length > 0;
 		const isNoLeaf = option.isLeaf === false;
+		const isLoading = option.loading;
 		const isActive = isActiveOption(menuValue, option, menuIndex);
-		const menuItemCls = classnames('o-cascade-menu-item', {
-			'o-cascade-menu-item--expanded': hasChildren || isNoLeaf,
-			'o-cascade-menu-item--active': isActive,
-			'o-cascade-menu-item--disabled': option.disabled,
-			'o-cascade-menu-item--loading': option.loading,
+		const menuItemCls = classnames(`${prefixCls}-menu-item`, {
+			[`${prefixCls}-menu-item--expanded`]: hasChildren || isNoLeaf,
+			[`${prefixCls}-menu-item--active`]: isActive,
+			[`${prefixCls}-menu-item--disabled`]: option.disabled,
+			[`${prefixCls}-menu-item--loading`]: isLoading,
 		});
-		const refProps = isActive ? {
-			ref: setRef(menuIndex),
-		} : {};
 		return (
 			<li
-				key={option.value}
+				key={`${option.value}-${menuIndex}`}
 				className={menuItemCls}
 				titel={option.label}
 				role="menuitem"
 				onClick={(e) => onSelect(option, menuIndex, e)}
 				onKeyDown={(e) => onSelect(option, menuIndex, e)}
-				onMouseDown={(e) => e.preventDefault()}
-				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...refProps}
 			>
 				{option.label}
-				{renderExpandIconNode(option)}
-				{renderLoadingIconNode(option)}
+				{renderExpandIconNode(hasChildren, isNoLeaf, isLoading)}
+				{renderLoadingIconNode(isLoading)}
 			</li>
 		);
 	};
 
 	return (
-		<div>
+		<>
 			{getShowOptions(options, value).map((menuOptions, menuIndex) => (
-				<ul className="o-cascade-menu" key={menuIndex}>
+				<ul className={`${prefixCls}-menu`} key={`${menuIndex}`}>
 					{menuOptions.map((menuOption) => renderOption(value, menuOption, menuIndex))}
 				</ul>
 			))}
-		</div>
+		</>
 	);
 };
 
+const CasCaderOption = PropTypes.shape({
+	/**
+	 * Value of the option
+	 */
+	value: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
+	/**
+	 * Human readable label
+	 */
+	label: PropTypes.node,
+	/**
+	 * True when loading
+	 */
+	loading: PropTypes.bool,
+	/**
+	 * Indicates the end of a cascader tree
+	 */
+	isLeaf: PropTypes.bool,
+});
+
+CasCaderOption.children = PropTypes.arrayOf(CasCaderOption);
+
 Menus.propTypes = {
+	prefixCls: PropTypes.string,
+	/**
+	 * Value
+	 */
 	value: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.string),
 		PropTypes.arrayOf(PropTypes.number),
 	]),
-	options: PropTypes.arrayOf(CasCaderOption),
+	/**
+	 * Options
+	 */
+	options: PropTypes.arrayOf(PropTypes.shape({
+		value: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.number,
+		]),
+		label: PropTypes.node,
+		loading: PropTypes.bool,
+		isLeaf: PropTypes.bool,
+		children: PropTypes.arrayOf(CasCaderOption),
+	})),
+	/**
+	 * Callback when selecting an option
+	 */
 	onSelect: PropTypes.func,
-	isVisible: PropTypes.bool,
 };
 
 export default Menus;

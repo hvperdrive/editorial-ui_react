@@ -7,6 +7,7 @@ import { KeyCode } from '../../helpers';
 
 import { BUILT_IN_PLACEMENTS } from './Cascader.const';
 import { Menus } from './Menus';
+import './Cascader.scss';
 
 const Cascader = ({
 	defaultValue,
@@ -15,11 +16,11 @@ const Cascader = ({
 	disabled = false,
 	changeOnSelect = false,
 	children,
+	prefixCls = 'o-cascader',
 	onChange = () => null,
 	loadData = () => null,
 }) => {
 	const [popupVisible, setPopupVisible] = useState(false);
-	// The active value represents the current selected tree, not the real value
 	const [activeValue, setActiveValue] = useState(defaultValue ?? []);
 	const triggerEl = useRef(null);
 
@@ -85,7 +86,7 @@ const Cascader = ({
 
 		const newActiveValue = activeValue.slice(0, menuLevel + 1);
 		newActiveValue[menuLevel] = targetOption.value;
-		const activeOptions = getActiveOptions(newActiveValue);
+		const activeOptions = getActiveOptions(options, newActiveValue);
 
 		/**
 		 * When the targetOption is not a leaf and it has no children
@@ -98,7 +99,7 @@ const Cascader = ({
 				handleChange(activeOptions, true, e);
 			}
 			setActiveValue(newActiveValue);
-			loadData(activeOptions);
+			loadData(activeOptions, menuLevel);
 			return;
 		}
 
@@ -152,10 +153,9 @@ const Cascader = ({
 		 * Key functionality when the popup is open.
 		 * The user can navigate through the cascade by using a set of key strokes
 		 */
-
 		const events = {
 			isGoingUpOrDow: e.keyCode === KeyCode.DOWN || e.keyCode === KeyCode.UP,
-			isGoingLeft: e.KeyCode === KeyCode.LEFT || e.keyCode === KeyCode.BACKSPACE,
+			isGoingLeft: e.keyCode === KeyCode.LEFT || e.keyCode === KeyCode.BACKSPACE,
 			isGoingRight: e.keyCode === KeyCode.RIGHT,
 			isLoosingFocus: e.keyCode === KeyCode.ESC || e.keyCode === KeyCode.TAB,
 		};
@@ -202,11 +202,11 @@ const Cascader = ({
 		if (!Array.isArray(options) || options.length === 0) {
 			return null;
 		}
+
 		return (
 			<Menus
 				value={activeValue}
 				onSelect={handleMenuSelect}
-				visible={popupVisible}
 				options={options}
 			/>
 		);
@@ -216,47 +216,93 @@ const Cascader = ({
 		<Trigger
 			ref={triggerEl}
 			popupPlacement="bottomLeft"
-			buildInPlacements={BUILT_IN_PLACEMENTS}
+			builtinPlacements={BUILT_IN_PLACEMENTS}
 			action={disabled ? [] : ['click']}
 			popupVisible={disabled ? false : popupVisible}
+			onPopupVisibleChange={setPopupVisible}
+			prefixCls={`${prefixCls}-menus`}
 			popup={renderPopupNode()}
 		>
 			{React.cloneElement(children, {
-				onKeyDow: handleKeyDown,
+				onKeyDown: handleKeyDown,
 				tabIndex: disabled ? undefined : 0,
 			})}
 		</Trigger>
 	);
 };
 
-export const CasCaderOption = PropTypes.shape({
+const CasCaderOption = PropTypes.shape({
+	/**
+	 * Value of the option
+	 */
 	value: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.number,
 	]),
+	/**
+	 * Human readable label
+	 */
 	label: PropTypes.node,
+	/**
+	 * True when loading
+	 */
 	loading: PropTypes.bool,
+	/**
+	 * Indicates the end of a cascader tree
+	 */
 	isLeaf: PropTypes.bool,
 });
 
 CasCaderOption.children = PropTypes.arrayOf(CasCaderOption);
 
 Cascader.propTypes = {
+	/**
+	 * Component class prefix
+	 */
+	prefixCls: PropTypes.string,
+	/**
+	 * Default value
+	 */
 	defaultValue: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.string),
 		PropTypes.arrayOf(PropTypes.number),
 	]),
+	/**
+	 * Value
+	 */
 	value: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.string),
 		PropTypes.arrayOf(PropTypes.number),
 	]),
-	options: PropTypes.arrayOf(CasCaderOption),
-	// Change the value on each selection, by default it will only
-	// trigger the onchange event when selecting a leaf option
-	changeOnSelect: PropTypes.func,
-	// Callback when finisching the cascader select
+	/**
+	 * Cascader options
+	 */
+	options: PropTypes.arrayOf(PropTypes.shape({
+		value: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.number,
+		]),
+		label: PropTypes.node,
+		loading: PropTypes.bool,
+		isLeaf: PropTypes.bool,
+		children: PropTypes.arrayOf(CasCaderOption),
+	})),
+	/**
+	 * Change the value on each selection, by default it will only
+	 * trigger the onchange event when selecting a leaf option
+	 */
+	changeOnSelect: PropTypes.bool,
+	/**
+	 * Callback when finisching the cascader select
+	 */
 	onChange: PropTypes.func,
+	/**
+	 * Lazy load children
+	 */
 	loadData: PropTypes.func,
+	/**
+	 * Selecting an option is not possible when disabled
+	 */
 	disabled: PropTypes.bool,
 	children: PropTypes.element,
 };
