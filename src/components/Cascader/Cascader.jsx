@@ -154,7 +154,7 @@ const Cascader = ({
 		 * The user can navigate through the cascade by using a set of key strokes
 		 */
 		const events = {
-			isGoingUpOrDow: e.keyCode === KeyCode.DOWN || e.keyCode === KeyCode.UP,
+			isGoingUpOrDown: e.keyCode === KeyCode.DOWN || e.keyCode === KeyCode.UP,
 			isGoingLeft: e.keyCode === KeyCode.LEFT || e.keyCode === KeyCode.BACKSPACE,
 			isGoingRight: e.keyCode === KeyCode.RIGHT,
 			isLoosingFocus: e.keyCode === KeyCode.ESC || e.keyCode === KeyCode.TAB,
@@ -165,7 +165,7 @@ const Cascader = ({
 		const currentIndex = currentOptions
 			.map((option) => option.value).indexOf(newActiveValue[currentLevel]);
 
-		if (events.isGoingUpOrDow) {
+		if (events.isGoingUpOrDown) {
 			e.preventDefault();
 			const nextIndex = getNextIndex(currentOptions, currentIndex, e);
 			newActiveValue[currentLevel] = currentOptions[nextIndex].value;
