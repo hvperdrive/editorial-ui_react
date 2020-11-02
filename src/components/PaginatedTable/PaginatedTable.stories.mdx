@@ -21,7 +21,7 @@ Some explanation about our PaginatedTable component
 			const offset = (currentPage - 1) * itemsPerPage;
 			return (
 				<PaginatedTable
-					columns={TABLE_MOCK_COLUMNS}
+					columns={TABLE_MOCK_COLUMNS()}
 					rows={TABLE_MOCK_ROWS.slice(offset, offset + itemsPerPage)}
 					currentPage={currentPage}
 					itemsPerPage={itemsPerPage}

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { equals, path } from 'ramda';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { getCellProps, getHeaderProps } from './Table.helpers';
 import TableCell from './TableCell/TableCell';
@@ -71,9 +71,8 @@ const Table = ({
 		const expanded = isRowExpanded(row);
 
 		return (
-			<>
+			<Fragment key={`table-row-${rowIndex}`}>
 				<TableRow
-					key={`table-row-${rowIndex}`}
 					hasClickAction={hasClickAction}
 					onClick={() => onRowClick(row)}
 				>
@@ -88,7 +87,7 @@ const Table = ({
 						</td>
 					</tr>
 				)}
-			</>
+			</Fragment>
 		);
 	};
 
