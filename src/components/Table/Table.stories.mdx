@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import Table from './Table';
-import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
+import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS, TABLE_MOCK_NESTED_ROWS } from './Table.mock';
 
 
 <Meta title="Table" component={Table} />
@@ -77,7 +77,7 @@ Group stories based on props
 ### Expandeble rows
 
 <Preview>
-	<Story name='Expandeble'>
+	<Story name='Expandable'>
 		{() => {
 			const [expandedRows, setExpandedRows] = useState({});
 			const expandedRowsTemplate = () => (
@@ -97,6 +97,71 @@ Group stories based on props
 					rows={TABLE_MOCK_ROWS}
 					expandedRows={expandedRows}
 					rowExpansionTemplate={expandedRowsTemplate}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Nested rows
+
+<Preview>
+	<Story name='Nested'>
+		{() => {
+			return (
+				<Table
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={TABLE_MOCK_NESTED_ROWS}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Draggable rows
+
+<Preview>
+	<Story name='Draggable'>
+		{() => {
+			const [rows, setRows] = useState(TABLE_MOCK_ROWS);
+			const moveRow = useCallback((sourceIndex, targetIndex) => {
+				const sourceRow = rows[sourceIndex];
+				const newRows = [...rows];
+				newRows.splice(sourceIndex, 1);
+				newRows.splice(targetIndex, 0, sourceRow);
+				setRows(newRows);
+			}, [rows]);
+			return (
+				<Table
+					dataKey="id"
+					draggable={true}
+					moveRow={moveRow}
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={rows}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+<Preview>
+	<Story name='Draggable nested'>
+		{() => {
+			const [rows, setRows] = useState(TABLE_MOCK_NESTED_ROWS);
+			const moveRow = (sourceIndex, targetIndex) => useCallback(() => {
+				const sourceRow = rows[sourceIndex];
+				const newRows = [...rows];
+				newRows.splice(sourceIndex, 1);
+				newRows.splice(targetIndex, 0, sourceRow);
+				setRows(newRows);
+			}, [rows]);
+			return (
+				<Table
+					dataKey="id"
+					draggable={true}
+					moveRow={moveRow}
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={rows}
 				/>
 			);
 		}}

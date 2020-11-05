@@ -90,3 +90,92 @@ export const TABLE_MOCK_ROWS = [
 	},
 
 ];
+
+export const TABLE_MOCK_NESTED_ROWS = [
+	{
+		id: 0,
+		firstName: 'Wyatt',
+		lastName: 'Cooper',
+	},
+	{
+		id: 1,
+		firstName: 'Mullen',
+		lastName: 'Ballard',
+		rows: [
+			{
+				id: 6,
+				firstName: 'Jerri',
+				lastName: 'Hicks',
+				rows: [
+					{
+						id: 11,
+						firstName: 'Kobe',
+						lastName: 'Bryant',
+					},
+					{
+						id: 10,
+						firstName: 'Stephen',
+						lastName: 'Curry',
+						rows: [
+							{
+								id: 11,
+								firstName: 'Eden',
+								lastName: 'Hazard',
+							},
+							{
+								id: 10,
+								firstName: 'Kevin',
+								lastName: 'De Bruyne',
+							},
+
+						],
+					},
+				],
+			},
+			{
+				id: 7,
+				firstName: 'Sharron',
+				lastName: 'Castro',
+			},
+		],
+	},
+	{
+		id: 2,
+		firstName: 'Sonia',
+		lastName: 'Bass',
+		rows: [
+			{
+				id: 8,
+				firstName: 'Harriett',
+				lastName: 'Horton',
+			},
+		],
+	},
+	{
+		id: 3,
+		firstName: 'Kristen',
+		lastName: 'Moore',
+	},
+	{
+		id: 4,
+		firstName: 'Moss',
+		lastName: 'Bowen',
+		rows: [
+			{
+				id: 9,
+				firstName: 'Griffin',
+				lastName: 'Navarro',
+			},
+			{
+				id: 10,
+				firstName: 'Lebron',
+				lastName: 'James',
+			},
+		],
+	},
+	{
+		id: 5,
+		firstName: 'Elaine',
+		lastName: 'Michael',
+	},
+];

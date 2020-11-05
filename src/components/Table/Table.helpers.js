@@ -1,6 +1,10 @@
 import { isNil, isObject, isString } from '../../helpers';
 
 const getCellValue = (rowData, key, fallback) => {
+	if (!key) {
+		return null;
+	}
+
 	const value = rowData[key];
 
 	if (isObject(value)) {
