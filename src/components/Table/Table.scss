@@ -124,4 +124,8 @@
 	.a-table__row--hovered {
 		opacity: 0;
 	}
+
+	.a-table__row--collapse {
+		display: none;
+	}
 }

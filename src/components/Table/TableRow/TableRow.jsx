@@ -5,6 +5,7 @@ import React from 'react';
 const TableRow = ({
 	children,
 	className,
+	collapseOnDrag,
 	hasClickAction,
 	onClick,
 	trRef,
@@ -16,6 +17,7 @@ const TableRow = ({
 		className={classnames(className, {
 			'a-table--clickable': hasClickAction,
 			'a-table__row--hovered': isDragging,
+			'a-table__row--collapse': collapseOnDrag,
 			'a-table__row--level-1': level === 1,
 			'a-table__row--level-2': level === 2,
 			'a-table__row--level-3': level === 3,
@@ -30,6 +32,7 @@ const TableRow = ({
 TableRow.propTypes = {
 	className: PropTypes.string,
 	children: PropTypes.node,
+	collapseOnDrag: PropTypes.bool,
 	hasClickAction: PropTypes.bool,
 	onClick: PropTypes.func,
 	trRef: PropTypes.oneOfType([

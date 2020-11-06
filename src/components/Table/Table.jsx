@@ -74,7 +74,7 @@ const Table = ({
 	/**
 	 * Render
 	 */
-	const renderDraggableRow = (row, rowIndex, level) => {
+	const renderDraggableRow = (row, rowIndex, level, collapse = false) => {
 		const expanded = isRowExpanded(row);
 		const id = path([dataKey])(row);
 
@@ -91,6 +91,7 @@ const Table = ({
 				{({ isDragging, dragDropRef }) => (
 					<>
 						<TableRow
+							collapseOnDrag={collapse}
 							hasClickAction={hasClickAction}
 							onClick={() => onRowClick(row)}
 							isDragging={isDragging}
@@ -111,10 +112,14 @@ const Table = ({
 								</td>
 							</tr>
 						)}
-						{row?.rows?.length
-							&& row.rows.map(
-								(subRow, subRowIndex) => renderDraggableRow(subRow, subRowIndex, level + 1),
-							)}
+						{row?.rows?.length && row.rows.map(
+							(subRow, subRowIndex) => renderDraggableRow(
+								subRow,
+								subRowIndex,
+								level + 1,
+								level === 1 && isDragging,
+							),
+						)}
 
 					</>
 				)}
