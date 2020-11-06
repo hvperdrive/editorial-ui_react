@@ -121,8 +121,7 @@
 		}
 	}
 
-	.a-table__row--hover {
-		background-color: $brand-primary !important;
-		color: $brand-primary !important;
+	.a-table__row--hovered {
+		opacity: 0;
 	}
 }

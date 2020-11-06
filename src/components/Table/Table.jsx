@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { equals, path } from 'ramda';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import DndContainer from '../Dnd/DndContainer';
 import DndDragDroppable from '../Dnd/DndDragDroppable';
@@ -65,7 +65,7 @@ const Table = ({
 
 	const isRowExpanded = (row) => {
 		if (dataKey) {
-			const dataKeyValue = path([`${dataKey}`], row);
+			const dataKeyValue = path([dataKey], row);
 			return expandedRows && expandedRows[dataKeyValue] != null;
 		}
 		return findExpandedRowIndex(row) !== -1;
@@ -76,10 +76,14 @@ const Table = ({
 	 */
 	const renderDraggableRow = (row, rowIndex, level) => {
 		const expanded = isRowExpanded(row);
+		const id = path([dataKey])(row);
 
 		return (
 			<DndDragDroppable
-				id={path([dataKey])(row)}
+				// Key can NOT be based on index because this will cause issues with react-dnd's
+				// ability to set the current item which is being dragged over/hovered
+				key={`table-row-${level}-${id}`}
+				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
 				accept={`${DND_ITEM_TYPE}-${level}`}
@@ -87,7 +91,6 @@ const Table = ({
 				{({ isDragging, dragDropRef }) => (
 					<>
 						<TableRow
-							key={`table-row-${level}-${rowIndex}`}
 							hasClickAction={hasClickAction}
 							onClick={() => onRowClick(row)}
 							isDragging={isDragging}
@@ -98,8 +101,11 @@ const Table = ({
 								<TableCell {...getCellProps(col, row, rowIndex)} />
 							))}
 						</TableRow>
-						{ expanded && (
-							<tr className="a-table-expanded-row" key={`table-row-expanded-${level}-${rowIndex}`}>
+						{expanded && (
+							<tr
+								key={`table-row-expanded-${level}-${rowIndex}`}
+								className="a-table-expanded-row"
+							>
 								<td colSpan={columns.length}>
 									{rowExpansionTemplate(row)}
 								</td>
@@ -120,9 +126,8 @@ const Table = ({
 		const expanded = isRowExpanded(row);
 
 		return (
-			<>
+			<Fragment key={`table-row-${level}-${rowIndex}`}>
 				<TableRow
-					key={`table-row-${level}-${rowIndex}`}
 					hasClickAction={hasClickAction}
 					onClick={() => onRowClick(row)}
 					level={level}
@@ -142,7 +147,7 @@ const Table = ({
 					row?.rows?.length
 					&& row.rows.map((subRow, subRowIndex) => renderStaticRow(subRow, subRowIndex, level + 1))
 				}
-			</>
+			</Fragment>
 		);
 	};
 
