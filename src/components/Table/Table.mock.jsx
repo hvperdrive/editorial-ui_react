@@ -103,37 +103,12 @@ export const TABLE_MOCK_NESTED_ROWS = [
 		lastName: 'Ballard',
 		rows: [
 			{
-				id: 6,
+				id: 11,
 				firstName: 'Jerri',
 				lastName: 'Hicks',
-				rows: [
-					{
-						id: 11,
-						firstName: 'Kobe',
-						lastName: 'Bryant',
-					},
-					{
-						id: 10,
-						firstName: 'Stephen',
-						lastName: 'Curry',
-						rows: [
-							{
-								id: 11,
-								firstName: 'Eden',
-								lastName: 'Hazard',
-							},
-							{
-								id: 10,
-								firstName: 'Kevin',
-								lastName: 'De Bruyne',
-							},
-
-						],
-					},
-				],
 			},
 			{
-				id: 7,
+				id: 12,
 				firstName: 'Sharron',
 				lastName: 'Castro',
 			},
@@ -145,7 +120,7 @@ export const TABLE_MOCK_NESTED_ROWS = [
 		lastName: 'Bass',
 		rows: [
 			{
-				id: 8,
+				id: 21,
 				firstName: 'Harriett',
 				lastName: 'Horton',
 			},
@@ -162,12 +137,12 @@ export const TABLE_MOCK_NESTED_ROWS = [
 		lastName: 'Bowen',
 		rows: [
 			{
-				id: 9,
+				id: 41,
 				firstName: 'Griffin',
 				lastName: 'Navarro',
 			},
 			{
-				id: 10,
+				id: 42,
 				firstName: 'Lebron',
 				lastName: 'James',
 			},

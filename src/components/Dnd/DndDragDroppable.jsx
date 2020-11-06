@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 const DndDragDroppable = ({
@@ -16,6 +16,8 @@ const DndDragDroppable = ({
 
 			const dragIndex = item.index;
 			const hoverIndex = index;
+			const dragId = item.id;
+			const hoverId = id;
 
 			// Don't replace items with themselves
 			if (dragIndex === hoverIndex) {
@@ -38,13 +40,13 @@ const DndDragDroppable = ({
 			if (dragIndex < hoverIndex && (hoverClientY + hoverMiddleY) < hoverMiddleY) {
 				return;
 			}
-
 			// Dragging upwards
 			if (dragIndex > hoverIndex && (hoverClientY - hoverMiddleY) > hoverMiddleY) {
 				return;
 			}
+
 			// Time to actually perform the action
-			moveRow(dragIndex, hoverIndex);
+			moveRow(dragIndex, hoverIndex, dragId, hoverId);
 
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
@@ -63,11 +65,7 @@ const DndDragDroppable = ({
 
 	drag(drop(dragDropRef));
 
-	return (
-		<>
-			{children({ dragDropRef, isDragging })}
-		</>
-	);
+	return children({ dragDropRef, isDragging });
 };
 
 DndDragDroppable.propTypes = {
