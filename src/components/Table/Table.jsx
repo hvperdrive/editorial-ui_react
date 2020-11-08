@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { equals, path } from 'ramda';
 import React, { Fragment } from 'react';
 
-import DndContainer from '../Dnd/DndContainer';
-import DndDragDroppable from '../Dnd/DndDragDroppable';
+import { DndContainer, DndDragDroppable } from '../Dnd';
 
 import { getCellProps, getHeaderProps } from './Table.helpers';
 import TableCell from './TableCell/TableCell';
@@ -233,7 +232,6 @@ Table.propTypes = {
 	rowExpansionTemplate: PropTypes.func,
 	draggable: PropTypes.bool,
 	striped: PropTypes.bool,
-	dragable: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
 	moveRow: PropTypes.func,
 };
