@@ -14,13 +14,11 @@ const DndDragDroppable = ({
 				return;
 			}
 
-			const dragIndex = item.index;
-			const hoverIndex = index;
-			const dragId = item.id;
-			const hoverId = id;
+			const dragged = item;
+			const hovered = { index, id, type: accept[0] };
 
 			// Don't replace items with themselves
-			if (dragIndex === hoverIndex) {
+			if (dragged.id === hovered.id) {
 				return;
 			}
 
@@ -37,27 +35,27 @@ const DndDragDroppable = ({
 			// When dragging downwards, only move when the cursor is below 0%
 			// When dragging upwards, only move when the cursor is above 0%
 			// Dragging downwards
-			if (dragIndex < hoverIndex && (hoverClientY + hoverMiddleY) < hoverMiddleY) {
+			if (dragged.index < hovered.index && (hoverClientY + hoverMiddleY) < hoverMiddleY) {
 				return;
 			}
 			// Dragging upwards
-			if (dragIndex > hoverIndex && (hoverClientY - hoverMiddleY) > hoverMiddleY) {
+			if (dragged.index > hovered.index && (hoverClientY - hoverMiddleY) > hoverMiddleY) {
 				return;
 			}
 
 			// Time to actually perform the action
-			moveRow(dragIndex, hoverIndex, dragId, hoverId);
+			moveRow(dragged, hovered);
 
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance
 			// to avoid expensive index searches.
-			item.index = hoverIndex; // eslint-disable-line
+			item.index = hovered.index; // eslint-disable-line
 		},
 	});
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: accept, id, index },
+		item: { type: accept[0], id, index },
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
@@ -69,7 +67,7 @@ const DndDragDroppable = ({
 };
 
 DndDragDroppable.propTypes = {
-	accept: PropTypes.string,
+	accept: PropTypes.arrayOf(PropTypes.string),
 	index: PropTypes.number,
 	moveRow: PropTypes.func,
 	children: PropTypes.func,

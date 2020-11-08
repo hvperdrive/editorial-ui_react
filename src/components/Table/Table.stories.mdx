@@ -124,13 +124,13 @@ Group stories based on props
 	<Story name='Draggable'>
 		{() => {
 			const [rows, setRows] = useState(TABLE_MOCK_ROWS);
-			const moveRow = useCallback((sourceIndex, targetIndex) => {
-				const sourceRow = rows[sourceIndex];
+			const moveRow = (source, target) => {
+				const sourceRow = rows[source.index];
 				const newRows = [...rows];
-				newRows.splice(sourceIndex, 1);
-				newRows.splice(targetIndex, 0, sourceRow);
+				newRows.splice(source.index, 1);
+				newRows.splice(target.index, 0, sourceRow);
 				setRows(newRows);
-			}, [rows]);
+			};
 			return (
 				<Table
 					dataKey="id"
@@ -148,13 +148,42 @@ Group stories based on props
 	<Story name='Draggable nested'>
 		{() => {
 			const [rows, setRows] = useState(TABLE_MOCK_NESTED_ROWS);
-			const moveRow = (sourceIndex, targetIndex) => useCallback(() => {
-				const sourceRow = rows[sourceIndex];
-				const newRows = [...rows];
-				newRows.splice(sourceIndex, 1);
-				newRows.splice(targetIndex, 0, sourceRow);
-				setRows(newRows);
-			}, [rows]);
+			const findIndexAndRow = (_rows = [], itemId) => {
+				let foundIndex = _rows.findIndex((r) => r.id === itemId);
+				let foundRow = _rows;
+				if (foundIndex === -1) {
+					_rows.some((r) => {
+						if (r.rows && r.rows.length) {
+							const result = findIndexAndRow(r.rows, itemId);
+							if (result[0] !== -1 && result[1].length) {
+								foundIndex = result[0];
+								foundRow = result[1];
+								return true;
+							}
+						}
+					});
+				}
+				return [foundIndex, foundRow];
+			};
+			const moveRow = (source, target) => {
+				const newRows = rows.concat([]);
+				const [sourceIndex, sourceRow] = findIndexAndRow(newRows, source.id);
+				const rowToMove = sourceRow.splice(sourceIndex, 1)[0];
+				if (rowToMove) {
+					const [, targetRow] = findIndexAndRow(newRows, target.id);
+					if (source.type === 'row-2' && target.type === 'row-1') {
+						const rootItem = newRows.find((r) => r.id === target.id);
+						if (!rootItem.rows) {
+							rootItem.rows = [];
+						}
+						rootItem.rows.push(rowToMove);
+					} else {
+						const [, targetRow] = findIndexAndRow(newRows, target.id);
+						targetRow.splice(target.index, 0, rowToMove);
+					}
+					setRows(newRows);
+				}
+			};
 			return (
 				<Table
 					dataKey="id"

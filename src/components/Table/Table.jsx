@@ -86,7 +86,7 @@ const Table = ({
 				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
-				accept={`${DND_ITEM_TYPE}-${level}`}
+				accept={[`${DND_ITEM_TYPE}-${level}`, `${DND_ITEM_TYPE}-${level + 1}`]}
 			>
 				{({ isDragging, dragDropRef }) => (
 					<>
@@ -112,14 +112,14 @@ const Table = ({
 								</td>
 							</tr>
 						)}
-						{row?.rows?.length && row.rows.map(
+						{row?.rows?.length ? row.rows.map(
 							(subRow, subRowIndex) => renderDraggableRow(
 								subRow,
 								subRowIndex,
 								level + 1,
 								level === 1 && isDragging,
 							),
-						)}
+						) : null}
 
 					</>
 				)}
@@ -148,10 +148,9 @@ const Table = ({
 						</td>
 					</tr>
 				)}
-				{
-					row?.rows?.length
-					&& row.rows.map((subRow, subRowIndex) => renderStaticRow(subRow, subRowIndex, level + 1))
-				}
+				{row?.rows?.length
+					? row.rows.map((subRow, subRowIndex) => renderStaticRow(subRow, subRowIndex, level + 1))
+					: null}
 			</Fragment>
 		);
 	};
