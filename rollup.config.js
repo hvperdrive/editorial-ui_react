@@ -1,7 +1,7 @@
+import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import autoprefixer from 'autoprefixer';
 import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 
@@ -15,10 +15,7 @@ export default {
 	],
 	plugins: [
 		commonjs({
-			include: 'node_modules/**',
-			namedExports: {
-				'node_modules/react-is/index.js': ['isMemo'],
-			},
+			include: ['node_modules/react-is/**'],
 		}),
 		resolve({
 			extensions: ['.js', '.jsx', '.scss'],

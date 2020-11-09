@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { KeyCode } from '../../helpers';
 
-import { BUILT_IN_PLACEMENTS } from './Cascader.const';
+import { ALLOWED_KEYS, BUILT_IN_PLACEMENTS, REOPEN_POPUP_KEYS } from './Cascader.const';
 import { Menus } from './Menus';
 import './Cascader.scss';
 
@@ -120,17 +120,7 @@ const Cascader = ({
 
 	const handleKeyDown = (e) => {
 		// Only hanlde the keys listed underneath
-		if (
-			e.keyCode !== KeyCode.DOWN
-			&& e.keyCode !== KeyCode.UP
-			&& e.keyCode !== KeyCode.ENTER
-			&& e.keyCode !== KeyCode.SPACE
-			&& e.keyCode !== KeyCode.LEFT
-			&& e.keyCode !== KeyCode.RIGHT
-			&& e.keyCode !== KeyCode.BACKSPACE
-			&& e.keyCode !== KeyCode.ESC
-			&& e.keyCode !== KeyCode.TAB
-		) {
+		if (!ALLOWED_KEYS.includes(e.keyCode)) {
 			return;
 		}
 
@@ -138,10 +128,7 @@ const Cascader = ({
 		// listed underneath
 		if (
 			!popupVisible
-			&& (e.keyCode === KeyCode.DOWN
-			|| e.keyCode === KeyCode.UP
-			|| e.keyCode === KeyCode.ENTER
-			|| e.keyCode === KeyCode.SPACE)
+			&& REOPEN_POPUP_KEYS.includes(e.keyCode)
 		) {
 			// open the popup and do nothing else
 			setPopupVisible(true);
@@ -230,7 +217,7 @@ const Cascader = ({
 	);
 };
 
-const CasCaderOption = PropTypes.shape({
+const CascaderOption = PropTypes.shape({
 	/**
 	 * Value of the option
 	 */
@@ -252,7 +239,7 @@ const CasCaderOption = PropTypes.shape({
 	isLeaf: PropTypes.bool,
 });
 
-CasCaderOption.children = PropTypes.arrayOf(CasCaderOption);
+CascaderOption.children = PropTypes.arrayOf(CascaderOption);
 
 Cascader.propTypes = {
 	/**
@@ -284,7 +271,7 @@ Cascader.propTypes = {
 		label: PropTypes.node,
 		loading: PropTypes.bool,
 		isLeaf: PropTypes.bool,
-		children: PropTypes.arrayOf(CasCaderOption),
+		children: PropTypes.arrayOf(CascaderOption),
 	})),
 	/**
 	 * Change the value on each selection, by default it will only
