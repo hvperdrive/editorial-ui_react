@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Trigger from 'rc-trigger';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { KeyCode } from '../../helpers';
+import { KEY_CODE } from '../../const';
 
 import { ALLOWED_KEYS, BUILT_IN_PLACEMENTS, REOPEN_POPUP_KEYS } from './Cascader.const';
 import { Menus } from './Menus';
@@ -60,7 +60,7 @@ const Cascader = ({
 		const nextIndexDown = currentIndex + 1;
 		const nextIndexUp = currentIndex - 1;
 
-		if (e.keyCode === KeyCode.DOWN) {
+		if (e.keyCode === KEY_CODE.DOWN) {
 			return nextIndexDown >= currentOptions.length ? 0 : nextIndexDown;
 		}
 
@@ -68,7 +68,7 @@ const Cascader = ({
 	};
 
 	const handleChange = (activeOptions, visible, e) => {
-		if (e.type !== 'keydown' || e.keyCode === KeyCode.ENTER) {
+		if (e.type !== 'keydown' || e.keyCode === KEY_CODE.ENTER) {
 			onChange(activeOptions.map((activeOption) => activeOption.value), activeOptions);
 			setPopupVisible(visible);
 		}
@@ -140,10 +140,10 @@ const Cascader = ({
 		 * The user can navigate through the cascade by using a set of key strokes
 		 */
 		const events = {
-			isGoingUpOrDown: e.keyCode === KeyCode.DOWN || e.keyCode === KeyCode.UP,
-			isGoingLeft: e.keyCode === KeyCode.LEFT || e.keyCode === KeyCode.BACKSPACE,
-			isGoingRight: e.keyCode === KeyCode.RIGHT,
-			isLoosingFocus: e.keyCode === KeyCode.ESC || e.keyCode === KeyCode.TAB,
+			isGoingUpOrDown: e.keyCode === KEY_CODE.DOWN || e.keyCode === KEY_CODE.UP,
+			isGoingLeft: e.keyCode === KEY_CODE.LEFT || e.keyCode === KEY_CODE.BACKSPACE,
+			isGoingRight: e.keyCode === KEY_CODE.RIGHT,
+			isLoosingFocus: e.keyCode === KEY_CODE.ESC || e.keyCode === KEY_CODE.TAB,
 		};
 		const newActiveValue = [...activeValue];
 		const currentLevel = newActiveValue.length - 1 < 0 ? 0 : newActiveValue.length - 1;
