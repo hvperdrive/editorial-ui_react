@@ -1,6 +1,6 @@
+import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import autoprefixer from 'autoprefixer';
-import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
@@ -15,7 +15,7 @@ export default {
 	],
 	plugins: [
 		commonjs({
-			include: 'node_modules/**',
+			include: ['node_modules/**'],
 		}),
 		resolve({
 			extensions: ['.js', '.jsx', '.scss'],

@@ -12,3 +12,4 @@ export * from './ScrollableTabs';
 export * from './Status';
 export * from './Table';
 export * from './Timepicker';
+export * from './Cascader';
