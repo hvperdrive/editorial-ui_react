@@ -1,0 +1,118 @@
+import { useState  } from 'react';
+import { TextField, Button } from '@acpaas-ui/react-components';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import Cascader from './Cascader';
+import { CASCADER_MOCK_CITY_OPTIONS, CASCADER_MOCK_LAZY_LOADED_CITY_OPTIONS } from './Cascader.mock';
+
+<Meta title="Cascader" component={Cascader} />
+
+# Cascader
+
+Simple Cascader
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		{() => {
+			const [value, setValue] = useState(['belgium', 'antwerp', 'lier']);
+			const [inputValue, setInputValue] = useState('');
+			const handleOnChange = (value, selectedOptions) => {
+				setInputValue(selectedOptions.map(o => o.label).join(' > '))
+				setValue(value);
+			};
+			return (
+				<Cascader value={value} options={CASCADER_MOCK_CITY_OPTIONS} onChange={handleOnChange}>
+					<TextField onChange={() => null} placeholder="Please select a city" value={inputValue} />
+				</Cascader>
+			)
+		}}
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Cascader} />
+
+## Stories
+
+Group stories based on props
+
+### Lazy loading
+
+<Preview>
+	<Story name='Lazyloading'>
+		{() => {
+			const [value, setValue] = useState([]);
+			const [options, setOptions] = useState(CASCADER_MOCK_LAZY_LOADED_CITY_OPTIONS)
+			const [inputValue, setInputValue] = useState('');
+			const handleOnChange = (value, selectedOptions) => {
+				setInputValue(selectedOptions.map(o => o.label).join(' > '))
+				setValue(value);
+			};
+			const handleLoadData = (selectedOptions = [], menuLevel) => {
+				const targetOption = selectedOptions[selectedOptions.length - 1];
+				targetOption.loading = true;
+				setTimeout(() => {
+					targetOption.loading = false;
+					targetOption.children = CASCADER_MOCK_CITY_OPTIONS[1].children[0].children;
+					setOptions([...options]);
+				}, 1000);
+			};
+			return (
+				<Cascader loadData={handleLoadData} value={value} options={options} onChange={handleOnChange}>
+					<TextField onChange={() => null} placeholder="Please select a city" value={inputValue} />
+				</Cascader>
+			)
+		}}
+	</Story>
+</Preview>
+
+### Disabled
+
+<Preview>
+	<Story name='Disabled'>
+		{() => {
+			const [inputValue, setInputValue] = useState('');
+			return (
+				<Cascader disabled options={CASCADER_MOCK_CITY_OPTIONS}>
+					<TextField disabled onChange={() => null} placeholder="Please select a city" value={inputValue} />
+				</Cascader>
+			)
+		}}
+	</Story>
+</Preview>
+
+### Change value on every select
+
+<Preview>
+	<Story name='Change on every select'>
+		{() => {
+			const [value, setValue] = useState(['belgium', 'antwerp', 'lier']);
+			const [inputValue, setInputValue] = useState('Belgium > Antwerp > Lier');
+			const handleOnChange = (value, selectedOptions) => {
+				setInputValue(selectedOptions.map(o => o.label).join(' > '))
+				setValue(value);
+			};
+			return (
+				<Cascader changeOnSelect value={value} options={CASCADER_MOCK_CITY_OPTIONS} onChange={handleOnChange}>
+					<div className="a-input has-icon-right">
+						<div className="a-input__wrapper">
+							<input onChange={() => null} placeholder="Please select a city" value={inputValue}  />
+							<span style={{"pointerEvents": "initial"}} className="fa">
+								<Button onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									setValue([]);
+									setInputValue('');
+								}} icon="times-circle" ariaLabel="Verwijder" transparent />
+							</span>
+						</div>
+					</div>
+				</Cascader>
+			)
+		}}
+	</Story>
+</Preview>

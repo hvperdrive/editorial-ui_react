@@ -1,3 +1,4 @@
+import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import autoprefixer from 'autoprefixer';
 import babel from 'rollup-plugin-babel';
@@ -13,6 +14,9 @@ export default {
 		{ file: pkg.module, format: 'es' },
 	],
 	plugins: [
+		commonjs({
+			include: ['node_modules/react-is/**'],
+		}),
 		resolve({
 			extensions: ['.js', '.jsx', '.scss'],
 		}),
