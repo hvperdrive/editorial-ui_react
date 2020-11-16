@@ -7,10 +7,11 @@ const TableRow = ({
 	className,
 	collapseOnDrag,
 	hasClickAction,
+	isDragging,
+	isLast,
+	level,
 	onClick,
 	trRef,
-	isDragging,
-	level,
 }) => (
 	<tr
 		ref={trRef}
@@ -20,8 +21,7 @@ const TableRow = ({
 			'a-table__row--collapse': collapseOnDrag,
 			'a-table__row--level-1': level === 1,
 			'a-table__row--level-2': level === 2,
-			'a-table__row--level-3': level === 3,
-			'a-table__row--level-4': level === 4,
+			'a-table__row--last-in-level': isLast,
 		})}
 		onClick={onClick}
 	>
@@ -41,6 +41,7 @@ TableRow.propTypes = {
 	]),
 	isDragging: PropTypes.bool,
 	level: PropTypes.number,
+	isLast: PropTypes.bool,
 };
 
 export default TableRow;

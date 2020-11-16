@@ -6,7 +6,7 @@
 	border-bottom: 1px solid #949494;
 
 	tr {
-		border-bottom: none
+		border-bottom: none;
 	}
 
 	td {
@@ -40,84 +40,43 @@
 		background-color: $white !important;
 	}
 
-	.a-table__row--level-2 + .a-table__row--level-1,
-	.a-table__row--level-3 + .a-table__row--level-1,
-	.a-table__row--level-3 + .a-table__row--level-2,
-	.a-table__row--level-4 + .a-table__row--level-1,
-	.a-table__row--level-4 + .a-table__row--level-2,
-	.a-table__row--level-4 + .a-table__row--level-3 {
-		td:first-child::after {
-			height: calc(100% + 1px);
-			position: absolute;
-			top: -1px;
-			right: 0;
-			border-top: 1px solid #949494;
+	.a-table__row--level-1 {
+		td {
+			&:first-child {
+				&::after {
+					left: 0;
+				}
+			}
 		}
 	}
 
-	.a-table__row--level-2 + .a-table__row--level-1 td:first-child::after {
-		left: 0;
-	}
-	.a-table__row--level-1 + .a-table__row--level-3,
-	.a-table__row--level-2 + .a-table__row--level-3 {
-		td:first-child::after {
-			left: $spacer-md * 2;
-		}
-	}
-	.a-table__row--level-1 + .a-table__row--level-4,
-	.a-table__row--level-2 + .a-table__row--level-4
-	.a-table__row--level-3 + .a-table__row--level-4 {
-		td:first-child::after {
-			left: $spacer-md * 3;
-		}
-	}
-
-	.a-table__row--level-2,
-	.a-table__row--level-3,
-	.a-table__row--level-4 {
+	.a-table__row--level-2 {
 		td:first-child {
+			padding-left: $spacer-md + $spacer;
+
 			&::before {
 				content: '';
 				background: white;
+				width: $spacer-md;
 				height: 100%;
 				position: absolute;
 				top: 0;
 				left: 0;
 			}
-		}
-	}
 
-	.a-table__row--level-2 td:first-child {
-		padding-left: $spacer-md + $spacer;
-
-		&::before {
-			width: $spacer-md;
+			&::after {
+				left: $spacer-md;
+			}
 		}
 
-		&::after {
-			left: $spacer-md;
-		}
-	}
-	.a-table__row--level-3 td:first-child {
-		padding-left: ($spacer-md * 2) + $spacer;
-
-		&::before {
-			width: $spacer-md * 2;
-		}
-
-		&::after {
-			left: $spacer-md * 2;
-		}
-	}
-	.a-table__row--level-4 td:first-child {
-		padding-left: ($spacer-md * 3) + $spacer;
-
-		&::before {
-			width: $spacer-md * 3;
-		}
-
-		&::after {
-			left: $spacer-md * 3;
+		&.a-table__row--last-in-level {
+			td {
+				&:first-child {
+					&::after {
+						left: 0;
+					}
+				}
+			}
 		}
 	}
 

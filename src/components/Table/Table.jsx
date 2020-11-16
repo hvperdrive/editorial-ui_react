@@ -73,7 +73,7 @@ const Table = ({
 	/**
 	 * Render
 	 */
-	const renderDraggableRow = (row, rowIndex, level, collapse = false) => {
+	const renderDraggableRow = (row, rowIndex, level, isLast, collapse = false) => {
 		const expanded = isRowExpanded(row);
 		const id = path([dataKey])(row);
 
@@ -87,15 +87,16 @@ const Table = ({
 				index={rowIndex}
 				accept={[`${DND_ITEM_TYPE}-${level}`, `${DND_ITEM_TYPE}-${level + 1}`]}
 			>
-				{({ isDragging, dragDropRef }) => (
+				{({ dragDropRef, isDragging }) => (
 					<>
 						<TableRow
 							collapseOnDrag={collapse}
 							hasClickAction={hasClickAction}
 							onClick={() => onRowClick(row)}
 							isDragging={isDragging}
-							trRef={dragDropRef}
+							isLast={isLast}
 							level={level}
+							trRef={dragDropRef}
 						>
 							{columns.map((col) => (
 								<TableCell {...getCellProps(col, row, rowIndex)} />
@@ -116,17 +117,17 @@ const Table = ({
 								subRow,
 								subRowIndex,
 								level + 1,
+								row.rows.length - 1 === subRowIndex,
 								level === 1 && isDragging,
 							),
 						) : null}
-
 					</>
 				)}
 			</DndDragDroppable>
 		);
 	};
 
-	const renderStaticRow = (row, rowIndex, level) => {
+	const renderStaticRow = (row, rowIndex, level, isLast) => {
 		const expanded = isRowExpanded(row);
 
 		return (
@@ -135,20 +136,29 @@ const Table = ({
 					hasClickAction={hasClickAction}
 					onClick={() => onRowClick(row)}
 					level={level}
+					isLast={isLast}
 				>
 					{columns.map((col) => (
 						<TableCell {...getCellProps(col, row, rowIndex)} />
 					))}
 				</TableRow>
-				{ expanded && (
-					<tr className="a-table-expanded-row" key={`table-row-expanded-${level}-${rowIndex}`}>
+				{expanded && (
+					<tr
+						key={`table-row-expanded-${level}-${rowIndex}`}
+						className="a-table-expanded-row"
+					>
 						<td colSpan={columns.length}>
 							{rowExpansionTemplate(row)}
 						</td>
 					</tr>
 				)}
 				{row?.rows?.length
-					? row.rows.map((subRow, subRowIndex) => renderStaticRow(subRow, subRowIndex, level + 1))
+					? row.rows.map((subRow, subRowIndex) => renderStaticRow(
+						subRow,
+						subRowIndex,
+						level + 1,
+						row.rows.length - 1 === subRowIndex
+					))
 					: null}
 			</Fragment>
 		);
