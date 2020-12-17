@@ -133,7 +133,7 @@ FileUpload.propTypes = {
 		}),
 		requestHeader: PropTypes.shape({
 			key: PropTypes.string,
-			value: PropTypes.any,
+			value: PropTypes.string,
 		}),
 	}),
 	files: PropTypes.arrayOf(PropTypes.shape({
