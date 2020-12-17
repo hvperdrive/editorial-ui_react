@@ -1,8 +1,10 @@
-import { getNodeText, render } from '@testing-library/react';
+import { getNodeText, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
+import { dragAndHold } from '../Dnd/Dnd.helpers';
+
 import Table from './Table';
-import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
+import { TABLE_MOCK_COLUMNS, TABLE_MOCK_NESTED_ROWS, TABLE_MOCK_ROWS } from './Table.mock';
 
 const message = {
 	loading: 'Loading data...',
@@ -87,5 +89,35 @@ describe('<Table />', () => {
 		const expandedRow = queryByText(templateText);
 
 		expect(expandedRow).not.toBeNull();
+	});
+
+	it('Should be able to show nested data', () => {
+		const firstNestedDataRow = TABLE_MOCK_NESTED_ROWS.find((row) => (row.rows || []).length);
+		const firstNestedDataCell = firstNestedDataRow.rows[0];
+		const { container } = render(<Table rows={TABLE_MOCK_NESTED_ROWS} columns={columns} />);
+		const firstNestedRowEl = container.querySelector('.a-table__row--level-2');
+		const nestedCells = firstNestedRowEl.querySelectorAll('td');
+
+		expect(nestedCells[0]).toHaveTextContent(firstNestedDataCell.id);
+		expect(nestedCells[1]).toHaveTextContent(firstNestedDataCell.firstName);
+		expect(nestedCells[2]).toHaveTextContent(firstNestedDataCell.lastName);
+	});
+
+	it('Should support drag and drop when `draggable` is true', async () => {
+		const { container } = render(
+			<Table dataKey="id" draggable rows={TABLE_MOCK_ROWS} columns={columns} />,
+		);
+		const rowElements = container.querySelector('tbody').querySelectorAll('tr');
+
+		// Move first to third
+		const draggedRow = rowElements[0];
+		const targetRow = rowElements[2];
+
+		dragAndHold(draggedRow, targetRow);
+
+		await waitFor(() => {
+			const reorderedRows = container.querySelector('tbody').querySelectorAll('tr');
+			expect(reorderedRows[0]).toHaveClass('a-table__row--hovered');
+		});
 	});
 });
