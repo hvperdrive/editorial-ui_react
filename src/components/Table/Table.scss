@@ -81,10 +81,17 @@
 	}
 
 	.a-table__row--hovered {
+		cursor: grabbing;
 		opacity: 0;
 	}
 
 	.a-table__row--collapse {
 		display: none;
+	}
+}
+
+.a-table--draggable {
+	tbody tr {
+		cursor: move;
 	}
 }
