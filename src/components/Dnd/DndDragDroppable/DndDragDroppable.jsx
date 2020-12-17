@@ -18,8 +18,6 @@ const DndDragDroppable = ({
 			const hovered = { index, id, type: accept[0] };
 
 			// Don't replace items with themselves
-			// TODO: id is necessary for Table but this should be configurable for this component
-			// to be more re-usable
 			if (dragged.id === hovered.id) {
 				return;
 			}
