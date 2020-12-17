@@ -157,7 +157,7 @@ const Table = ({
 						subRow,
 						subRowIndex,
 						level + 1,
-						row.rows.length - 1 === subRowIndex
+						row.rows.length - 1 === subRowIndex,
 					))
 					: null}
 			</Fragment>

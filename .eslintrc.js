@@ -22,7 +22,7 @@ module.exports = {
 		'dist/*',
 	],
 	rules: {
-		'indent': ['error', 'tab'],
+		indent: ['error', 'tab'],
 		'no-tabs': 'off',
 		'sort-imports': ['warn', {
 			ignoreCase: true,
