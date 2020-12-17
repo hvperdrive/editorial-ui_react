@@ -15,7 +15,7 @@ export default {
 	],
 	plugins: [
 		commonjs({
-			include: ['node_modules/react-is/**'],
+			include: ['node_modules/**'],
 		}),
 		resolve({
 			extensions: ['.js', '.jsx', '.scss'],

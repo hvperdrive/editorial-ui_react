@@ -1,9 +1,9 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import Table from './Table';
-import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS } from './Table.mock';
+import { TABLE_MOCK_COLUMNS, TABLE_MOCK_ROWS, TABLE_MOCK_NESTED_ROWS } from './Table.mock';
 
 
 <Meta title="Table" component={Table} />
@@ -77,7 +77,7 @@ Group stories based on props
 ### Expandeble rows
 
 <Preview>
-	<Story name='Expandeble'>
+	<Story name='Expandable'>
 		{() => {
 			const [expandedRows, setExpandedRows] = useState({});
 			const expandedRowsTemplate = () => (
@@ -97,6 +97,100 @@ Group stories based on props
 					rows={TABLE_MOCK_ROWS}
 					expandedRows={expandedRows}
 					rowExpansionTemplate={expandedRowsTemplate}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Nested rows
+
+<Preview>
+	<Story name='Nested'>
+		{() => {
+			return (
+				<Table
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={TABLE_MOCK_NESTED_ROWS}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Draggable rows
+
+<Preview>
+	<Story name='Draggable'>
+		{() => {
+			const [rows, setRows] = useState(TABLE_MOCK_ROWS);
+			const moveRow = (source, target) => {
+				const sourceRow = rows[source.index];
+				const newRows = [...rows];
+				newRows.splice(source.index, 1);
+				newRows.splice(target.index, 0, sourceRow);
+				setRows(newRows);
+			};
+			return (
+				<Table
+					dataKey="id"
+					draggable={true}
+					moveRow={moveRow}
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={rows}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+<Preview>
+	<Story name='Draggable nested'>
+		{() => {
+			const [rows, setRows] = useState(TABLE_MOCK_NESTED_ROWS);
+			const findIndexAndRow = (_rows = [], itemId) => {
+				let foundIndex = _rows.findIndex((r) => r.id === itemId);
+				let foundRow = _rows;
+				if (foundIndex === -1) {
+					_rows.some((r) => {
+						if (r.rows && r.rows.length) {
+							const result = findIndexAndRow(r.rows, itemId);
+							if (result[0] !== -1 && result[1].length) {
+								foundIndex = result[0];
+								foundRow = result[1];
+								return true;
+							}
+						}
+					});
+				}
+				return [foundIndex, foundRow];
+			};
+			const moveRow = (source, target) => {
+				const newRows = rows.concat([]);
+				const [sourceIndex, sourceRow] = findIndexAndRow(newRows, source.id);
+				const rowToMove = sourceRow.splice(sourceIndex, 1)[0];
+				if (rowToMove) {
+					const [, targetRow] = findIndexAndRow(newRows, target.id);
+					if (source.type === 'row-2' && target.type === 'row-1') {
+						const rootItem = newRows.find((r) => r.id === target.id);
+						if (!rootItem.rows) {
+							rootItem.rows = [];
+						}
+						rootItem.rows.push(rowToMove);
+					} else {
+						const [, targetRow] = findIndexAndRow(newRows, target.id);
+						targetRow.splice(target.index, 0, rowToMove);
+					}
+					setRows(newRows);
+				}
+			};
+			return (
+				<Table
+					dataKey="id"
+					draggable={true}
+					moveRow={moveRow}
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={rows}
 				/>
 			);
 		}}

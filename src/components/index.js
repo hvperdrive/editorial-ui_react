@@ -2,6 +2,7 @@ export * from './ActionBar';
 export * from './Container';
 export * from './ContextHeader';
 export * from './ControlledModal';
+export * from './Dnd';
 export * from './FileUpload';
 export * from './Filter';
 export * from './NavList';
