@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { useSlot } from '../../../hooks/useSlot';
 import { ProgressBar } from '../../ProgressBar';
@@ -18,7 +18,11 @@ const FileUploadZone = ({
 	onCustomDrop,
 	uploadedFiles = () => null,
 	invalidFiles = () => null,
+	onRequestError = () => null,
+	allowedMimeTypes = [],
+	allowedFileTypes = [],
 	children,
+
 }) => {
 	/**
 	 * Hooks
@@ -29,6 +33,10 @@ const FileUploadZone = ({
 	const [, setHasDragOver] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState(0);
 	const [uploadingFiles, setUploadingFiles] = useState([]);
+	const accept = useMemo(() =>
+		allowedFileTypes.map(type => `.${type}`).concat(allowedMimeTypes).join(','),
+		[allowedFileTypes, allowedMimeTypes]
+	);
 
 	/**
 	 * Methods
@@ -52,13 +60,23 @@ const FileUploadZone = ({
 				if (response.progress) {
 					setUploadProgress(Math.floor(response.progress * 100));
 				}
-				if (response.data) {
+
+				if (response.status < 300 && response.data) {
 					uploadedFiles(response.data);
+					return;
 				}
+
+				onRequestError({
+					files,
+					error: response.data,
+				});
 			},
-			(err) => {
+			(error) => {
 				// eslint-disable-next-line no-console
-				console.error(err);
+				onRequestError({
+					files,
+					error,
+				});
 			},
 			() => {
 				setUploadProgress(0);
@@ -144,6 +162,7 @@ const FileUploadZone = ({
 							disabled={disabled}
 							aria-labelledby={ariaId}
 							multiple={multiple}
+							accept={accept}
 							onDragOver={handleDragOver}
 							onDragLeave={handleDragLeave}
 							onDrop={handleDrop}
@@ -190,8 +209,11 @@ FileUploadZone.propTypes = {
 	ariaId: PropTypes.string,
 	uploadedFiles: PropTypes.func,
 	invalidFiles: PropTypes.func,
+	onRequestError: PropTypes.func,
 	onCustomClick: PropTypes.func,
 	onCustomDrop: PropTypes.func,
+	allowedMimeTypes: PropTypes.arrayOf(PropTypes.string),
+	allowedFileTypes: PropTypes.arrayOf(PropTypes.string),
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
