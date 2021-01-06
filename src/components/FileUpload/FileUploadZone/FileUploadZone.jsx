@@ -33,10 +33,8 @@ const FileUploadZone = ({
 	const [, setHasDragOver] = useState(false);
 	const [uploadProgress, setUploadProgress] = useState(0);
 	const [uploadingFiles, setUploadingFiles] = useState([]);
-	const accept = useMemo(() =>
-		allowedFileTypes.map(type => `.${type}`).concat(allowedMimeTypes).join(','),
-		[allowedFileTypes, allowedMimeTypes]
-	);
+	const accept = useMemo(() => allowedFileTypes.map((type) => `.${type}`).concat(allowedMimeTypes).join(','),
+		[allowedFileTypes, allowedMimeTypes]);
 
 	/**
 	 * Methods
