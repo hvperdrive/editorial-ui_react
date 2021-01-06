@@ -39,6 +39,7 @@ export class Uploader {
 				observer.next({
 					progress: 1,
 					data: xhr.response,
+					status: xhr.status,
 				});
 				observer.complete();
 			};

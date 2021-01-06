@@ -88,3 +88,9 @@
 		display: none;
 	}
 }
+
+.a-table--draggable {
+	tbody tr {
+		cursor: move;
+	}
+}

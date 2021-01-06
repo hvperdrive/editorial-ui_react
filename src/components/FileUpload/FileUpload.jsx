@@ -49,6 +49,13 @@ const FileUpload = ({
 		setInvalidFiles(invFiles);
 	};
 
+	const onRequestError = (error) => {
+		setInvalidFiles(error.files.map((file) => ({
+			file,
+			reasons: ['REQUEST_ERROR']
+		})));
+	}
+
 	const onRemoveInvalidFile = (index) => {
 		setInvalidFiles(invalidFiles.filter((file, i) => i !== index));
 	};
@@ -85,10 +92,13 @@ const FileUpload = ({
 		<div className="m-upload">
 			<FileUploadZone
 				invalidFiles={onInvalidFiles}
+				onRequestError={onRequestError}
 				uploadedFiles={selectUploadedFiles}
 				disabled={disabled || !uploadZoneIsDisabled}
 				id={id}
 				uploader={uploader}
+				allowedMimeTypes={options.allowedMimeTypes}
+				allowedFileTypes={options.allowedFileTypes}
 			>
 				{ fileUploadMessageSlot
 					&& (
@@ -130,10 +140,11 @@ FileUpload.propTypes = {
 			INVALID_FILE_TYPE: PropTypes.string,
 			INVALID_FILE_SIZE: PropTypes.string,
 			INVALID_MIME_TYPE: PropTypes.string,
+			REQUEST_ERROR: PropTypes.string,
 		}),
 		requestHeader: PropTypes.shape({
 			key: PropTypes.string,
-			value: PropTypes.any,
+			value: PropTypes.string,
 		}),
 	}),
 	files: PropTypes.arrayOf(PropTypes.shape({
