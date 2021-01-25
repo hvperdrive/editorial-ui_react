@@ -86,7 +86,7 @@ const ContextHeader = ({
 						)
 					}
 				</div>
-				{ renderTabs() }
+				{renderTabs()}
 			</div>
 		</div>
 	);

@@ -3,10 +3,10 @@ import React, { useRef } from 'react';
 import { createDndContext, DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-const RNDContext = createDndContext(HTML5Backend);
+const DNDContext = createDndContext(HTML5Backend);
 
 const DndContainer = ({ draggable, children }) => {
-	const manager = useRef(RNDContext);
+	const manager = useRef(DNDContext);
 
 	if (!draggable) {
 		return children;
