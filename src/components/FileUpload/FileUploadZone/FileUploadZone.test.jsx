@@ -130,6 +130,7 @@ describe('<FileUploadZone/>', () => {
 			it('should call the `uploadedFiles`callback when the file has been successfully uploaded', () => {
 				uploader.uploadFiles.mockReturnValueOnce(of({
 					progress: 1,
+					status: 200,
 					data: uploadResponse,
 				}));
 				const handleUploadedFiles = jest.fn();

@@ -52,9 +52,9 @@ const FileUpload = ({
 	const onRequestError = (error) => {
 		setInvalidFiles(error.files.map((file) => ({
 			file,
-			reasons: ['REQUEST_ERROR']
+			reasons: ['REQUEST_ERROR'],
 		})));
-	}
+	};
 
 	const onRemoveInvalidFile = (index) => {
 		setInvalidFiles(invalidFiles.filter((file, i) => i !== index));
