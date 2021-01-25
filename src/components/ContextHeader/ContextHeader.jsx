@@ -75,7 +75,7 @@ const ContextHeader = ({
 				}
 				<div className={classNameBody}>
 					<div className={classNameBodyTitle}>
-						<h1 className="u-margin-right-xs">{title}</h1>
+						<h1 className="h2 u-margin-right-xs">{title}</h1>
 						{renderBadges()}
 					</div>
 					{
@@ -86,7 +86,7 @@ const ContextHeader = ({
 						)
 					}
 				</div>
-				{ renderTabs() }
+				{renderTabs()}
 			</div>
 		</div>
 	);
