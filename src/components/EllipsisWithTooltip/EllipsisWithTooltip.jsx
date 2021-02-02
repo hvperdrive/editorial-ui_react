@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 
@@ -10,13 +11,16 @@ const EllipsisWithTooltip = ({
 }) => {
 	const targetRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
+
+	const debounceMouseEnter = debounce(setVisibility, 800);
+
 	return (
 		<>
 			<div
 				style={style}
 				className="u-text-truncate"
 				ref={targetRef}
-				onMouseEnter={() => setVisibility(true)}
+				onMouseEnter={() => debounceMouseEnter(true)}
 				onMouseLeave={() => setVisibility(false)}
 			>
 				{children}
