@@ -222,6 +222,8 @@ Table.propTypes = {
 			format: PropTypes.func,
 			hidden: PropTypes.bool,
 			disabled: PropTypes.bool,
+			ellipsis: PropTypes.bool,
+			width: PropTypes.string,
 			disableSorting: PropTypes.bool,
 			classList: PropTypes.arrayOf(PropTypes.string),
 			fallback: PropTypes.string,

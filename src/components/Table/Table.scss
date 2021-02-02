@@ -25,8 +25,12 @@
 }
 
 .a-table {
+	table-layout: fixed;
+	min-width: 1000px;
+
 	th > .a-table__header__button {
 		padding-left: 0;
+		width: auto;
 	}
 
 	&.a-table--primary,

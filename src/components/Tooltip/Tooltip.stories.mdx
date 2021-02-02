@@ -1,0 +1,76 @@
+import { useRef, useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+
+import Tooltip from './Tooltip';
+import { TooltipTypeMap } from './Tooltip.const';
+
+<Meta title="Tooltip" component={Tooltip} />
+
+# Tooltip
+
+Some explanation about our Tooltip component
+
+### Different variations
+
+<Preview isColumn>
+	<Story name="Default">
+		{() => {
+			const buttonRef = useRef(null);
+			const [isVisible, setVisibility] = useState(false);
+			return (
+				<>
+					<button
+						ref={buttonRef}
+						onMouseEnter={() => setVisibility(true)}
+						onMouseLeave={() => setVisibility(false)}
+					>
+						Default tooltip
+					</button>
+					<Tooltip isVisible={isVisible} targetRef={buttonRef}> Some tooltip info </Tooltip>
+				</>
+			);
+		}}
+	</Story>
+	<Story name="Primary">
+		{() => {
+			const buttonRef = useRef(null);
+			const [isVisible, setVisibility] = useState(false);
+			return (
+				<>
+					<button
+						ref={buttonRef}
+						onMouseEnter={() => setVisibility(true)}
+						onMouseLeave={() => setVisibility(false)}
+					>
+						Primary tooltip
+					</button>
+					<Tooltip type={TooltipTypeMap.PRIMARY} isVisible={isVisible} targetRef={buttonRef}> Some tooltip info </Tooltip>
+				</>
+			);
+		}}
+	</Story>
+	<Story name="Secondary">
+		{() => {
+			const buttonRef = useRef(null);
+			const [isVisible, setVisibility] = useState(false);
+			return (
+				<>
+					<button
+						ref={buttonRef}
+						onMouseEnter={() => setVisibility(true)}
+						onMouseLeave={() => setVisibility(false)}
+					>
+						Secondary tooltip
+					</button>
+					<Tooltip type={TooltipTypeMap.SECONDARY}  isVisible={isVisible} targetRef={buttonRef}> Some tooltip info </Tooltip>
+				</>
+			);
+		}}
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Tooltip} />

@@ -1,0 +1,46 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks';
+
+.a-tooltip {
+	z-index: 100;
+	white-space: normal;
+	height: auto;
+
+	&.a-tooltip--no-arrow {
+		&::before {
+			display: none;
+		}
+	}
+
+	.arrow {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+
+		&::after {
+			content: " ";
+			position: absolute;
+			top: -$spacer-xs;
+			left: 0;
+			transform: rotate(45deg);
+			width: $tooltip-arrow-height * 2;
+			height: $tooltip-arrow-height * 2;
+			background-color: $grey-light;
+		}
+	}
+
+	&.a-tooltip--primary {
+		.arrow {
+			&::after {
+				background-color: $tooltip-primary-bg;
+			}
+		}
+	}
+
+	&.a-tooltip--secondary {
+		.arrow {
+			&::after {
+				background-color: $tooltip-secondary-bg;
+			}
+		}
+	}
+}
