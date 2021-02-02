@@ -1,6 +1,5 @@
-import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { Tooltip, TooltipTypeMap } from '../Tooltip';
 
@@ -8,11 +7,27 @@ const EllipsisWithTooltip = ({
 	children,
 	style,
 	type,
+	delayShow = 700,
 }) => {
 	const targetRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
+	const [delayShowLoop, setDelayShowLoop] = useState(null);
 
-	const debounceMouseEnter = debounce(setVisibility, 800);
+	const handleMouseEnter = () => {
+		setDelayShowLoop(setTimeout(() => {
+			setVisibility(true);
+		}, parseInt(delayShow, 10)));
+	};
+
+	const handleMouseLeave = useCallback(
+		() => {
+			if (delayShowLoop) {
+				clearTimeout(delayShowLoop);
+			}
+			setVisibility(false);
+		},
+		[delayShowLoop],
+	);
 
 	return (
 		<>
@@ -20,8 +35,8 @@ const EllipsisWithTooltip = ({
 				style={style}
 				className="u-text-truncate"
 				ref={targetRef}
-				onMouseEnter={() => debounceMouseEnter(true)}
-				onMouseLeave={() => setVisibility(false)}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
 			>
 				{children}
 			</div>
@@ -37,6 +52,7 @@ EllipsisWithTooltip.propTypes = {
 	]).isRequired,
 	style: PropTypes.shape(),
 	type: PropTypes.oneOf([TooltipTypeMap.PRIMARY, TooltipTypeMap.SECONDARY]),
+	delayShow: PropTypes.number,
 };
 
 export default EllipsisWithTooltip;
