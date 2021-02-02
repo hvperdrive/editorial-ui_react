@@ -3,7 +3,7 @@ import { KEY_CODE } from '../../const';
 export const BUILT_IN_PLACEMENTS = {
 	bottomLeft: {
 		points: ['tl', 'bl'],
-		offset: [0, 4],
+		offset: [0, 0],
 		overflow: {
 			adjustX: 1,
 			adjustY: 1,
