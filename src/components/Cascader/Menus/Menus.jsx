@@ -1,5 +1,4 @@
 import { Spinner } from '@acpaas-ui/react-components';
-import arrayTreeFilter from 'array-tree-filter';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -10,25 +9,20 @@ const Menus = ({
 	onSelect = () => null,
 	prefixCls = 'o-cascader',
 }) => {
+	const menuClass = `${prefixCls}-menu m-flyout__content`;
+
 	/**
 	 * Functions
 	 */
 
-	const getActiveOptions = (menuOptions = [], menuValue = []) => arrayTreeFilter(
-		menuOptions,
-		(option, level) => option.value === menuValue[level],
-	);
-
-	const getShowOptions = (menuOptions, menuValue) => {
-		const activeOptions = getActiveOptions(menuOptions, menuValue)
-			.map((menuOption) => menuOption.children)
-			.filter((menuOption) => !!menuOption);
-		activeOptions.unshift(menuOptions);
-		return activeOptions;
-	};
-
 	const isActiveOption = (menuValue, menuOption, menuIndex) => menuValue[menuIndex]
 		=== menuOption.value;
+
+	const handleSelect = (option, menuIndex, e) => {
+		// Prevent selecting the parent element because of nested lists
+		e.stopPropagation();
+		onSelect(option, menuIndex, e);
+	};
 
 	/**
 	 * Render
@@ -54,7 +48,6 @@ const Menus = ({
 		const isLoading = option.loading;
 		const isActive = isActiveOption(menuValue, option, menuIndex);
 		const menuItemCls = classnames(`${prefixCls}-menu-item`, {
-			[`${prefixCls}-menu-item--expanded`]: hasChildren || isNoLeaf,
 			[`${prefixCls}-menu-item--active`]: isActive,
 			[`${prefixCls}-menu-item--disabled`]: option.disabled,
 			[`${prefixCls}-menu-item--loading`]: isLoading,
@@ -65,24 +58,27 @@ const Menus = ({
 				className={menuItemCls}
 				titel={option.label}
 				role="menuitem"
-				onClick={(e) => onSelect(option, menuIndex, e)}
-				onKeyDown={(e) => onSelect(option, menuIndex, e)}
+				onClick={(e) => handleSelect(option, menuIndex, e)}
+				onKeyDown={(e) => handleSelect(option, menuIndex, e)}
 			>
-				{option.label}
-				{renderExpandIconNode(hasChildren, isNoLeaf, isLoading)}
-				{renderLoadingIconNode(isLoading)}
+				<span className={`${prefixCls}-menu-item__label`}>
+					<span className="u-text-truncate">{option.label}</span>
+					{renderExpandIconNode(hasChildren, isNoLeaf, isLoading)}
+					{renderLoadingIconNode(isLoading)}
+				</span>
+				{(hasChildren || isNoLeaf) && isActive && (
+					<ul className={menuClass}>
+						{option.children.map((child) => renderOption(menuValue, child, menuIndex + 1))}
+					</ul>
+				)}
 			</li>
 		);
 	};
 
 	return (
-		<>
-			{getShowOptions(options, value).map((menuOptions, menuIndex) => (
-				<ul className={`${prefixCls}-menu`} key={`${menuIndex}`}>
-					{menuOptions.map((menuOption) => renderOption(value, menuOption, menuIndex))}
-				</ul>
-			))}
-		</>
+		<ul className={menuClass}>
+			{options.map((option) => renderOption(value, option, 0))}
+		</ul>
 	);
 };
 
