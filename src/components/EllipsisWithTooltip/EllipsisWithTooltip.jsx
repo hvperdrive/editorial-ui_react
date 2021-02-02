@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
 
 import { Tooltip, TooltipTypeMap } from '../Tooltip';
+import './EllipsisWithTooltip.scss';
 
 const EllipsisWithTooltip = ({
 	children,
@@ -33,12 +34,16 @@ const EllipsisWithTooltip = ({
 		<>
 			<div
 				style={style}
-				className="u-text-truncate"
 				ref={targetRef}
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
+				className="u-text-truncate"
 			>
-				{children}
+				<div
+					className="ellipsis__text"
+					onMouseEnter={handleMouseEnter}
+					onMouseLeave={handleMouseLeave}
+				>
+					{children}
+				</div>
 			</div>
 			<Tooltip type={type} isVisible={isVisible} targetRef={targetRef}>{children}</Tooltip>
 		</>
