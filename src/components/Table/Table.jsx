@@ -176,7 +176,7 @@ const Table = ({
 					className={classnames('a-table', {
 						'a-table--draggable': draggable,
 						'a-table--striped': striped,
-						'a-table--fixes': fixed,
+						'a-table--fixed': fixed,
 						[`a-table--${type}`]: type,
 					})}
 				>
