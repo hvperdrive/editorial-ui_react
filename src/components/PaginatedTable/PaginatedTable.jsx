@@ -69,6 +69,7 @@ PaginatedTable.propTypes = {
 	])),
 	loading: PropTypes.bool,
 	responsive: PropTypes.bool,
+	fixed: PropTypes.bool,
 	hasClickAction: PropTypes.bool,
 	activeSorting: PropTypes.shape({
 		key: PropTypes.string,
