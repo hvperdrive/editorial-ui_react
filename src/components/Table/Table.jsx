@@ -21,6 +21,7 @@ const Table = ({
 	columns = [],
 	loading = false,
 	responsive = true,
+	fixed = false,
 	hasClickAction = false,
 	activeSorting,
 	orderBy,
@@ -175,6 +176,7 @@ const Table = ({
 					className={classnames('a-table', {
 						'a-table--draggable': draggable,
 						'a-table--striped': striped,
+						'a-table--fixes': fixed,
 						[`a-table--${type}`]: type,
 					})}
 				>
@@ -232,6 +234,7 @@ Table.propTypes = {
 	expandedRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 	loading: PropTypes.bool,
 	responsive: PropTypes.bool,
+	fixed: PropTypes.bool,
 	hasClickAction: PropTypes.bool,
 	activeSorting: PropTypes.shape({
 		key: PropTypes.string,
