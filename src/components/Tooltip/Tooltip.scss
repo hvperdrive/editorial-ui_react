@@ -12,34 +12,92 @@
 	}
 
 	.arrow {
+		width: 0;
+		height: 0;
+		border-style: solid;
 		position: absolute;
-		width: 10px;
-		height: 10px;
+	}
 
-		&::after {
-			content: " ";
-			position: absolute;
-			top: -$spacer-xs;
-			left: 0;
-			transform: rotate(45deg);
-			width: $tooltip-arrow-height * 2;
-			height: $tooltip-arrow-height * 2;
-			background-color: $grey-light;
+	&[data-popper-placement^="top"] {
+		.arrow {
+			border-width: $tooltip-arrow-height $tooltip-arrow-height 0 $tooltip-arrow-height;
+			border-color: $grey-light transparent transparent transparent;
+			bottom: -$tooltip-arrow-height;
+		}
+	}
+
+	&[data-popper-placement^="left"] {
+		.arrow {
+			border-width: $tooltip-arrow-height 0 $tooltip-arrow-height $tooltip-arrow-height;
+			border-color: transparent transparent transparent $grey-light;
+			right: -$tooltip-arrow-height;
+		}
+	}
+
+	&[data-popper-placement^="right"] {
+		.arrow {
+			border-width: $tooltip-arrow-height $tooltip-arrow-height $tooltip-arrow-height 0;
+			border-color: transparent $grey-light transparent transparent;
+			left: -$tooltip-arrow-height;
+		}
+	}
+
+	&[data-popper-placement^="bottom"] {
+		.arrow {
+			border-width: 0 $tooltip-arrow-height $tooltip-arrow-height $tooltip-arrow-height;
+			border-color: transparent transparent $grey-light transparent;
+			top: -$tooltip-arrow-height;
 		}
 	}
 
 	&.a-tooltip--primary {
-		.arrow {
-			&::after {
-				background-color: $tooltip-primary-bg;
+		&[data-popper-placement^="top"] {
+			.arrow {
+				border-color: $tooltip-primary-bg transparent transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="left"] {
+			.arrow {
+				border-color: transparent transparent transparent $tooltip-primary-bg;
+			}
+		}
+
+		&[data-popper-placement^="right"] {
+			.arrow {
+				border-color: transparent $tooltip-primary-bg transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="bottom"] {
+			.arrow {
+				border-color: transparent transparent $tooltip-primary-bg transparent;
 			}
 		}
 	}
 
 	&.a-tooltip--secondary {
-		.arrow {
-			&::after {
-				background-color: $tooltip-secondary-bg;
+		&[data-popper-placement^="top"] {
+			.arrow {
+				border-color: $tooltip-secondary-bg transparent transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="left"] {
+			.arrow {
+				border-color: transparent transparent transparent $tooltip-secondary-bg;
+			}
+		}
+
+		&[data-popper-placement^="right"] {
+			.arrow {
+				border-color: transparent $tooltip-secondary-bg transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="bottom"] {
+			.arrow {
+				border-color: transparent transparent $tooltip-secondary-bg transparent;
 			}
 		}
 	}
