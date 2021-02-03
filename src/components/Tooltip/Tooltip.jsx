@@ -70,7 +70,7 @@ const Tooltip = ({
 			ref={popperElement}
 			{...attributes.popper}
 		>
-			<div style={styles.arrow} ref={setArrowRef} className="arrow" />
+			<div ref={setArrowRef} className="arrow" />
 			{children}
 		</div>
 	) : null);
