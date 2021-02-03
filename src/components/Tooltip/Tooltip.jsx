@@ -28,7 +28,7 @@ const Tooltip = ({
 	});
 	const [mountNode, setMountNode] = useState(null);
 	const popperElement = useRef(null);
-	const [arrowRef, setArrowRed] = useState(null);
+	const [arrowRef, setArrowRef] = useState(null);
 
 	useEffect(() => {
 		if (!disablePortal) {
@@ -70,7 +70,7 @@ const Tooltip = ({
 			ref={popperElement}
 			{...attributes.popper}
 		>
-			<div ref={setArrowRed} className="arrow" />
+			<div style={styles.arrow} ref={setArrowRef} className="arrow" />
 			{children}
 		</div>
 	) : null);
