@@ -17,6 +17,7 @@ const DND_ITEM_TYPE = 'row';
 const Table = ({
 	dataKey,
 	className,
+	tableClassName,
 	rows = [],
 	columns = [],
 	loading = false,
@@ -173,7 +174,7 @@ const Table = ({
 		<DndContainer draggable={draggable}>
 			<div className={classnames(className, { 'a-table__wrapper-responsive': responsive })}>
 				<table
-					className={classnames('a-table', {
+					className={classnames('a-table', tableClassName, {
 						'a-table--draggable': draggable,
 						'a-table--striped': striped,
 						'a-table--fixed': fixed,
@@ -213,6 +214,7 @@ const Table = ({
 Table.propTypes = {
 	dataKey: PropTypes.string,
 	className: PropTypes.string,
+	tableClassName: PropTypes.string,
 	rows: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
 	columns: PropTypes.arrayOf(PropTypes.oneOfType([
 		PropTypes.string,
