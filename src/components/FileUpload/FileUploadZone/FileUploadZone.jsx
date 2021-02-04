@@ -59,6 +59,10 @@ const FileUploadZone = ({
 					setUploadProgress(Math.floor(response.progress * 100));
 				}
 
+				if (!response.status && !response.data) {
+					return;
+				}
+
 				if (response.status < 300 && response.data) {
 					uploadedFiles(response.data);
 					return;
