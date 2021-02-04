@@ -56,7 +56,7 @@ EllipsisWithTooltip.propTypes = {
 		PropTypes.node,
 	]).isRequired,
 	style: PropTypes.shape(),
-	type: PropTypes.oneOf([TooltipTypeMap.PRIMARY, TooltipTypeMap.SECONDARY]),
+	type: PropTypes.oneOf([TooltipTypeMap.DEFAULT, TooltipTypeMap.PRIMARY, TooltipTypeMap.SECONDARY]),
 	delayShow: PropTypes.number,
 };
 
