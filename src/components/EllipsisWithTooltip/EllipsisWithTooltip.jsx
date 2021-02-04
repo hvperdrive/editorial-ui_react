@@ -7,7 +7,7 @@ import './EllipsisWithTooltip.scss';
 const EllipsisWithTooltip = ({
 	children,
 	style,
-	type,
+	type = TooltipTypeMap.PRIMARY,
 	delayShow = 700,
 }) => {
 	const targetRef = useRef(null);
