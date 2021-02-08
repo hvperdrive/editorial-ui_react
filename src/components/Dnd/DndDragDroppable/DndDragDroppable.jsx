@@ -44,7 +44,7 @@ const DndDragDroppable = ({
 			}
 
 			// Time to actually perform the action
-			moveRow(dragged, hovered);
+			moveRow(dragged, hovered, hoverBoundingRect, clientOffset);
 
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
