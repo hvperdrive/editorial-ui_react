@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 const DndDragDroppable = ({
-	accept, moveRow, index, children, id,
+	accept, moveRow, index, children, id, offsetRow,
 }) => {
 	const dragDropRef = useRef(null);
 
@@ -16,14 +16,17 @@ const DndDragDroppable = ({
 
 			const dragged = item;
 			const hovered = { index, id, type: accept[0] };
+			// Determine rectangle on screen
+			const hoverBoundingRect = dragDropRef.current.getBoundingClientRect();
 
 			// Don't replace items with themselves
 			if (dragged.id === hovered.id) {
+				if (offsetRow) {
+					offsetRow(dragged, hoverBoundingRect, monitor.getDifferenceFromInitialOffset());
+				}
 				return;
 			}
 
-			// Determine rectangle on screen
-			const hoverBoundingRect = dragDropRef.current.getBoundingClientRect();
 			// Get vertical middle
 			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 			// Determine mouse position
@@ -70,6 +73,7 @@ DndDragDroppable.propTypes = {
 	accept: PropTypes.arrayOf(PropTypes.string),
 	index: PropTypes.number,
 	moveRow: PropTypes.func,
+	offsetRow: PropTypes.func,
 	children: PropTypes.func,
 	id: PropTypes.any, // eslint-disable-line
 };
