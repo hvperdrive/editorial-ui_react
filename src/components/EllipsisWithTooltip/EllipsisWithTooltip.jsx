@@ -1,8 +1,12 @@
+import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
 
 import { Tooltip, TooltipTypeMap } from '../Tooltip';
-import './EllipsisWithTooltip.scss';
+
+import styles from './EllipsisWithTooltip.module.scss';
+
+const cx = classnames.bind(styles);
 
 const EllipsisWithTooltip = ({
 	children,
@@ -32,19 +36,19 @@ const EllipsisWithTooltip = ({
 
 	return (
 		<>
-			<div
+			<span
 				style={style}
 				ref={targetRef}
-				className="u-text-truncate"
+				className={cx('ellipsis', 'u-text-truncate')}
 			>
-				<div
-					className="ellipsis__text"
+				<span
+					className={cx('ellipsis__text')}
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
 				>
 					{children}
-				</div>
-			</div>
+				</span>
+			</span>
 			<Tooltip type={type} isVisible={isVisible} targetRef={targetRef}>{children}</Tooltip>
 		</>
 	);
