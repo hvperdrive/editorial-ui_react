@@ -62,6 +62,15 @@ const DndDragDroppable = ({
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
+		isDragging(monitor) {
+			return monitor.getItem().id === id;
+		},
+		end(item) {
+			if (item && offsetRow) {
+				// Only pass item and true to indicate drag ended
+				offsetRow(item, null, null, true);
+			}
+		},
 	});
 
 	drag(drop(dragDropRef));
