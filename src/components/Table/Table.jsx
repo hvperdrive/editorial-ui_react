@@ -26,6 +26,7 @@ const Table = ({
 	hasClickAction = false,
 	activeSorting,
 	orderBy,
+	offsetRow,
 	rowClicked,
 	striped = true,
 	expandedRows,
@@ -86,6 +87,7 @@ const Table = ({
 				key={`table-row-${level}-${id}`}
 				id={id}
 				moveRow={moveRow}
+				offsetRow={offsetRow}
 				index={rowIndex}
 				accept={[`${DND_ITEM_TYPE}-${level}`, `${DND_ITEM_TYPE}-${level + 1}`]}
 			>
@@ -246,6 +248,7 @@ Table.propTypes = {
 	loadDataMessage: PropTypes.string,
 	noColumnsMessage: PropTypes.string,
 	orderBy: PropTypes.func,
+	offsetRow: PropTypes.func,
 	rowClicked: PropTypes.func,
 	rowExpansionTemplate: PropTypes.func,
 	draggable: PropTypes.bool,
