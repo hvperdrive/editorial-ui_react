@@ -13,3 +13,5 @@ export * from './Status';
 export * from './Table';
 export * from './Timepicker';
 export * from './Cascader';
+export * from './Tooltip';
+export * from './EllipsisWithTooltip';

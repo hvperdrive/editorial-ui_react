@@ -11,7 +11,7 @@
 		> a,
 		> a.is-active,
 		> a:hover,
-		> a.is-active:hover, {
+		> a.is-active:hover {
 			color: $state-danger;
 		}
 	}

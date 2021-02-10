@@ -25,8 +25,13 @@
 }
 
 .a-table {
+	&.a-table--fixed {
+		table-layout: fixed;
+	}
+
 	th > .a-table__header__button {
 		padding-left: 0;
+		width: auto;
 	}
 
 	&.a-table--primary,

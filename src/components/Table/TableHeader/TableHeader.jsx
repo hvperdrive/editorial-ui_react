@@ -11,7 +11,12 @@ const TableHeader = ({
 	label,
 	value = '',
 	onSortClick,
+	width,
 }) => {
+	const style = width ? {
+		width,
+	} : {};
+
 	const renderTableHeader = () => {
 		if (component) {
 			return component(value);
@@ -36,7 +41,7 @@ const TableHeader = ({
 		);
 	};
 
-	return <th className={classnames(classList)}>{renderTableHeader()}</th>;
+	return <th style={style} className={classnames(classList)}>{renderTableHeader()}</th>;
 };
 
 TableHeader.propTypes = {
@@ -50,6 +55,7 @@ TableHeader.propTypes = {
 		order: PropTypes.oneOf(['asc', 'desc']),
 	}),
 	onSortClick: PropTypes.func,
+	width: PropTypes.string,
 };
 
 export default TableHeader;

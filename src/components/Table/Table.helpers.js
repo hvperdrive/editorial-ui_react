@@ -44,6 +44,7 @@ export const getHeaderProps = (col, activeSorting, onSortClick) => {
 		disableSorting: col.disableSorting,
 		label: col.label,
 		value: col.value,
+		width: col.width,
 		activeSorting,
 		onSortClick,
 	};
@@ -60,6 +61,7 @@ export const getCellProps = (col, rowData, rowIndex) => {
 		key: `${keyPrefix}-${col.label}`,
 		classList: col.classList,
 		component: col.component,
+		ellipsis: col.ellipsis,
 		rowData,
 		rowIndex,
 		value: getFormatValue(rowData, col, rowIndex),

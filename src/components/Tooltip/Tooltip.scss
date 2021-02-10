@@ -1,0 +1,104 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks';
+
+.a-tooltip {
+	z-index: 100;
+	white-space: normal;
+	height: auto;
+
+	&.a-tooltip--no-arrow {
+		&::before {
+			display: none;
+		}
+	}
+
+	.arrow {
+		width: 0;
+		height: 0;
+		border-style: solid;
+		position: absolute;
+	}
+
+	&[data-popper-placement^="top"] {
+		.arrow {
+			border-width: $tooltip-arrow-height $tooltip-arrow-height 0 $tooltip-arrow-height;
+			border-color: $grey-light transparent transparent transparent;
+			bottom: -$tooltip-arrow-height;
+		}
+	}
+
+	&[data-popper-placement^="left"] {
+		.arrow {
+			border-width: $tooltip-arrow-height 0 $tooltip-arrow-height $tooltip-arrow-height;
+			border-color: transparent transparent transparent $grey-light;
+			right: -$tooltip-arrow-height;
+		}
+	}
+
+	&[data-popper-placement^="right"] {
+		.arrow {
+			border-width: $tooltip-arrow-height $tooltip-arrow-height $tooltip-arrow-height 0;
+			border-color: transparent $grey-light transparent transparent;
+			left: -$tooltip-arrow-height;
+		}
+	}
+
+	&[data-popper-placement^="bottom"] {
+		.arrow {
+			border-width: 0 $tooltip-arrow-height $tooltip-arrow-height $tooltip-arrow-height;
+			border-color: transparent transparent $grey-light transparent;
+			top: -$tooltip-arrow-height;
+		}
+	}
+
+	&.a-tooltip--primary {
+		&[data-popper-placement^="top"] {
+			.arrow {
+				border-color: $tooltip-primary-bg transparent transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="left"] {
+			.arrow {
+				border-color: transparent transparent transparent $tooltip-primary-bg;
+			}
+		}
+
+		&[data-popper-placement^="right"] {
+			.arrow {
+				border-color: transparent $tooltip-primary-bg transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="bottom"] {
+			.arrow {
+				border-color: transparent transparent $tooltip-primary-bg transparent;
+			}
+		}
+	}
+
+	&.a-tooltip--secondary {
+		&[data-popper-placement^="top"] {
+			.arrow {
+				border-color: $tooltip-secondary-bg transparent transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="left"] {
+			.arrow {
+				border-color: transparent transparent transparent $tooltip-secondary-bg;
+			}
+		}
+
+		&[data-popper-placement^="right"] {
+			.arrow {
+				border-color: transparent $tooltip-secondary-bg transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="bottom"] {
+			.arrow {
+				border-color: transparent transparent $tooltip-secondary-bg transparent;
+			}
+		}
+	}
+}

@@ -3,14 +3,14 @@ import React from 'react';
 
 import { typeMap } from './Status.helpers';
 
-const ActionBar = ({
+const Status = ({
 	label,
 	type,
 }) => <span className={`u-text-${typeMap[type]}`}>{label}</span>;
 
-ActionBar.propTypes = {
+Status.propTypes = {
 	label: PropTypes.string.isRequired,
 	type: PropTypes.oneOf(['ACTIVE', 'INACTIVE', 'ARCHIVED']).isRequired,
 };
 
-export default ActionBar;
+export default Status;

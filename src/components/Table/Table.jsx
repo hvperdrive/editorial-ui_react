@@ -17,10 +17,12 @@ const DND_ITEM_TYPE = 'row';
 const Table = ({
 	dataKey,
 	className,
+	tableClassName,
 	rows = [],
 	columns = [],
 	loading = false,
 	responsive = true,
+	fixed = false,
 	hasClickAction = false,
 	activeSorting,
 	orderBy,
@@ -172,9 +174,10 @@ const Table = ({
 		<DndContainer draggable={draggable}>
 			<div className={classnames(className, { 'a-table__wrapper-responsive': responsive })}>
 				<table
-					className={classnames('a-table', {
+					className={classnames('a-table', tableClassName, {
 						'a-table--draggable': draggable,
 						'a-table--striped': striped,
+						'a-table--fixed': fixed,
 						[`a-table--${type}`]: type,
 					})}
 				>
@@ -211,6 +214,7 @@ const Table = ({
 Table.propTypes = {
 	dataKey: PropTypes.string,
 	className: PropTypes.string,
+	tableClassName: PropTypes.string,
 	rows: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
 	columns: PropTypes.arrayOf(PropTypes.oneOfType([
 		PropTypes.string,
@@ -222,6 +226,8 @@ Table.propTypes = {
 			format: PropTypes.func,
 			hidden: PropTypes.bool,
 			disabled: PropTypes.bool,
+			ellipsis: PropTypes.bool,
+			width: PropTypes.string,
 			disableSorting: PropTypes.bool,
 			classList: PropTypes.arrayOf(PropTypes.string),
 			fallback: PropTypes.string,
@@ -230,6 +236,7 @@ Table.propTypes = {
 	expandedRows: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 	loading: PropTypes.bool,
 	responsive: PropTypes.bool,
+	fixed: PropTypes.bool,
 	hasClickAction: PropTypes.bool,
 	activeSorting: PropTypes.shape({
 		key: PropTypes.string,
