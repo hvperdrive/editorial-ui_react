@@ -36,7 +36,7 @@ const DndDragDroppable = ({
 			// Get vertical middle
 			const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 			// Get pixels to the top
-			const hoverClientY = clientOffset?.y || 0 - hoverBoundingRect.top;
+			const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
 			// Only perform the move when the mouse has crossed half of the items height
 			// When dragging downwards, only move when the cursor is below 0%
