@@ -102,7 +102,10 @@ ContextHeader.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]),
-	title: PropTypes.string.isRequired,
+	title: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.node,
+	]).isRequired,
 	/** Badges, which are shown on the right side of the title */
 	badges: PropTypes.arrayOf(PropTypes.shape({
 		type: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger']).isRequired,
