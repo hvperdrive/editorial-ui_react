@@ -41,5 +41,6 @@ module.exports = {
 		'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
 		'react/require-default-props': ['error', { ignoreFunctionalComponents: true }],
 		'react/no-array-index-key': 'off',
+		'no-nested-ternary': 'off'
 	},
 };

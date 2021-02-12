@@ -33,6 +33,37 @@ Some explanation about our PaginatedTable component
 	</Story>
 </Preview>
 
+### Async loading
+
+<Preview>
+	<Story name='Async data'>
+		{() => {
+			const [currentPage, setCurrentPage] = useState(1);
+			const [isLoading, setIsLoading] = useState(false);
+			const itemsPerPage = 3;
+			const offset = (currentPage - 1) * itemsPerPage;
+			const setPage = (page) => {
+				setIsLoading(true);
+				setTimeout(() => {
+					setCurrentPage(page);
+					setIsLoading(false);
+				}, 1000);
+			}
+			return (
+				<PaginatedTable
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={TABLE_MOCK_ROWS.slice(offset, offset + itemsPerPage)}
+					currentPage={currentPage}
+					itemsPerPage={itemsPerPage}
+					onPageChange={setPage}
+					loading={isLoading}
+					totalValues={TABLE_MOCK_ROWS.length}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
 ## Props
 
 <Props of={PaginatedTable} />

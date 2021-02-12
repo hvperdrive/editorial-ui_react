@@ -8,6 +8,7 @@ import { DndContainer, DndDragDroppable } from '../Dnd';
 import { getCellProps, getHeaderProps } from './Table.helpers';
 import TableCell from './TableCell/TableCell';
 import TableHeader from './TableHeader/TableHeader';
+import TableLoader from './TableLoader/TableLoader';
 import TablePlaceholder from './TablePlaceholder/TablePlaceholder';
 import TableRow from './TableRow/TableRow';
 import './Table.scss';
@@ -41,7 +42,8 @@ const Table = ({
 	// Computed
 	const hasCols = !loading && columns.length > 0;
 	const hasData = !loading && rows.length > 0;
-	const showPlaceholder = loading || !hasCols || !hasData;
+	const showPlaceholder = !hasCols || !hasData;
+	const showLoader = !!loading;
 
 	/**
 	 * Methods
@@ -172,7 +174,7 @@ const Table = ({
 		? renderDraggableRow(row, rowIndex, level)
 		: renderStaticRow(row, rowIndex, level));
 
-	return (
+	const renderTable = () => (
 		<DndContainer draggable={draggable}>
 			<div className={classnames(className, { 'a-table__wrapper-responsive': responsive })}>
 				<table
@@ -193,23 +195,30 @@ const Table = ({
 						</thead>
 					)}
 					<tbody>
-						{showPlaceholder ? (
-							<TablePlaceholder
-								colSpan={columns.length}
-								hasCols={hasCols}
-								hasData={hasData}
-								loading={loading}
-								noDataMessage={noDataMessage}
-								loadDataMessage={loadDataMessage}
-								noColumnsMessage={noColumnsMessage}
-							/>
-						) : (
-							rows.map((row, index) => renderTableRow(row, index))
-						)}
+						{rows.map((row, index) => renderTableRow(row, index))}
 					</tbody>
 				</table>
 			</div>
 		</DndContainer>
+	);
+
+	const renderPlaceholder = () => (
+		<TablePlaceholder
+			hasCols={hasCols}
+			hasData={hasData}
+			noDataMessage={noDataMessage}
+			noColumnsMessage={noColumnsMessage}
+		/>
+	);
+
+	const renderLoader = () => <TableLoader loadDataMessage={loadDataMessage} />;
+
+	return (
+		showLoader
+			? renderLoader()
+			: showPlaceholder
+				? renderPlaceholder()
+				: renderTable()
 	);
 };
 
