@@ -1,61 +1,69 @@
 @import '~@a-ui/core/dist/assets/styles/_quarks';
 
-.m-accordion {
-	&__header {
-		border-top: none;
-		border-left: none;
-		border-right: none;
+.o-filter {
+	.m-accordion {
+		&__header {
+			border-top: none;
+			border-left: none;
+			border-right: none;
 
-		&:hover {
-			background-color: #fff;
-		}
-	}
-}
-
-.m-filter-form {
-	&__row {
-		justify-content: flex-end;
-	}
-
-	&__text {
-		text-align: left;
-		align-self: center;
-	}
-
-	&__col {
-		flex-basis: 50%;
-		margin-bottom: $spacer;
-	}
-
-	&__buttons {
-		width: 100%;
-		align-self: flex-end;
-		flex-basis: auto;
-		padding-left: 0;
-		margin: $spacer 0.9rem 0;
-
-		@include at($screen-xs) {
-			width: unset;
-		}
-
-		@include at($screen-sm) {
-			align-self: flex-end;
-			padding-left: $spacer-lg;
-			margin: 0 0.9rem;
-		}
-
-		button {
-			&:not(:last-child) {
-				@include at($screen-sm) {
-					margin-right: $spacer-xs;
-				}
+			&:hover {
+				background-color: #fff;
 			}
 		}
 	}
 
-	.m-filter-form__col + &__buttons {
-		button {
-			margin-top: 0;
+	.m-accordion__tab.is-open .m-accordion__content {
+		overflow: visible;
+		margin-top: -$spacer;
+	}
+
+	.o-filter__form {
+		&__row {
+			padding-top: $spacer;
+			justify-content: flex-end;
+		}
+
+		&__text {
+			text-align: left;
+			align-self: center;
+		}
+
+		&__col {
+			flex-basis: 50%;
+			margin-bottom: $spacer;
+		}
+
+		&__buttons {
+			width: 100%;
+			align-self: flex-end;
+			flex-basis: auto;
+			padding-left: 0;
+			margin: $spacer 0.9rem 0;
+
+			@include at($screen-xs) {
+				width: unset;
+			}
+
+			@include at($screen-sm) {
+				align-self: flex-end;
+				padding-left: $spacer-lg;
+				margin: 0 0.9rem;
+			}
+
+			button {
+				&:not(:last-child) {
+					@include at($screen-sm) {
+						margin-right: $spacer-xs;
+					}
+				}
+			}
+		}
+
+		.o-filter__form__col + &__buttons {
+			button {
+				margin-top: 0;
+			}
 		}
 	}
 }
