@@ -1,7 +1,7 @@
 import {
 	Accordion, AccordionTab, AccordionTabContent, AccordionTabHeader, Button, TagList, TagListItem,
 } from '@acpaas-ui/react-components';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -32,7 +32,7 @@ const Filter = ({
 	};
 
 	return (
-		<div className={classNames(className, 'o-filter')}>
+		<div className={classnames(className, 'o-filter')}>
 			<Accordion>
 				<AccordionTab>
 					<AccordionTabHeader>
@@ -53,7 +53,7 @@ const Filter = ({
 									{noFilterText}
 								</p>
 							)}
-							<div className={classNames(actionsClassName, 'o-filter__form__buttons')}>
+							<div className={classnames(actionsClassName, 'o-filter__form__buttons')}>
 								<Button
 									type="primary"
 									onClick={onClean}
