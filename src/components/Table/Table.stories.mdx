@@ -32,10 +32,10 @@ Group stories based on props
 
 <Preview isColumn>
 	<Story name='Loading'>
-		<Table loading />
+		<Table loading columns={TABLE_MOCK_COLUMNS()} />
 	</Story>
 	<Story name='No columns'>
-		<Table rows={[]} />
+		<Table rows={TABLE_MOCK_ROWS}/>
 	</Story>
 	<Story name='No data'>
 		<Table columns={TABLE_MOCK_COLUMNS()} />

@@ -7,10 +7,14 @@ import '../Table.scss';
 const TableLoader = ({
 	loadDataMessage,
 }) => (
-	<div className="a-table a-table--loading">
-		<Spinner className="u-margin-right-xs" style={{ display: 'inline' }} />
-		<span>{loadDataMessage}</span>
-	</div>
+	<tr>
+		<td>
+			<div className="a-table--loading">
+				<Spinner className="u-margin-right-xs" style={{ display: 'inline' }} />
+				<span>{loadDataMessage}</span>
+			</div>
+		</td>
+	</tr>
 );
 
 TableLoader.propTypes = {

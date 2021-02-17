@@ -42,7 +42,7 @@ const Table = ({
 	// Computed
 	const hasCols = !loading && columns.length > 0;
 	const hasData = !loading && rows.length > 0;
-	const showPlaceholder = !hasCols || !hasData;
+	const showPlaceholder = (!hasCols || !hasData) && !loading;
 	const showLoader = !!loading;
 
 	/**
@@ -74,6 +74,8 @@ const Table = ({
 		}
 		return findExpandedRowIndex(row) !== -1;
 	};
+
+	const renderLoader = () => <TableLoader loadDataMessage={loadDataMessage} />;
 
 	/**
 	 * Render
@@ -195,7 +197,7 @@ const Table = ({
 						</thead>
 					)}
 					<tbody>
-						{rows.map((row, index) => renderTableRow(row, index))}
+						{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
 					</tbody>
 				</table>
 			</div>
@@ -211,14 +213,10 @@ const Table = ({
 		/>
 	);
 
-	const renderLoader = () => <TableLoader loadDataMessage={loadDataMessage} />;
-
 	return (
-		showLoader
-			? renderLoader()
-			: showPlaceholder
-				? renderPlaceholder()
-				: renderTable()
+		showPlaceholder
+			? renderPlaceholder()
+			: renderTable()
 	);
 };
 
