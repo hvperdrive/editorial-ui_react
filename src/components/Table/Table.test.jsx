@@ -32,10 +32,9 @@ describe('<Table />', () => {
 
 	it('Should display columns', () => {
 		const { container } = render(
-			<Table columns={columns} />,
+			<Table rows={TABLE_MOCK_ROWS} columns={columns} />,
 		);
 		const tableHeaders = container.querySelectorAll('th');
-
 		const colIndex = columns.findIndex((col) => !col.format && !col.headerComponent);
 
 		expect(tableHeaders[colIndex].innerHTML).toBe(columns[colIndex].label);
