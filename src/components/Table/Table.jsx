@@ -6,11 +6,11 @@ import React, { Fragment } from 'react';
 import { DndContainer, DndDragDroppable } from '../Dnd';
 
 import { getCellProps, getHeaderProps } from './Table.helpers';
-import TableCell from './TableCell/TableCell';
-import TableHeader from './TableHeader/TableHeader';
-import TableLoader from './TableLoader/TableLoader';
-import TablePlaceholder from './TablePlaceholder/TablePlaceholder';
-import TableRow from './TableRow/TableRow';
+import { TableCell } from './TableCell';
+import { TableHeader } from './TableHeader';
+import { TableLoader } from './TableLoader';
+import { TablePlaceholder } from './TablePlaceholder';
+import { TableRow } from './TableRow';
 import './Table.scss';
 
 const DND_ITEM_TYPE = 'row';
