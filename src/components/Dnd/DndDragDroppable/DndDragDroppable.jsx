@@ -86,7 +86,6 @@ DndDragDroppable.propTypes = {
 	allowHorizontalDrag: PropTypes.bool,
 	index: PropTypes.number,
 	moveRow: PropTypes.func,
-	offsetRow: PropTypes.func,
 	children: PropTypes.func,
 	id: PropTypes.any, // eslint-disable-line
 };
