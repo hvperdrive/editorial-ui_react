@@ -41,6 +41,25 @@
 		}
 	}
 
+	&.a-table--has-placeholder,
+	.a-table--loading {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		min-width: 100%;
+	}
+
+	&.a-table--has-placeholder {
+		border: 1px dashed $grey;
+		padding: $spacer;
+		flex-direction: column;
+		align-items: flex-start;
+
+		.a-table--has-placeholder__item:not(:last-child) {
+			margin-bottom: $spacer-xs;
+		}
+	}
+
 	.a-table-expanded-row {
 		background-color: $white !important;
 	}
