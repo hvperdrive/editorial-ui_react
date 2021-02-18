@@ -13,7 +13,7 @@ const TableCell = ({
 	ellipsis = false,
 }) => (
 	<td className={classnames(classList)}>
-		{ ellipsis ? (
+		{ ellipsis && value !== null && value !== undefined ? (
 			<EllipsisWithTooltip type="primary">
 				{component ? component(value, rowData, rowIndex) : value}
 			</EllipsisWithTooltip>
@@ -31,7 +31,7 @@ TableCell.propTypes = {
 	component: PropTypes.func,
 	rowData: PropTypes.oneOfType([PropTypes.object]),
 	rowIndex: PropTypes.number,
-	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]),
 };
 
 export default TableCell;
