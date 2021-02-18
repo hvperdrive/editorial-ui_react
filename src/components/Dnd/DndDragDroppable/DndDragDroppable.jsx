@@ -83,10 +83,9 @@ const DndDragDroppable = ({
 
 DndDragDroppable.propTypes = {
 	accept: PropTypes.arrayOf(PropTypes.string),
-	allowHorizontalDrag: PropTypes.boolean,
+	allowHorizontalDrag: PropTypes.bool,
 	index: PropTypes.number,
 	moveRow: PropTypes.func,
-	offsetRow: PropTypes.func,
 	children: PropTypes.func,
 	id: PropTypes.any, // eslint-disable-line
 };
