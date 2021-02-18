@@ -97,7 +97,7 @@ describe('<Filter />', () => {
 		const { container } = render(
 			<Filter actionsClassName={actionsClassName} title="Filter" />,
 		);
-		const actionsEl = container.querySelector('.m-filter-form__buttons');
+		const actionsEl = container.querySelector('.o-filter__form__buttons');
 
 		expect(actionsEl.classList.contains(actionsClassName)).toBeTruthy();
 	});

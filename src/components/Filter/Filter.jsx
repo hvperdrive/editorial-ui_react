@@ -32,15 +32,15 @@ const Filter = ({
 	};
 
 	return (
-		<div className={className}>
+		<div className={classnames(className, 'o-filter')}>
 			<Accordion>
 				<AccordionTab>
 					<AccordionTabHeader>
 						<h5 className="u-text-primary">{title}</h5>
 					</AccordionTabHeader>
-					<AccordionTabContent className="m-filter-form">
+					<AccordionTabContent>
 						<div
-							className="m-filter-form__row row"
+							className="o-filter__form__row row"
 							role="button"
 							tabIndex="0"
 							onClick={preventClosingAccordion}
@@ -49,11 +49,11 @@ const Filter = ({
 							{filterSlot ? (
 								<>{ filterSlot }</>
 							) : (
-								<p className="m-filter-form__text col-xs-12 col-sm">
+								<p className="o-filter__form__text col-xs-12 col-sm">
 									{noFilterText}
 								</p>
 							)}
-							<div className={classnames(actionsClassName, 'm-filter-form__buttons')}>
+							<div className={classnames(actionsClassName, 'o-filter__form__buttons')}>
 								<Button
 									type="primary"
 									onClick={onClean}

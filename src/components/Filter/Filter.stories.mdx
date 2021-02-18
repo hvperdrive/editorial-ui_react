@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 import Filter from './Filter';
-import { TextField } from '@acpaas-ui/react-components';
+import { TextField, Datepicker } from '@acpaas-ui/react-components';
 import { FilterBody } from './Filter.slots';
 
 <Meta title="Filter" component={Filter} />
@@ -30,9 +30,7 @@ A generic filter component that can be used anywhere
 						label="zoeken"
 						id="zoeken"
 						name="zoeken"
-						className="textfield-class"
-						placeholder={`Zoeken op`}
-						onChange={(value) => console.log('Filteren op:', value)}
+						placeholder="Zoeken op"
 						iconright="search"
 					/>
 				</div>
@@ -50,49 +48,43 @@ A generic filter component that can be used anywhere
 			onFilterRemove={action()}
 		>
 			<FilterBody>
-				<div className="m-filter-form__col col-xs">
-					<TextField
-						label="zoeken"
-						id="zoeken"
-						name="zoeken"
-						className="textfield-class"
-						placeholder={`Zoeken op`}
-						onChange={(value) => console.log('Filteren op:', value)}
-						iconright="search"
-					/>
-				</div>
-				<div className="m-filter-form__col col-xs">
-					<TextField
-						label="zoeken"
-						id="zoeken"
-						name="zoeken"
-						className="textfield-class"
-						placeholder={`Zoeken op`}
-						onChange={(value) => console.log('Filteren op:', value)}
-						iconright="search"
-					/>
-				</div>
-				<div className="m-filter-form__col col-xs">
-					<TextField
-						label="zoeken"
-						id="zoeken"
-						name="zoeken"
-						className="textfield-class"
-						placeholder={`Zoeken op`}
-						onChange={(value) => console.log('Filteren op:', value)}
-						iconright="search"
-					/>
-				</div>
-				<div className="m-filter-form__col col-xs">
-					<TextField
-						label="zoeken"
-						id="zoeken"
-						name="zoeken"
-						className="textfield-class"
-						placeholder={`Zoeken op`}
-						onChange={(value) => console.log('Filteren op:', value)}
-						iconright="search"
-					/>
+				<div className="col-xs-12 col-sm">
+					<div className="row">
+						<div className="col-xs-6">
+							<TextField
+								label="zoeken"
+								id="zoeken"
+								name="zoeken"
+								iconright="search"
+							/>
+						</div>
+						<div className="col-xs-6">
+							<TextField
+								label="Voornaam"
+								id="firstname"
+								name="firstname"
+							/>
+						</div>
+					</div>
+					<div className="row u-margin-top">
+						<div className="col-xs-6">
+							<TextField
+								label="Naam"
+								id="lastname"
+								name="lastname"
+							/>
+						</div>
+						<div className="col-xs-6">
+							<Datepicker
+								locale="en"
+								id="datepicker"
+								name="date"
+								label="Date"
+								format="DD/MM/YYYY"
+								readOnly
+							/>
+						</div>
+					</div>
 				</div>
 			</FilterBody>
 		</Filter>
