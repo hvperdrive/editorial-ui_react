@@ -11,6 +11,8 @@ const cx = classnames.bind(styles);
 const EllipsisWithTooltip = ({
 	children,
 	style,
+	className,
+	value,
 	type = TooltipTypeMap.PRIMARY,
 	delayShow = 700,
 }) => {
@@ -39,7 +41,7 @@ const EllipsisWithTooltip = ({
 			<span
 				style={style}
 				ref={targetRef}
-				className={cx('ellipsis', 'u-text-truncate')}
+				className={cx(className, 'ellipsis', 'u-text-truncate')}
 			>
 				<span
 					className={cx('ellipsis__text')}
@@ -49,12 +51,14 @@ const EllipsisWithTooltip = ({
 					{children}
 				</span>
 			</span>
-			<Tooltip type={type} isVisible={isVisible} targetRef={targetRef}>{children}</Tooltip>
+			<Tooltip type={type} isVisible={isVisible} targetRef={targetRef}>{value ?? children}</Tooltip>
 		</>
 	);
 };
 
 EllipsisWithTooltip.propTypes = {
+	className: PropTypes.string,
+	value: PropTypes.string,
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
