@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -6,6 +7,7 @@ import '../Table.scss';
 const TablePlaceholder = ({
 	hasCols,
 	hasData,
+	className,
 	noColumnsMessage,
 	noDataMessage,
 }) => {
@@ -13,7 +15,7 @@ const TablePlaceholder = ({
 	const showNoData = !hasData;
 
 	return (
-		<div className="a-table a-table--has-placeholder">
+		<div className={classnames(className, 'a-table a-table--has-placeholder')}>
 			{showNoData && <div className="a-table--has-placeholder__item">{noDataMessage}</div>}
 			{showNoCols && <div className="a-table--has-placeholder__item">{noColumnsMessage}</div>}
 		</div>
@@ -23,6 +25,7 @@ const TablePlaceholder = ({
 TablePlaceholder.propTypes = {
 	hasCols: PropTypes.bool.isRequired,
 	hasData: PropTypes.bool.isRequired,
+	className: PropTypes.string,
 	noColumnsMessage: PropTypes.string,
 	noDataMessage: PropTypes.string,
 };

@@ -204,6 +204,7 @@ const Table = ({
 
 	const renderPlaceholder = () => (
 		<TablePlaceholder
+			className={className}
 			hasCols={hasCols}
 			hasData={hasData}
 			noDataMessage={noDataMessage}
