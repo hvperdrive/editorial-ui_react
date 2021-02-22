@@ -59,9 +59,6 @@ const DndDragDroppable = ({
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance
 			// to avoid expensive index searches.
-			if (allowHorizontalDrag) {
-				return;
-			}
 			item.index = hovered.index; // eslint-disable-line
 		},
 	});
