@@ -29,7 +29,7 @@ NavList.propTypes = {
 	className: PropTypes.string,
 	linkComponent: PropTypes.elementType,
 	items: PropTypes.arrayOf(PropTypes.shape({
-		hasError: PropTypes.boolean,
+		hasError: PropTypes.bool,
 		label: PropTypes.string.isRequired,
 		description: PropTypes.string,
 	})).isRequired,
