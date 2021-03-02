@@ -5,7 +5,9 @@ import React from 'react';
 
 const TableHeader = ({
 	activeSorting = { key: '', order: 'asc' },
+	as: HTMLTag = 'th',
 	classList,
+	className,
 	component,
 	disableSorting,
 	label,
@@ -19,7 +21,7 @@ const TableHeader = ({
 
 	const renderTableHeader = () => {
 		if (component) {
-			return component(value);
+			return component(value, label);
 		}
 		if (disableSorting) {
 			return label;
@@ -41,11 +43,17 @@ const TableHeader = ({
 		);
 	};
 
-	return <th style={style} className={classnames(classList)}>{renderTableHeader()}</th>;
+	return (
+		<HTMLTag style={style} className={classnames(className, classList)}>
+			{renderTableHeader()}
+		</HTMLTag>
+	);
 };
 
 TableHeader.propTypes = {
+	as: PropTypes.string,
 	classList: PropTypes.arrayOf(PropTypes.string),
+	className: PropTypes.string,
 	label: PropTypes.string.isRequired,
 	value: PropTypes.string,
 	component: PropTypes.func,
