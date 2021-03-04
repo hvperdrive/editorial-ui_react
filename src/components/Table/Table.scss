@@ -32,6 +32,10 @@
 	th > .a-table__header__button {
 		padding-left: 0;
 		width: auto;
+
+		.fa {
+			font-size: rem($font-size-base);
+		}
 	}
 
 	&.a-table--primary,
