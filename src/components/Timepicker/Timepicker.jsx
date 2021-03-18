@@ -8,6 +8,7 @@ import { isUndefined } from '../../helpers';
 import {
 	getTimeArray, getTimeString, mapToObject, setInitialValues,
 } from './Timepicker.helpers';
+import './Timepicker.scss';
 
 const Timepicker = ({
 	id,
