@@ -11,6 +11,10 @@
 				background-color: #fff;
 			}
 		}
+
+		&__tab {
+			outline: none;
+		}
 	}
 
 	.m-accordion__tab.is-open .m-accordion__content {
@@ -22,6 +26,7 @@
 		&__row {
 			padding-top: $spacer;
 			justify-content: flex-end;
+			outline: none;
 		}
 
 		&__text {
