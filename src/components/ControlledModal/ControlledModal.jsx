@@ -1,7 +1,7 @@
 import { Button } from '@acpaas-ui/react-components';
 import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useSlot } from '../../hooks';
@@ -41,6 +41,12 @@ const ControlledModal = ({
 	 */
 
 	const showSlots = headerSlot || bodySlot || footerSlot;
+	const overlayClassNames = classnames(
+		overlayClassName,
+		'm-overlay',
+		cx('m-controlled-modal-overlay'),
+		{ 'is-active': show },
+	);
 
 	/**
 	 * Render
@@ -57,7 +63,7 @@ const ControlledModal = ({
 	);
 
 	return createPortal(
-		<div className={classnames(overlayClassName, 'm-overlay', { 'is-active': show })}>
+		<div className={overlayClassNames}>
 			<div
 				className={classnames(className, 'm-modal', {
 					'm-modal--large': size === 'large',
