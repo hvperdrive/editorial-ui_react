@@ -14,7 +14,7 @@ import {
 const cx = classnames.bind(styles);
 
 const ControlledModal = ({
-	children, className, overlayClassName, node, onClose, show, size,
+	children, className, overlayClassName, lockBodyScroll = true, node, onClose, show, size,
 }) => {
 	/**
 	 * Hooks
@@ -23,6 +23,18 @@ const ControlledModal = ({
 	const headerSlot = useSlot(ControlledModalHeader, children);
 	const bodySlot = useSlot(ControlledModalBody, children);
 	const footerSlot = useSlot(ControlledModalFooter, children);
+
+	useEffect(() => {
+		if (!lockBodyScroll) {
+			return;
+		}
+
+		if (show) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+	}, [lockBodyScroll, show]);
 
 	/**
 	 * Methods
@@ -83,6 +95,7 @@ ControlledModal.propTypes = {
 	onClose: PropTypes.func,
 	show: PropTypes.bool.isRequired,
 	size: PropTypes.oneOf(['large']),
+	lockBodyScroll: PropTypes.bool,
 };
 
 export default ControlledModal;
