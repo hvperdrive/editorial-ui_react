@@ -24,16 +24,23 @@ const ControlledModal = ({
 	const bodySlot = useSlot(ControlledModalBody, children);
 	const footerSlot = useSlot(ControlledModalFooter, children);
 
+	// Lock body scroll when enabled
 	useEffect(() => {
 		if (!lockBodyScroll) {
 			return;
 		}
 
+		const initialOverflowStyle = document.body.style.overflow;
+
 		if (show) {
 			document.body.style.overflow = 'hidden';
 		} else {
-			document.body.style.overflow = 'unset';
+			document.body.style.overflow = initialOverflowStyle;
 		}
+
+		return () => {
+			document.body.style.overflow = initialOverflowStyle;
+		};
 	}, [lockBodyScroll, show]);
 
 	/**
