@@ -89,6 +89,6 @@ describe('<ControlledModal />', () => {
 
 		rerender(<ControlledModal show={false} />);
 
-		expect(baseElement).toHaveStyle('overflow: unset');
+		expect(baseElement).toHaveAttribute('style', '');
 	});
 });
