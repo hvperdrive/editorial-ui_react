@@ -6,7 +6,7 @@ import React from 'react';
 import { isUndefined } from '../../helpers';
 
 import {
-	getTimeArray, getTimeString, mapToObject, setInitialValues,
+	generateTimeSelectOptions, getTimeArray, getTimeString, setInitialValues,
 } from './Timepicker.helpers';
 import './Timepicker.scss';
 
@@ -61,7 +61,7 @@ const Timepicker = ({
 				required={required}
 				label={hourLabel}
 				disabled={disabled}
-				options={mapToObject(24, hourStep, disabled)}
+				options={generateTimeSelectOptions(24, hourStep, disabled)}
 				placeholder={hourPlaceholder}
 				value={timeArray[0]}
 				onChange={(event) => handleChange(event.target.value, 0)}
@@ -72,7 +72,7 @@ const Timepicker = ({
 				required={required}
 				disabled={disabled}
 				label={minuteLabel}
-				options={mapToObject(60, minuteStep, disabled)}
+				options={generateTimeSelectOptions(60, minuteStep, disabled, true)}
 				placeholder={minutePlaceholder}
 				value={timeArray[1]}
 				onChange={(event) => handleChange(event.target.value, 1)}
@@ -85,7 +85,7 @@ const Timepicker = ({
 						required={required}
 						disabled={disabled}
 						label={secondLabel}
-						options={mapToObject(60, roundedSecondStep, disabled)}
+						options={generateTimeSelectOptions(60, roundedSecondStep, disabled)}
 						placeholder={secondPlaceholder}
 						value={timeArray[2]}
 						onChange={(event) => handleChange(event.target.value, 2)}
@@ -100,7 +100,7 @@ const Timepicker = ({
 						required={required}
 						disabled={disabled}
 						label={millisecondLabel}
-						options={mapToObject(1000, roundedMillisecondSecondStep, disabled)}
+						options={generateTimeSelectOptions(1000, roundedMillisecondSecondStep, disabled)}
 						placeholder={millisecondPlaceholder}
 						value={timeArray[3]}
 						onChange={(event) => handleChange(event.target.value, 3)}

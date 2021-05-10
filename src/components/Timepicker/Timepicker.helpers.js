@@ -8,14 +8,28 @@ export const setInitialValues = (index) => {
 	return initialValues;
 };
 
-export const mapToObject = (amount, step, disabled = false) => {
+const SINGLE_DIGIT_REGEX = /^\d$/;
+const isSingleDigit = (numberString) => SINGLE_DIGIT_REGEX.test(numberString);
+const getTimeOptionLabel = (value, addLeadingZero = false) => {
+	const valueString = value.toString();
+
+	if (!addLeadingZero) {
+		return valueString;
+	}
+
+	return isSingleDigit(valueString) ? `0${valueString}` : valueString;
+};
+
+export const generateTimeSelectOptions = (
+	amount, step, disabled = false, addLeadingZero = false,
+) => {
 	const a = [];
 	let b = 0;
 	while (b < amount) {
 		a.push({
 			key: b,
 			value: b,
-			label: b,
+			label: getTimeOptionLabel(b, addLeadingZero),
 			disabled,
 		});
 		b += step;
