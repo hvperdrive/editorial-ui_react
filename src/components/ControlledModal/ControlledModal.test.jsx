@@ -81,4 +81,14 @@ describe('<ControlledModal />', () => {
 		expect(bodyEl).not.toBeNull();
 		expect(footerEl).not.toBeNull();
 	});
+
+	it('Should lock body scroll based on `show` prop', () => {
+		const { baseElement, rerender } = render(<ControlledModal show />);
+
+		expect(baseElement).toHaveStyle('overflow: hidden');
+
+		rerender(<ControlledModal show={false} />);
+
+		expect(baseElement).toHaveAttribute('style', '');
+	});
 });

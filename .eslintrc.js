@@ -22,25 +22,26 @@ module.exports = {
 		'dist/*',
 	],
 	rules: {
+		'consistent-return': 'off',
 		indent: ['error', 'tab'],
+		'no-nested-ternary': 'off',
 		'no-tabs': 'off',
 		'sort-imports': ['warn', {
 			ignoreCase: true,
 			ignoreDeclarationSort: true,
 		}],
 
+		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 		'import/order': ['error', {
 			alphabetize: { order: 'asc' },
 			'newlines-between': 'always',
 		}],
 		'import/prefer-default-export': 'off',
-		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
 		'react/jsx-indent': ['error', 'tab'],
 		'react/jsx-indent-props': ['error', 'tab'],
 		'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
 		'react/require-default-props': ['error', { ignoreFunctionalComponents: true }],
 		'react/no-array-index-key': 'off',
-		'no-nested-ternary': 'off'
 	},
 };

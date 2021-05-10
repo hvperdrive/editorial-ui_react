@@ -1,7 +1,7 @@
 import { Button } from '@acpaas-ui/react-components';
 import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useSlot } from '../../hooks';
@@ -14,7 +14,7 @@ import {
 const cx = classnames.bind(styles);
 
 const ControlledModal = ({
-	children, className, overlayClassName, node, onClose, show, size,
+	children, className, overlayClassName, lockBodyScroll = true, node, onClose, show, size,
 }) => {
 	/**
 	 * Hooks
@@ -24,11 +24,36 @@ const ControlledModal = ({
 	const bodySlot = useSlot(ControlledModalBody, children);
 	const footerSlot = useSlot(ControlledModalFooter, children);
 
+	// Lock body scroll when enabled
+	useEffect(() => {
+		if (!lockBodyScroll) {
+			return;
+		}
+
+		const initialOverflowStyle = document.body.style.overflow;
+
+		if (show) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = initialOverflowStyle;
+		}
+
+		return () => {
+			document.body.style.overflow = initialOverflowStyle;
+		};
+	}, [lockBodyScroll, show]);
+
 	/**
 	 * Methods
 	 */
 
 	const showSlots = headerSlot || bodySlot || footerSlot;
+	const overlayClassNames = classnames(
+		overlayClassName,
+		'm-overlay',
+		cx('m-controlled-modal-overlay'),
+		{ 'is-active': show },
+	);
 
 	/**
 	 * Render
@@ -45,7 +70,7 @@ const ControlledModal = ({
 	);
 
 	return createPortal(
-		<div className={classnames(overlayClassName, 'm-overlay', { 'is-active': show })}>
+		<div className={overlayClassNames}>
 			<div
 				className={classnames(className, 'm-modal', {
 					'm-modal--large': size === 'large',
@@ -83,6 +108,7 @@ ControlledModal.propTypes = {
 	onClose: PropTypes.func,
 	show: PropTypes.bool.isRequired,
 	size: PropTypes.oneOf(['large']),
+	lockBodyScroll: PropTypes.bool,
 };
 
 export default ControlledModal;
