@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { isNil } from '../../../helpers';
 import { EllipsisWithTooltip } from '../../EllipsisWithTooltip';
 
 const TableCell = ({
@@ -16,7 +17,7 @@ const TableCell = ({
 	style,
 }) => (
 	<HTMLTag className={classnames(className, classList)} style={style}>
-		{ ellipsis && value !== null && value !== undefined ? (
+		{ ellipsis && !isNil(value) ? (
 			<EllipsisWithTooltip type="primary">
 				{component ? component(value, rowData, rowIndex) : value}
 			</EllipsisWithTooltip>
