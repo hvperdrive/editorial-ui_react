@@ -1,3 +1,5 @@
+import { isNil } from '../../helpers';
+
 export const setInitialValues = (index) => {
 	const initialValues = [];
 
@@ -8,41 +10,47 @@ export const setInitialValues = (index) => {
 	return initialValues;
 };
 
-const SINGLE_DIGIT_REGEX = /^\d$/;
-const isSingleDigit = (numberString) => SINGLE_DIGIT_REGEX.test(numberString);
-const getTimeOptionLabel = (value, addLeadingZero = false) => {
-	const valueString = value.toString();
-
-	if (!addLeadingZero) {
-		return valueString;
+const isPowerOfTen = (value) => Math.log10(value) % 1 === 0;
+const getTimeOption = (value, amount) => {
+	if (isNil(value)) {
+		return;
 	}
 
-	return isSingleDigit(valueString) ? `0${valueString}` : valueString;
+	const valueString = value.toString();
+	const amountLength = amount.toString().length;
+	const targetLength = isPowerOfTen(amount) ? amountLength - 1 : amountLength;
+	const label = valueString.length <= targetLength
+		? valueString.padStart(targetLength, '0')
+		: valueString;
+
+	return { label, value: label };
 };
 
 export const generateTimeSelectOptions = (
-	amount, step, disabled = false, addLeadingZero = false,
+	amount, step, disabled = false,
 ) => {
 	const a = [];
 	let b = 0;
+
 	while (b < amount) {
 		a.push({
 			key: b,
-			value: b,
-			label: getTimeOptionLabel(b, addLeadingZero),
 			disabled,
+			...getTimeOption(b, amount),
 		});
 		b += step;
 	}
 	return a;
 };
 
-export const getTimeArray = (timeString) => {
+export const getTimeArray = (timeString, stepsArray) => {
 	if (!timeString || timeString === '') {
 		return [];
 	}
 
-	return timeString.split(':');
+	const timeArray = timeString.split(':');
+
+	return timeArray.map((time, index) => getTimeOption(time, stepsArray[index])?.value ?? '');
 };
 
 export const getTimeString = (timeArray) => timeArray.join(':');

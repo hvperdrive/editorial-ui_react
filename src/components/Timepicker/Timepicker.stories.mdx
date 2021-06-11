@@ -32,3 +32,48 @@ Some explanation about our Timepicker component
 ## Props
 
 <Props of={Timepicker} />
+
+## Stories
+
+### Seconds
+
+<Preview>
+	<Story name="Seconds">
+		{() => {
+			const [value, setValue] = useState('10:30:40');
+			return (
+				<Timepicker
+					id="time"
+					secondStep={10}
+					value={value}
+					onChange={(newValue) => {
+						action()(newValue);
+						setValue(newValue);
+					}}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
+
+### Milliseconds
+
+<Preview>
+	<Story name="Milliseconds">
+		{() => {
+			const [value, setValue] = useState('10:30:40:300');
+			return (
+				<Timepicker
+					id="time"
+					secondStep={10}
+					millisecondStep={100}
+					value={value}
+					onChange={(newValue) => {
+						action()(newValue);
+						setValue(newValue);
+					}}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
