@@ -103,7 +103,7 @@ A generic filter component that can be used anywhere
 	<Story name='Active filter items'>
 		{() => {
 			const array = [{valuePrefix:'User', value:'John Doe'}, {valuePrefix:'Status', value: 'Success'}];
-			const deleteFilter = (filter) => {console.log(filter)};
+			const deleteFilter = (filter) => {action()(filter)};
 			return(
 				<Filter
 					title='Filter'
