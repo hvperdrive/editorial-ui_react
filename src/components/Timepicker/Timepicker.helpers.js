@@ -43,14 +43,14 @@ export const generateTimeSelectOptions = (
 	return a;
 };
 
-export const getTimeArray = (timeString, stepsArray) => {
+export const getTimeArray = (timeString, timeUnitAmounts) => {
 	if (!timeString || timeString === '') {
 		return [];
 	}
 
 	const timeArray = timeString.split(':');
 
-	return timeArray.map((time, index) => getTimeOption(time, stepsArray[index])?.value ?? '');
+	return timeArray.map((time, index) => getTimeOption(time, timeUnitAmounts[index])?.value ?? '');
 };
 
 export const getTimeString = (timeArray) => timeArray.join(':');
