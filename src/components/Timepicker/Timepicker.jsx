@@ -5,6 +5,7 @@ import React from 'react';
 
 import { isUndefined } from '../../helpers';
 
+import { TIME_UNIT_AMOUNTS } from './Timepicker.const';
 import {
 	generateTimeSelectOptions, getTimeArray, getTimeString, setInitialValues,
 } from './Timepicker.helpers';
@@ -30,17 +31,18 @@ const Timepicker = ({
 	millisecondStep,
 	onChange,
 }) => {
-	const timeArray = getTimeArray(value) || [];
 	const roundedSecondStep = !isUndefined(secondStep) ? Math.round(secondStep) : null;
 	const roundedMillisecondSecondStep = !isUndefined(millisecondStep)
 		? Math.round(millisecondStep)
 		: null;
+	const [hours, minutes, seconds, milliseconds] = TIME_UNIT_AMOUNTS;
+	const timeArray = getTimeArray(value, TIME_UNIT_AMOUNTS) || [];
 
 	/**
 	* Methods
 	*/
 	const handleChange = (indexValue, index) => {
-		let prevValue = getTimeArray(value);
+		let prevValue = getTimeArray(value, TIME_UNIT_AMOUNTS);
 
 		if (timeArray.length < index - 1) {
 			prevValue = setInitialValues(index);
@@ -61,7 +63,7 @@ const Timepicker = ({
 				required={required}
 				label={hourLabel}
 				disabled={disabled}
-				options={generateTimeSelectOptions(24, hourStep, disabled)}
+				options={generateTimeSelectOptions(hours, hourStep, disabled)}
 				placeholder={hourPlaceholder}
 				value={timeArray[0]}
 				onChange={(event) => handleChange(event.target.value, 0)}
@@ -72,7 +74,7 @@ const Timepicker = ({
 				required={required}
 				disabled={disabled}
 				label={minuteLabel}
-				options={generateTimeSelectOptions(60, minuteStep, disabled, true)}
+				options={generateTimeSelectOptions(minutes, minuteStep, disabled)}
 				placeholder={minutePlaceholder}
 				value={timeArray[1]}
 				onChange={(event) => handleChange(event.target.value, 1)}
@@ -85,7 +87,7 @@ const Timepicker = ({
 						required={required}
 						disabled={disabled}
 						label={secondLabel}
-						options={generateTimeSelectOptions(60, roundedSecondStep, disabled)}
+						options={generateTimeSelectOptions(seconds, roundedSecondStep, disabled)}
 						placeholder={secondPlaceholder}
 						value={timeArray[2]}
 						onChange={(event) => handleChange(event.target.value, 2)}
@@ -100,7 +102,11 @@ const Timepicker = ({
 						required={required}
 						disabled={disabled}
 						label={millisecondLabel}
-						options={generateTimeSelectOptions(1000, roundedMillisecondSecondStep, disabled)}
+						options={generateTimeSelectOptions(
+							milliseconds,
+							roundedMillisecondSecondStep,
+							disabled,
+						)}
 						placeholder={millisecondPlaceholder}
 						value={timeArray[3]}
 						onChange={(event) => handleChange(event.target.value, 3)}
