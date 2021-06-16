@@ -18,7 +18,13 @@ const NavList = ({ className, linkComponent: LinkComponent = 'a', items }) => (
 			>
 				<LinkComponent {...linkProps}>
 					<span>{`${label}${hasError ? '*' : ''}`}</span>
-					{description && <p className="m-nav-list__item-description u-text-light">{description}</p>}
+					{description && (
+						<p
+							className="m-nav-list__item-description u-text-light"
+							// eslint-disable-next-line react/no-danger
+							dangerouslySetInnerHTML={{ __html: description }}
+						/>
+					)}
 				</LinkComponent>
 			</li>
 		))}
