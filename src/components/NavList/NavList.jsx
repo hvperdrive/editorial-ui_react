@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import sanitizeHtml from 'sanitize-html';
 
 import './NavList.scss';
 
@@ -22,7 +23,11 @@ const NavList = ({ className, linkComponent: LinkComponent = 'a', items }) => (
 						<p
 							className="m-nav-list__item-description u-text-light"
 							// eslint-disable-next-line react/no-danger
-							dangerouslySetInnerHTML={{ __html: description }}
+							dangerouslySetInnerHTML={{
+								__html: sanitizeHtml(description, {
+									allowedTags: ['br'],
+								}),
+							}}
 						/>
 					)}
 				</LinkComponent>

@@ -36,5 +36,6 @@ export default {
 		'prop-types',
 		'react',
 		'react-dom',
+		'sanitize-html',
 	],
 };
