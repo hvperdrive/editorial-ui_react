@@ -22,6 +22,7 @@ const Filter = ({
 	cleanText,
 	activeFilters = [],
 	onFilterRemove,
+	enableSubmitOnEnter = true,
 }) => {
 	const filterSlot = useSlot(FilterBody, children);
 
@@ -47,7 +48,7 @@ const Filter = ({
 							onKeyPress={preventClosingAccordion}
 						>
 							{filterSlot ? (
-								<>{ filterSlot }</>
+								<>{filterSlot}</>
 							) : (
 								<p className="o-filter__form__text col-xs-12 col-sm">
 									{noFilterText}
@@ -55,6 +56,7 @@ const Filter = ({
 							)}
 							<div className={classnames(actionsClassName, 'o-filter__form__buttons')}>
 								<Button
+									htmlType="button"
 									type="primary"
 									onClick={onClean}
 									negative
@@ -62,6 +64,7 @@ const Filter = ({
 									{cleanText}
 								</Button>
 								<Button
+									htmlType={enableSubmitOnEnter ? 'submit' : 'button'}
 									type="primary"
 									iconRight="angle-right"
 									onClick={onConfirm}
@@ -103,6 +106,10 @@ const Filter = ({
 
 Filter.propTypes = {
 	actionsClassName: PropTypes.string,
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]),
 	className: PropTypes.string,
 	title: PropTypes.string,
 	noFilterText: PropTypes.string,
@@ -116,10 +123,7 @@ Filter.propTypes = {
 		key: PropTypes.string,
 	})),
 	onFilterRemove: PropTypes.func,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	enableSubmitOnEnter: PropTypes.bool,
 };
 
 export default Filter;
