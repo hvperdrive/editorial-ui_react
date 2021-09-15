@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@a-ui/core": "^4.1.1",
-    "@acpaas-ui/react-components": "5.0.0",
+    "@acpaas-ui/react-components": "5.0.7",
     "@popperjs/core": "^2.6.0",
     "array-tree-filter": "^2.1.0",
     "classnames": "^2.2.6",
@@ -48,7 +48,7 @@
     "sanitize-html": "^2.4.0"
   },
   "peerDependencies": {
-    "@acpaas-ui/react-components": "^4.0.0"
+    "@acpaas-ui/react-components": "5.0.7"
   },
   "devDependencies": {
     "@a-ui/flexboxgrid": "^1.0.1",
