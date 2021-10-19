@@ -210,3 +210,17 @@ Group stories based on props
 		<Table columns={TABLE_MOCK_COLUMNS()} rows={TABLE_MOCK_ROWS.slice(0, 2)} type="secondary" />
 	</Story>
 </Preview>
+
+<Preview>
+	<Story name='Styled rows'>
+		{() => {
+			return (
+				<Table
+					columns={TABLE_MOCK_COLUMNS()}
+					rows={TABLE_MOCK_ROWS.slice(0, 5).map((row, index) => index === 1 ? { ...row, classList: ['u-bg-light'] } : row)}
+					striped={false}
+				/>
+			);
+		}}
+	</Story>
+</Preview>
