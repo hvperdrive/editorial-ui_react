@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { equals, path } from 'ramda';
+import { equals, path, pathOr } from 'ramda';
 import React, { Fragment } from 'react';
 
 import { DndContainer, DndDragDroppable } from '../Dnd';
@@ -139,6 +139,7 @@ const Table = ({
 		return (
 			<Fragment key={`table-row-${level}-${rowIndex}`}>
 				<TableRow
+					className={classnames(pathOr('', ['classList'], row))}
 					hasClickAction={hasClickAction}
 					onClick={() => onRowClick(row)}
 					level={level}
