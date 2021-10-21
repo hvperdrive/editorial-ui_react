@@ -189,8 +189,8 @@ const Table = ({
 					{columns.length > 0 && (
 						<thead>
 							<TableRow>
-								{columns.map((col) => (
-									<TableHeader {...getHeaderProps(col, activeSorting, onSortClick)} />
+								{columns.map((col, index) => (
+									<TableHeader {...getHeaderProps(col, activeSorting, onSortClick, index)} />
 								))}
 							</TableRow>
 						</thead>

@@ -30,15 +30,15 @@ const getFormatValue = (rowData, col, rowIndex) => {
 		: cellValue;
 };
 
-export const getHeaderProps = (col, activeSorting, onSortClick) => {
+export const getHeaderProps = (col, activeSorting, onSortClick, columnIndex) => {
 	const keyPrefix = 'table-header';
 
 	if (isString(col)) {
-		return { key: `${keyPrefix}-${col}`, label: col };
+		return { key: `${keyPrefix}-${col}-${columnIndex}`, label: col };
 	}
 
 	return {
-		key: `${keyPrefix}-${col.label}`,
+		key: `${keyPrefix}-${col.label}-${columnIndex}`,
 		component: col.headerComponent,
 		classList: col.classList,
 		disableSorting: col.disableSorting,
@@ -54,11 +54,11 @@ export const getCellProps = (col, rowData, rowIndex) => {
 	const keyPrefix = 'table-cell';
 
 	if (isString(col)) {
-		return { key: `${keyPrefix}-${col}`, label: col };
+		return { key: `${keyPrefix}-${col}-${rowIndex}`, label: col };
 	}
 
 	return {
-		key: `${keyPrefix}-${col.label}`,
+		key: `${keyPrefix}-${col.label}-${rowIndex}`,
 		classList: col.classList,
 		component: col.component,
 		ellipsis: col.ellipsis,
