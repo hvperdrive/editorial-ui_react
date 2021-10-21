@@ -9,6 +9,7 @@ const TableHeader = ({
 	classList,
 	className,
 	component,
+	hideLabel,
 	disableSorting,
 	label,
 	value = '',
@@ -20,6 +21,10 @@ const TableHeader = ({
 	} : {};
 
 	const renderTableHeader = () => {
+		if (hideLabel) {
+			return;
+		}
+
 		if (component) {
 			return component(value, label);
 		}
@@ -64,6 +69,7 @@ TableHeader.propTypes = {
 	}),
 	onSortClick: PropTypes.func,
 	width: PropTypes.string,
+	hideLabel: PropTypes.bool,
 };
 
 export default TableHeader;
