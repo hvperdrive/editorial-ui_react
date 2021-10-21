@@ -234,6 +234,7 @@ Table.propTypes = {
 			headerComponent: PropTypes.func,
 			format: PropTypes.func,
 			hidden: PropTypes.bool,
+			hideLabel: PropTypes.bool,
 			disabled: PropTypes.bool,
 			ellipsis: PropTypes.bool,
 			width: PropTypes.string,

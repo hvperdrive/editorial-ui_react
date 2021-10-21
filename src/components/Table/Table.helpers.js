@@ -45,6 +45,7 @@ export const getHeaderProps = (col, activeSorting, onSortClick, columnIndex) => 
 		label: col.label,
 		value: col.value,
 		width: col.width,
+		hideLabel: col.hideLabel,
 		activeSorting,
 		onSortClick,
 	};
