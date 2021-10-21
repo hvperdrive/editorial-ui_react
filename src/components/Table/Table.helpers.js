@@ -54,11 +54,11 @@ export const getCellProps = (col, rowData, rowIndex) => {
 	const keyPrefix = 'table-cell';
 
 	if (isString(col)) {
-		return { key: `${keyPrefix}-${col}-${rowIndex}`, label: col };
+		return { key: `${keyPrefix}-${col}-${rowData.id}`, label: col };
 	}
 
 	return {
-		key: `${keyPrefix}-${col.label}-${rowIndex}`,
+		key: `${keyPrefix}-${col.label}-${rowData.id}`,
 		classList: col.classList,
 		component: col.component,
 		ellipsis: col.ellipsis,
