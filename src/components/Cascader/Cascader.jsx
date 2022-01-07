@@ -75,6 +75,11 @@ const Cascader = ({
 	};
 
 	const handleMenuSelect = (targetOption, menuLevel, e) => {
+		const triggerNode = triggerEl.current.getRootDomNode();
+		if (triggerNode && triggerNode.focus) {
+			triggerNode.focus();
+		}
+
 		if (!targetOption || targetOption.disabled) {
 			return;
 		}
