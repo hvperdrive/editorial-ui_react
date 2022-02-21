@@ -77,11 +77,11 @@
 			background-color: $table-striped-bg;
 		}
 
-		&:global(.is-collapsed) {
+		&--collapsed {
 			display: none;
 		}
 
-		&:global(.is-hovered) {
+		&--hovered {
 			.a-table__cell {
 				background: transparent;
 				color: transparent;
@@ -96,30 +96,6 @@
 					opacity: 0;
 				}
 			}
-		}
-	}
-
-	.a-table__row--hovered {
-		position: relative;
-		background: transparent;
-		color: transparent;
-
-		&::before,
-		&::after {
-			content: "";
-			position: absolute;
-			left: 0;
-			width: 100%;
-			background: $brand-primary;
-			height: 4px;
-		}
-
-		&::after {
-			bottom: 0;
-		}
-
-		> * {
-			opacity: 0;
 		}
 	}
 
@@ -149,25 +125,6 @@
 
 		&::after {
 			bottom: 0;
-		}
-
-		&:global(.is-small) {
-			width: 1%;
-			white-space: nowrap;
-		}
-	}
-
-	.a-table__body {
-		display: table-row-group;
-
-		.a-table__row {
-			&:last-child {
-				.a-table__cell {
-					&::after {
-						content: none;
-					}
-				}
-			}
 		}
 	}
 }

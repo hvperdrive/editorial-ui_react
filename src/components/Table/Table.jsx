@@ -38,8 +38,6 @@ const Table = ({
 	rowExpansionTemplate = () => null,
 	moveRow = () => null,
 	indentSize = 24,
-	childrenAs,
-	allowHorizontalDrag = false,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -91,7 +89,7 @@ const Table = ({
 				// Key can NOT be based on index because this will cause issues with react-dnd's
 				// ability to set the current item which is being dragged over/hovered
 				key={`table-row-${level}-${id}`}
-				allowHorizontalDrag={allowHorizontalDrag}
+				allowHorizontalDrag
 				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
@@ -107,12 +105,10 @@ const Table = ({
 							isDragging={isDragging}
 							level={level}
 							innerRef={dragDropRef}
-							as={childrenAs}
 						>
 							{columns.map((col, colIndex) => (
 								<TableCell
 									{...getCellProps(col, colIndex, row, rowIndex, indentSize, level)}
-									as={childrenAs}
 									className="a-table__cell"
 								/>
 							))}
@@ -202,15 +198,9 @@ const Table = ({
 						</thead>
 					)}
 					{
-						childrenAs ? (
-							<div className="a-table__body">
-								{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
-							</div>
-						) : (
-							<tbody>
-								{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
-							</tbody>
-						)
+						<tbody className="a-table__body">
+							{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
+						</tbody>
 					}
 				</table>
 			</div>
@@ -276,7 +266,6 @@ Table.propTypes = {
 	striped: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
 	moveRow: PropTypes.func,
-	childrenAs: PropTypes.string,
 };
 
 export default Table;

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const TableRow = ({
-	as: HTMLTag = 'tr',
 	children,
 	className,
 	collapseOnDrag,
@@ -12,7 +11,7 @@ const TableRow = ({
 	onClick,
 	innerRef,
 }) => (
-	<HTMLTag
+	<tr
 		ref={innerRef}
 		className={classnames(className, {
 			'a-table--clickable': hasClickAction,
@@ -22,11 +21,10 @@ const TableRow = ({
 		onClick={onClick}
 	>
 		{children}
-	</HTMLTag>
+	</tr>
 );
 
 TableRow.propTypes = {
-	as: PropTypes.string,
 	className: PropTypes.string,
 	children: PropTypes.node,
 	collapseOnDrag: PropTypes.bool,
