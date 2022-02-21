@@ -3,45 +3,40 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const TableRow = ({
+	as: HTMLTag = 'tr',
 	children,
 	className,
 	collapseOnDrag,
 	hasClickAction,
 	isDragging,
-	isLast,
-	level,
 	onClick,
-	trRef,
+	innerRef,
 }) => (
-	<tr
-		ref={trRef}
+	<HTMLTag
+		ref={innerRef}
 		className={classnames(className, {
 			'a-table--clickable': hasClickAction,
 			'a-table__row--hovered': isDragging,
 			'a-table__row--collapse': collapseOnDrag,
-			'a-table__row--level-1': level === 1,
-			'a-table__row--level-2': level === 2,
-			'a-table__row--last-in-level': isLast,
 		})}
 		onClick={onClick}
 	>
 		{children}
-	</tr>
+	</HTMLTag>
 );
 
 TableRow.propTypes = {
+	as: PropTypes.string,
 	className: PropTypes.string,
 	children: PropTypes.node,
 	collapseOnDrag: PropTypes.bool,
 	hasClickAction: PropTypes.bool,
 	onClick: PropTypes.func,
-	trRef: PropTypes.oneOfType([
+	innerRef: PropTypes.oneOfType([
 		PropTypes.func,
 		PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
 	]),
 	isDragging: PropTypes.bool,
-	level: PropTypes.number,
-	isLast: PropTypes.bool,
 };
 
 export default TableRow;

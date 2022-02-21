@@ -37,6 +37,9 @@ const Table = ({
 	noDataMessage = 'No data available.',
 	rowExpansionTemplate = () => null,
 	moveRow = () => null,
+	indentSize = 24,
+	childrenAs,
+	allowHorizontalDrag = false,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -79,7 +82,7 @@ const Table = ({
 	/**
 	 * Render
 	 */
-	const renderDraggableRow = (row, rowIndex, level, isLast, collapse = false) => {
+	const renderDraggableRow = (row, rowIndex, level, collapse = false, parentIsDragging = false) => {
 		const expanded = isRowExpanded(row);
 		const id = path([dataKey])(row);
 
@@ -88,24 +91,30 @@ const Table = ({
 				// Key can NOT be based on index because this will cause issues with react-dnd's
 				// ability to set the current item which is being dragged over/hovered
 				key={`table-row-${level}-${id}`}
+				allowHorizontalDrag={allowHorizontalDrag}
 				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
-				accept={[`${DND_ITEM_TYPE}-${level}`, `${DND_ITEM_TYPE}-${level + 1}`]}
+				accept={[DND_ITEM_TYPE]}
 			>
 				{({ dragDropRef, isDragging }) => (
 					<>
 						<TableRow
+							className="a-table__row"
 							collapseOnDrag={collapse}
 							hasClickAction={hasClickAction}
 							onClick={() => onRowClick(row)}
 							isDragging={isDragging}
-							isLast={isLast}
 							level={level}
-							trRef={dragDropRef}
+							innerRef={dragDropRef}
+							as={childrenAs}
 						>
-							{columns.map((col) => (
-								<TableCell {...getCellProps(col, row, rowIndex)} />
+							{columns.map((col, colIndex) => (
+								<TableCell
+									{...getCellProps(col, colIndex, row, rowIndex, indentSize, level)}
+									as={childrenAs}
+									className="a-table__cell"
+								/>
 							))}
 						</TableRow>
 						{expanded && (
@@ -123,8 +132,8 @@ const Table = ({
 								subRow,
 								subRowIndex,
 								level + 1,
-								row.rows.length - 1 === subRowIndex,
-								level === 1 && isDragging,
+								level >= 1 && (isDragging || parentIsDragging),
+								isDragging || parentIsDragging,
 							),
 						) : null}
 					</>
@@ -133,20 +142,18 @@ const Table = ({
 		);
 	};
 
-	const renderStaticRow = (row, rowIndex, level, isLast) => {
+	const renderStaticRow = (row, rowIndex, level) => {
 		const expanded = isRowExpanded(row);
 
 		return (
 			<Fragment key={`table-row-${level}-${rowIndex}`}>
 				<TableRow
-					className={classnames(pathOr('', ['classList'], row))}
+					className={classnames(['a-table__row', ...pathOr('', ['classList'], row)])}
 					hasClickAction={hasClickAction}
 					onClick={() => onRowClick(row)}
-					level={level}
-					isLast={isLast}
 				>
-					{columns.map((col) => (
-						<TableCell {...getCellProps(col, row, rowIndex)} />
+					{columns.map((col, colIndex) => (
+						<TableCell {...getCellProps(col, colIndex, row, rowIndex, indentSize, level)} />
 					))}
 				</TableRow>
 				{expanded && (
@@ -164,7 +171,6 @@ const Table = ({
 						subRow,
 						subRowIndex,
 						level + 1,
-						row.rows.length - 1 === subRowIndex,
 					))
 					: null}
 			</Fragment>
@@ -195,9 +201,17 @@ const Table = ({
 							</TableRow>
 						</thead>
 					)}
-					<tbody>
-						{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
-					</tbody>
+					{
+						childrenAs ? (
+							<div className="a-table__body">
+								{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
+							</div>
+						) : (
+							<tbody>
+								{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
+							</tbody>
+						)
+					}
 				</table>
 			</div>
 		</DndContainer>
@@ -262,6 +276,7 @@ Table.propTypes = {
 	striped: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
 	moveRow: PropTypes.func,
+	childrenAs: PropTypes.string,
 };
 
 export default Table;
