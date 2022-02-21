@@ -1,9 +1,9 @@
 @import '~@a-ui/core/dist/assets/styles/_quarks';
 
 .a-table__wrapper-responsive {
-	border: none;
-	border-top: 1px solid #949494;
-	border-bottom: 1px solid #949494;
+	border: none !important;
+	border-top: 1px solid #949494 !important;
+	border-bottom: 1px solid #949494 !important;
 
 	tbody tr {
 		border-bottom: none;
@@ -25,6 +25,9 @@
 }
 
 .a-table {
+	border-collapse: separate;
+	border-spacing: 0;
+
 	&.a-table--fixed {
 		table-layout: fixed;
 	}
