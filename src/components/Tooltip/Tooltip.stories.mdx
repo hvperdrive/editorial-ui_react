@@ -69,6 +69,24 @@ Some explanation about our Tooltip component
 			);
 		}}
 	</Story>
+	<Story name="White">
+		{() => {
+			const buttonRef = useRef(null);
+			const [isVisible, setVisibility] = useState(false);
+			return (
+				<div style={{marginLeft: "200px"}} className="u-margin-top-lg">
+					<button
+						ref={buttonRef}
+						onMouseEnter={() => setVisibility(true)}
+						onMouseLeave={() => setVisibility(false)}
+					>
+						White tooltip
+					</button>
+					<Tooltip placement="bottom-end" type={TooltipTypeMap.WHITE} isVisible={true} targetRef={buttonRef}> Some tooltip info </Tooltip>
+				</div>
+			);
+		}}
+	</Story>
 	<Story name="Tooltip placement">
 		{() => {
 			const buttonRefTop = useRef(null);
