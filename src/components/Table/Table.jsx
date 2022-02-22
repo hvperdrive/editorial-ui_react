@@ -38,6 +38,7 @@ const Table = ({
 	rowExpansionTemplate = () => null,
 	moveRow = () => null,
 	indentSize = 24,
+	allowHorizontalDrag = true,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -89,7 +90,7 @@ const Table = ({
 				// Key can NOT be based on index because this will cause issues with react-dnd's
 				// ability to set the current item which is being dragged over/hovered
 				key={`table-row-${level}-${id}`}
-				allowHorizontalDrag
+				allowHorizontalDrag={allowHorizontalDrag}
 				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
@@ -266,6 +267,7 @@ Table.propTypes = {
 	striped: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
 	moveRow: PropTypes.func,
+	allowHorizontalDrag: PropTypes.bool,
 };
 
 export default Table;
