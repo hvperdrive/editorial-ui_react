@@ -2,10 +2,7 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
+	useEffect, useMemo, useRef, useState,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
@@ -25,6 +22,7 @@ const Tooltip = ({
 	const tooltipClasses = classnames('a-tooltip', 'a-tooltip--no-arrow', {
 		'a-tooltip--primary': type === TooltipTypeMap.PRIMARY,
 		'a-tooltip--secondary': type === TooltipTypeMap.SECONDARY,
+		'a-tooltip--white': type === TooltipTypeMap.WHITE,
 	});
 	const [mountNode, setMountNode] = useState(null);
 	const popperElement = useRef(null);
@@ -40,17 +38,20 @@ const Tooltip = ({
 	const popperOptions = useMemo(
 		() => ({
 			placement,
-			modifiers: [{
-				name: 'offset',
-				options: {
-					offset: [0, 10],
+			modifiers: [
+				{
+					name: 'offset',
+					options: {
+						offset: [0, 10],
+					},
 				},
-			}, {
-				name: 'arrow',
-				options: {
-					element: arrowRef,
+				{
+					name: 'arrow',
+					options: {
+						element: arrowRef,
+					},
 				},
-			}],
+			],
 		}),
 		[arrowRef, placement],
 	);
@@ -70,7 +71,9 @@ const Tooltip = ({
 			ref={popperElement}
 			{...attributes.popper}
 		>
-			<div ref={setArrowRef} className="arrow" />
+			<div ref={setArrowRef} className="arrow">
+				{type === TooltipTypeMap.WHITE && <div className="innerArrow" />}
+			</div>
 			{children}
 		</div>
 	) : null);
@@ -85,7 +88,12 @@ Tooltip.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]).isRequired,
-	type: PropTypes.oneOf([TooltipTypeMap.DEFAULT, TooltipTypeMap.PRIMARY, TooltipTypeMap.SECONDARY]),
+	type: PropTypes.oneOf([
+		TooltipTypeMap.DEFAULT,
+		TooltipTypeMap.PRIMARY,
+		TooltipTypeMap.SECONDARY,
+		TooltipTypeMap.WHITE,
+	]),
 	targetRef: PropTypes.oneOfType([
 		PropTypes.func,
 		PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
