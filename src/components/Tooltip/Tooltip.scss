@@ -170,5 +170,11 @@
 				right: 0.75rem;
 			}
 		}
+
+		&[data-popper-placement^="top-end"] {
+			.arrow {
+				right: 0.75rem;
+			}
+		}
 	}
 }
