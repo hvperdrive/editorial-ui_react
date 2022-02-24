@@ -160,7 +160,7 @@ const Table = ({
 						<TableCell {...getCellProps(col, colIndex, row, rowIndex, indentSize, level)} />
 					))}
 				</TableRow>
-				{expanded && !expandNested && !!rowExpansionTemplate() && (
+				{expanded && !!rowExpansionTemplate() && (
 					<tr
 						key={`table-row-expanded-${level}-${rowIndex}`}
 						className="a-table-expanded-row"

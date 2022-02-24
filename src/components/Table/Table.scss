@@ -137,9 +137,3 @@
 		cursor: move;
 	}
 }
-
-.a-table--striped {
-	&:nth-child(even) {
-		background-color: $table-striped-bg;
-	}
-}

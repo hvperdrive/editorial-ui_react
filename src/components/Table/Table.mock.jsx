@@ -168,8 +168,8 @@ export const EXPANDABLE_NESTED_TABLE_MOCK_COLUMNS = (
 				gridTemplateColumns: '5rem auto',
 			}}
 			>
-				<p>Actie</p>
-				<p>Voornaam</p>
+				<p>Open</p>
+				<p>Firstname</p>
 			</div>
 		),
 		component: (value, rowData) => {
@@ -197,7 +197,7 @@ export const EXPANDABLE_NESTED_TABLE_MOCK_COLUMNS = (
 						padding: '0.75rem',
 					}}
 					>
-						{ rowData.label }
+						{ rowData.firstname }
 
 					</p>
 				</div>
@@ -216,8 +216,8 @@ export const EXPANDABLE_NESTED_TABLE_MOCK_COLUMNS = (
 		),
 	},
 	{
-		label: 'Status menu item',
-		value: 'status',
+		label: 'Lastname',
+		value: 'lastname',
 		width: '50%',
 		disableSorting: true,
 	},
@@ -226,28 +226,28 @@ export const EXPANDABLE_NESTED_TABLE_MOCK_COLUMNS = (
 export const EXPANDED_NESTED_TABLE_MOCK_ROWS = [
 	{
 		id: 0,
-		label: 'Wyatt',
-		status: 'Cooper',
+		firstname: 'Wyatt',
+		lastname: 'Cooper',
 	},
 	{
 		id: 1,
-		label: 'Mullen',
-		status: 'Ballard',
+		firstname: 'Mullen',
+		lastname: 'Ballard',
 		rows: [
 			{
 				id: 11,
-				label: 'Jerri',
-				status: 'Hicks',
+				firstname: 'Jerri',
+				lastname: 'Hicks',
 			},
 			{
 				id: 12,
-				label: 'Sharron',
-				status: 'Castro',
+				firstname: 'Sharron',
+				lastname: 'Castro',
 				rows: [
 					{
 						id: 121,
-						label: 'Jo',
-						status: 'Smets',
+						firstname: 'Gregory',
+						lastname: 'Vandevelde',
 					},
 				],
 			},
@@ -255,41 +255,41 @@ export const EXPANDED_NESTED_TABLE_MOCK_ROWS = [
 	},
 	{
 		id: 2,
-		label: 'Sonia',
-		status: 'Bass',
+		firstname: 'Sonia',
+		lastname: 'Bass',
 		rows: [
 			{
 				id: 21,
-				label: 'Harriett',
-				status: 'Horton',
+				firstname: 'Harriett',
+				lastname: 'Horton',
 			},
 		],
 	},
 	{
 		id: 3,
-		label: 'Kristen',
-		status: 'Moore',
+		firstname: 'Kristen',
+		lastname: 'Moore',
 	},
 	{
 		id: 4,
-		label: 'Moss',
-		status: 'Bowen',
+		firstname: 'Moss',
+		lastname: 'Bowen',
 		rows: [
 			{
 				id: 41,
-				label: 'Griffin',
-				status: 'Navarro',
+				firstname: 'Griffin',
+				lastname: 'Navarro',
 			},
 			{
 				id: 42,
-				label: 'Lebron',
-				status: 'James',
+				firstname: 'Lebron',
+				lastname: 'James',
 			},
 		],
 	},
 	{
 		id: 5,
-		label: 'Elaine',
-		status: 'Michael',
+		firstname: 'Elaine',
+		lastname: 'Michael',
 	},
 ];
