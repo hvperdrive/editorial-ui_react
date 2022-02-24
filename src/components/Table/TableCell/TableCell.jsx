@@ -22,7 +22,7 @@ const TableCell = ({
 	<HTMLTag className={classnames(className, classList, tdClassList)} style={style}>
 		{
 			indentingComponent
-			&& new Array(level).fill(0).map(() => indentingComponent())
+			&& new Array(level).fill(0).map(() => indentingComponent(value, rowData, rowIndex))
 		}
 		{ ellipsis && !isNil(value) ? (
 			<EllipsisWithTooltip type="primary">
