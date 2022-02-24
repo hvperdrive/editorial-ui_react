@@ -28,6 +28,10 @@
 	border-collapse: separate !important;
 	border-spacing: 0;
 
+	tr {
+		position: relative;
+	}
+
 	&.a-table--fixed {
 		table-layout: fixed;
 	}
@@ -75,10 +79,6 @@
 		display: table-row;
 		height: $spacer-lg;
 		transition: background-color $animation-duration $animation-easing;
-
-		&:nth-child(even) {
-			background-color: $table-striped-bg;
-		}
 
 		&--collapsed {
 			display: none;
@@ -135,5 +135,11 @@
 .a-table--draggable {
 	tbody tr {
 		cursor: move;
+	}
+}
+
+.a-table--striped {
+	&:nth-child(even) {
+		background-color: $table-striped-bg;
 	}
 }

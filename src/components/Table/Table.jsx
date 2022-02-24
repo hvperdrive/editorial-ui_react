@@ -39,6 +39,8 @@ const Table = ({
 	moveRow = () => null,
 	indentSize = 24,
 	allowHorizontalDrag = true,
+	nestedLoadingId,
+	expandNested = true,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -76,7 +78,12 @@ const Table = ({
 		return findExpandedRowIndex(row) !== -1;
 	};
 
-	const renderLoader = () => <TableLoader loadDataMessage={loadDataMessage} />;
+	const renderLoader = (inTableRow) => (
+		<TableLoader
+			loadDataMessage={loadDataMessage}
+			inTableRow={inTableRow}
+		/>
+	);
 
 	/**
 	 * Render
@@ -153,7 +160,7 @@ const Table = ({
 						<TableCell {...getCellProps(col, colIndex, row, rowIndex, indentSize, level)} />
 					))}
 				</TableRow>
-				{expanded && (
+				{expanded && !expandNested && !!rowExpansionTemplate() && (
 					<tr
 						key={`table-row-expanded-${level}-${rowIndex}`}
 						className="a-table-expanded-row"
@@ -163,13 +170,19 @@ const Table = ({
 						</td>
 					</tr>
 				)}
-				{row?.rows?.length
-					? row.rows.map((subRow, subRowIndex) => renderStaticRow(
-						subRow,
-						subRowIndex,
-						level + 1,
-					))
-					: null}
+				{
+					nestedLoadingId && nestedLoadingId.toString() === row.id.toString()
+						? (
+							<tr>
+								<td colSpan={columns.length}>{renderLoader(false)}</td>
+							</tr>
+						) : (expandNested || expanded)
+							? (row.rows || []).map((subRow, subRowIndex) => renderStaticRow(
+								subRow,
+								subRowIndex,
+								level + 1,
+							)) : null
+				}
 			</Fragment>
 		);
 	};
@@ -268,6 +281,8 @@ Table.propTypes = {
 	type: PropTypes.oneOf(['primary', 'secondary']),
 	moveRow: PropTypes.func,
 	allowHorizontalDrag: PropTypes.bool,
+	nestedLoadingId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	expandNested: PropTypes.bool,
 };
 
 export default Table;

@@ -54,22 +54,32 @@ export const getHeaderProps = (col, activeSorting, onSortClick, columnIndex) => 
 export const getCellProps = (col, colIndex, rowData, rowIndex, indentSize, level = 1) => {
 	const suffix = isString(col) && col ? col : col.label ? col.label : colIndex;
 	const key = `table-cell-${suffix}`;
+	let style = {};
 
 	if (isString(col)) {
 		return { key, label: col };
 	}
 
-	const indentStyle = { borderLeft: `${(level - 1) * (indentSize / 16)}rem solid white` };
-	const style = colIndex === 0 && level > 1 ? indentStyle : {};
+	if (!col.indentingComponent) {
+		const indentStyle = { borderLeft: `${(level - 1) * (indentSize / 16)}rem solid white` };
+		style = colIndex === 0 && level > 1 ? indentStyle : {};
+	} else {
+		style = {
+			display: 'flex',
+			flexDirection: 'row',
+		};
+	}
 
 	return {
 		key,
-		classList: col.classList,
+		classList: [...col.classList || [], ...col.tdClassList || []],
+		indentingComponent: col.indentingComponent,
 		component: col.component,
 		ellipsis: col.ellipsis,
 		rowData,
 		rowIndex,
 		value: getFormatValue(rowData, col, rowIndex),
 		style,
+		level,
 	};
 };

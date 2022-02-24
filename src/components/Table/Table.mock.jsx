@@ -154,3 +154,142 @@ export const TABLE_MOCK_NESTED_ROWS = [
 		lastName: 'Michael',
 	},
 ];
+export const EXPANDABLE_NESTED_TABLE_MOCK_COLUMNS = (
+	expandRow,
+) => [
+	{
+		label: '',
+		width: '50%',
+		disableSorting: true,
+		tdClassList: ['has-no-padding'],
+		headerComponent: () => (
+			<div style={{
+				display: 'grid',
+				gridTemplateColumns: '5rem auto',
+			}}
+			>
+				<p>Actie</p>
+				<p>Voornaam</p>
+			</div>
+		),
+		component: (value, rowData) => {
+			const { id } = rowData;
+
+			return (
+				<div style={{
+					display: 'grid',
+					gridTemplateColumns: '3rem auto',
+					alignItems: 'center',
+				}}
+				>
+					<div style={{
+						width: '2rem',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
+					>
+						{
+							rowData.rows && <button type="button" onClick={() => expandRow(id)} size="small">&gt;</button>
+						}
+					</div>
+					<p style={{
+						padding: '0.75rem',
+					}}
+					>
+						{ rowData.label }
+
+					</p>
+				</div>
+			);
+		},
+		indentingComponent: () => (
+			<div style={{
+				backgroundColor: 'lightgrey',
+				height: '3.5rem',
+				width: '2rem',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+			/>
+		),
+	},
+	{
+		label: 'Status menu item',
+		value: 'status',
+		width: '50%',
+		disableSorting: true,
+	},
+];
+
+export const EXPANDED_NESTED_TABLE_MOCK_ROWS = [
+	{
+		id: 0,
+		label: 'Wyatt',
+		status: 'Cooper',
+	},
+	{
+		id: 1,
+		label: 'Mullen',
+		status: 'Ballard',
+		rows: [
+			{
+				id: 11,
+				label: 'Jerri',
+				status: 'Hicks',
+			},
+			{
+				id: 12,
+				label: 'Sharron',
+				status: 'Castro',
+				rows: [
+					{
+						id: 121,
+						label: 'Jo',
+						status: 'Smets',
+					},
+				],
+			},
+		],
+	},
+	{
+		id: 2,
+		label: 'Sonia',
+		status: 'Bass',
+		rows: [
+			{
+				id: 21,
+				label: 'Harriett',
+				status: 'Horton',
+			},
+		],
+	},
+	{
+		id: 3,
+		label: 'Kristen',
+		status: 'Moore',
+	},
+	{
+		id: 4,
+		label: 'Moss',
+		status: 'Bowen',
+		rows: [
+			{
+				id: 41,
+				label: 'Griffin',
+				status: 'Navarro',
+			},
+			{
+				id: 42,
+				label: 'Lebron',
+				status: 'James',
+			},
+		],
+	},
+	{
+		id: 5,
+		label: 'Elaine',
+		status: 'Michael',
+	},
+];
