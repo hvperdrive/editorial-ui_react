@@ -1,0 +1,12 @@
+@import '~@a-ui/core/dist/assets/styles/_quarks';
+
+.o-language-header {
+	padding-top: $spacer;
+
+	&__top-section {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid $border-color-light;
+	}
+}

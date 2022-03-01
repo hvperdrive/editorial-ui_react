@@ -1,0 +1,31 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Button, Breadcrumbs } from '@acpaas-ui/react-components';
+
+import { LANGUAGE_HEADER_MOCK_LANGUAGES, LANGUAGE_HEADER_MOCK_TOOLTIP} from './LanguageHeader.mock';
+import LanguageHeader from './LanguageHeader';
+import { LanguageHeaderFormSection } from './LanguageHeader.slots';
+
+<Meta title="LanguageHeader" component={LanguageHeader} />
+
+# Language Header
+
+The language header can be used as a language selector on top of a form.
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<LanguageHeader
+			languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
+			tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
+			onChangeLanguage={console.log}>
+			<LanguageHeaderFormSection>
+				formSlot
+			</LanguageHeaderFormSection>
+		</LanguageHeader>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={LanguageHeader} />

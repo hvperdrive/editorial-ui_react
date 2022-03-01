@@ -9,7 +9,14 @@ import styles from './ScrollableTabs.module.scss';
 
 const cx = classnames.bind(styles);
 
-const ScrollableTabs = ({ className, items = [], linkProps = (props) => props }) => {
+const ScrollableTabs = ({
+	className,
+	items = [],
+	linkProps = (props) => props,
+	tabStyle = 'link',
+	alignTabs = 'left',
+	onChange = () => {},
+}) => {
 	/**
 	 * Hooks
 	 */
@@ -55,28 +62,34 @@ const ScrollableTabs = ({ className, items = [], linkProps = (props) => props })
 	}, [activeEl]);
 
 	// Set gradients to indicate it's scrollable
-	const setGradients = useCallback((element) => {
-		if (!element) {
-			return;
-		}
+	const setGradients = useCallback(
+		(element) => {
+			if (!element) {
+				return;
+			}
 
-		const containerEnd = Math.round(element.clientWidth);
-		const leftOffset = Math.round(element.scrollLeft);
-		const rightOffset = Math.round(element.scrollWidth - leftOffset);
-		const showLeft = leftOffset > 0;
-		const showRight = rightOffset > containerEnd;
+			const containerEnd = Math.round(element.clientWidth);
+			const leftOffset = Math.round(element.scrollLeft);
+			const rightOffset = Math.round(element.scrollWidth - leftOffset);
+			const showLeft = leftOffset > 0;
+			const showRight = rightOffset > containerEnd;
 
-		if (showLeft !== showLeftGradient) {
-			setShowLeftGradient(showLeft);
-		}
-		if (showRight !== showRightGradient) {
-			setShowRightGradient(showRight);
-		}
-	}, [showLeftGradient, showRightGradient]);
+			if (showLeft !== showLeftGradient) {
+				setShowLeftGradient(showLeft);
+			}
+			if (showRight !== showRightGradient) {
+				setShowRightGradient(showRight);
+			}
+		},
+		[showLeftGradient, showRightGradient],
+	);
 
-	const onTabsScroll = useCallback((e) => {
-		setGradients(e.target);
-	}, [setGradients]);
+	const onTabsScroll = useCallback(
+		(e) => {
+			setGradients(e.target);
+		},
+		[setGradients],
+	);
 
 	// Set scroll listener
 	useEffect(() => {
@@ -119,20 +132,49 @@ const ScrollableTabs = ({ className, items = [], linkProps = (props) => props })
 			ref={scrollContainerRef}
 			style={{ height: `${tabsHeight}px` }}
 		>
-			<Tabs items={items} linkProps={linkProps} />
+			{tabStyle === 'link' ? (
+				<Tabs items={items} linkProps={linkProps} />
+			) : (
+				<ul
+					className={cx('m-nav-tabs', {
+						'm-nav-tabs--left': alignTabs === 'left',
+						'm-nav-tabs--right': alignTabs === 'right',
+					})}
+				>
+					{items.map((item) => (
+						<li key={item.name}>
+							<button
+								type="button"
+								className={cx({
+									'is-active': item.active,
+									'is-disabled': item.disabled,
+								})}
+								onClick={() => onChange(item)}
+							>
+								{item.name}
+							</button>
+						</li>
+					))}
+				</ul>
+			)}
 		</div>
 	);
 };
 
 ScrollableTabs.propTypes = {
 	className: PropTypes.string,
-	items: PropTypes.arrayOf(PropTypes.shape({
-		name: PropTypes.string.isRequired,
-		target: PropTypes.string.isRequired,
-		active: PropTypes.bool,
-		disabled: PropTypes.bool,
-	})),
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string.isRequired,
+			target: PropTypes.string,
+			active: PropTypes.bool,
+			disabled: PropTypes.bool,
+		}),
+	),
+	tabStyle: PropTypes.oneOf(['link', 'button']),
+	alignTabs: PropTypes.oneOf(['left', 'right', 'center']),
 	linkProps: PropTypes.func,
+	onChange: PropTypes.func,
 };
 
 export default ScrollableTabs;

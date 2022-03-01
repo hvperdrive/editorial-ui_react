@@ -15,3 +15,4 @@ export * from './Timepicker';
 export * from './Cascader';
 export * from './Tooltip';
 export * from './EllipsisWithTooltip';
+export * from './LanguageHeader';
