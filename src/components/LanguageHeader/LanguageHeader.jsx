@@ -3,12 +3,10 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 
-import { useSlot } from '../../hooks';
 import { ScrollableTabs } from '../ScrollableTabs';
 import { Tooltip, TooltipTypeMap } from '../Tooltip';
 
 import styles from './LanguageHeader.module.scss';
-import { LanguageHeaderFormSection } from './LanguageHeader.slots';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +17,6 @@ const LanguageHeader = ({
 	tooltipText,
 	onChangeLanguage,
 }) => {
-	const formSlot = useSlot(LanguageHeaderFormSection, children);
 	const buttonRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
 
@@ -47,16 +44,12 @@ const LanguageHeader = ({
 					<div>
 						<button
 							type="button"
-							className="a-button a-button-transparent has-icon u-no-padding"
+							className="a-button a-button-transparent has-icon"
 							ref={buttonRef}
 							onMouseEnter={() => setVisibility(true)}
 							onMouseLeave={() => setVisibility(false)}
 						>
-							<Icon
-								name="globe"
-								onMouseEnter={() => setVisibility(true)}
-								onMouseLeave={() => setVisibility(false)}
-							/>
+							<Icon name="globe" />
 
 							<Tooltip
 								isVisible={isVisible}
@@ -71,7 +64,7 @@ const LanguageHeader = ({
 				)}
 			</div>
 			<div className={cx('o-language-header__form-section')}>
-				{formSlot}
+				{children}
 			</div>
 		</div>
 	);

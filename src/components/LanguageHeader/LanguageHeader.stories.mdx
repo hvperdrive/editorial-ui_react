@@ -1,9 +1,9 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { Button, Breadcrumbs } from '@acpaas-ui/react-components';
+import { InputLabel, TextField } from '@acpaas-ui/react-components';
 
 import { LANGUAGE_HEADER_MOCK_LANGUAGES, LANGUAGE_HEADER_MOCK_TOOLTIP} from './LanguageHeader.mock';
 import LanguageHeader from './LanguageHeader';
-import { LanguageHeaderFormSection } from './LanguageHeader.slots';
+import MultilanguageWrapper from '../MultilanguageWrapper/MultilanguageWrapper';
 
 <Meta title="LanguageHeader" component={LanguageHeader} />
 
@@ -16,12 +16,30 @@ The language header can be used as a language selector on top of a form.
 <Preview>
 	<Story name='Base'>
 		<LanguageHeader
+			className="u-margin"
 			languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
 			tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
 			onChangeLanguage={console.log}>
-			<LanguageHeaderFormSection>
-				formSlot
-			</LanguageHeaderFormSection>
+				<div className="u-margin-top">
+					<InputLabel htmlFor={"inputfield"}>Label</InputLabel>
+					<TextField
+						id="inputField"
+						onChange={() => null}
+						placeholder="Please select a city"
+						value={""}
+					/>
+				</div>
+				<MultilanguageWrapper className="u-margin-top">
+					<div>
+						<InputLabel htmlFor={"inputfield"}>Label</InputLabel>
+						<TextField
+							id="inputField"
+							onChange={() => null}
+							placeholder="Please select a city"
+							value={""}
+						/>
+					</div>
+				</MultilanguageWrapper>
 		</LanguageHeader>
 	</Story>
 </Preview>
