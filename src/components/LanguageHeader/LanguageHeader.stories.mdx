@@ -1,9 +1,11 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { InputLabel, TextField } from '@acpaas-ui/react-components';
+import { InputLabel, TextField, Textarea } from '@acpaas-ui/react-components';
+import { Formik, Field } from 'formik';
+import { useState } from 'react';
 
 import { LANGUAGE_HEADER_MOCK_LANGUAGES, LANGUAGE_HEADER_MOCK_TOOLTIP} from './LanguageHeader.mock';
 import LanguageHeader from './LanguageHeader';
-import MultilanguageWrapper from '../MultilanguageWrapper/MultilanguageWrapper';
+import MultilanguageField from '../MultilanguageField/MultilanguageField';
 
 <Meta title="LanguageHeader" component={LanguageHeader} />
 
@@ -15,32 +17,63 @@ The language header can be used as a language selector on top of a form.
 
 <Preview>
 	<Story name='Base'>
-		<LanguageHeader
-			className="u-margin"
-			languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
-			tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
-			onChangeLanguage={console.log}>
-				<div className="u-margin-top">
-					<InputLabel htmlFor={"inputfield"}>Label</InputLabel>
-					<TextField
-						id="inputField"
-						onChange={() => null}
-						placeholder="Please select a city"
-						value={""}
-					/>
-				</div>
-				<MultilanguageWrapper className="u-margin-top">
-					<div>
-						<InputLabel htmlFor={"inputfield"}>Label</InputLabel>
-						<TextField
-							id="inputField"
-							onChange={() => null}
-							placeholder="Please select a city"
-							value={""}
-						/>
+		{() => {
+			const [activeLanguage, setActiveLanguage] = useState(LANGUAGE_HEADER_MOCK_LANGUAGES[1]);
+			const languages = LANGUAGE_HEADER_MOCK_LANGUAGES;
+
+			const onSave = (newValue) => {
+				console.log(newValue);
+			};
+
+			const onChange = (newValue) => {
+				console.log('change');
+			};
+
+			return (
+				<LanguageHeader
+					className="u-margin"
+					languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
+					activeLanguage={activeLanguage}
+					tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
+					onChangeLanguage={setActiveLanguage}
+				>
+					<div className="u-margin-top">
+						<Formik
+							onSubmit={onSave}
+							initialValues={{title: '', label: ''}}
+						>
+							{({ errors, submitForm, values, resetForm }) => {
+								onChange(values);
+
+								return (
+									<>
+										<div className="row u-margin-bottom">
+											<div className="col-xs-12">
+												<Field
+													as={TextField}
+													label="Titel"
+													name="title"
+												/>
+											</div>
+										</div>
+										<div className="row u-margin-bottom">
+											<div className="col-xs-12">
+												<MultilanguageField
+													as={Textarea}
+													label="Naam"
+													name="description"
+													activeLanguage={activeLanguage}
+												/>
+											</div>
+										</div>
+									</>
+								);
+							}}
+						</Formik>
 					</div>
-				</MultilanguageWrapper>
-		</LanguageHeader>
+				</LanguageHeader>
+			);
+		}}
 	</Story>
 </Preview>
 

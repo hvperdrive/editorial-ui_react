@@ -1,11 +1,12 @@
 import { Icon } from '@acpaas-ui/react-components';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { ScrollableTabs } from '../ScrollableTabs';
 import { Tooltip, TooltipTypeMap } from '../Tooltip';
 
+import { setActiveLanguage } from './LanguageHeader.helpers';
 import styles from './LanguageHeader.module.scss';
 
 const cx = classNames.bind(styles);
@@ -14,20 +15,36 @@ const LanguageHeader = ({
 	className,
 	children,
 	languages = [],
+	activeLanguage,
 	tooltipText,
 	onChangeLanguage,
 }) => {
 	const buttonRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
+	const [availableLanguages, setLanguages] = useState([]);
+
+	useEffect(() => {
+		if (!activeLanguage) {
+			setLanguages(setActiveLanguage(languages, 0));
+		} else {
+			const i = languages.findIndex((l) => l === activeLanguage);
+			setLanguages(setActiveLanguage(languages, i));
+		}
+	}, [languages, activeLanguage]);
+
+	const handleChangeLanguage = (lang, i) => {
+		setLanguages(setActiveLanguage(languages, i));
+		onChangeLanguage(lang.name);
+	};
 
 	const renderTabs = () => {
-		if (languages && languages.length > 0) {
+		if (availableLanguages && availableLanguages.length > 0) {
 			return (
 				<ScrollableTabs
 					className={cx('o-language-header__tabs')}
-					items={languages}
+					items={availableLanguages}
 					tabStyle="button"
-					onChange={onChangeLanguage}
+					onChange={handleChangeLanguage}
 				/>
 			);
 		}
@@ -81,13 +98,8 @@ LanguageHeader.propTypes = {
 		PropTypes.node,
 	]),
 	/** languages, which are shown on the top of the component */
-	languages: PropTypes.arrayOf(
-		PropTypes.shape({
-			name: PropTypes.string.isRequired,
-			active: PropTypes.bool,
-			disabled: PropTypes.bool,
-		}),
-	),
+	languages: PropTypes.arrayOf(PropTypes.string),
+	activeLanguage: PropTypes.string,
 	tooltipText: PropTypes.string,
 	onChangeLanguage: PropTypes.func,
 };

@@ -141,7 +141,7 @@ const ScrollableTabs = ({
 						'm-nav-tabs--right': alignTabs === 'right',
 					})}
 				>
-					{items.map((item) => (
+					{items.map((item, index) => (
 						<li key={item.name}>
 							<button
 								type="button"
@@ -149,7 +149,7 @@ const ScrollableTabs = ({
 									'is-active': item.active,
 									'is-disabled': item.disabled,
 								})}
-								onClick={() => onChange(item)}
+								onClick={() => onChange(item, index)}
 							>
 								{item.name}
 							</button>
