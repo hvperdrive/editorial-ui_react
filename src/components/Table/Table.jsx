@@ -37,6 +37,10 @@ const Table = ({
 	noDataMessage = 'No data available.',
 	rowExpansionTemplate = () => null,
 	moveRow = () => null,
+	indentSize = 24,
+	allowHorizontalDrag = true,
+	nestedLoadingId,
+	expandNested = true,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -74,12 +78,17 @@ const Table = ({
 		return findExpandedRowIndex(row) !== -1;
 	};
 
-	const renderLoader = () => <TableLoader loadDataMessage={loadDataMessage} />;
+	const renderLoader = (inTableRow) => (
+		<TableLoader
+			loadDataMessage={loadDataMessage}
+			inTableRow={inTableRow}
+		/>
+	);
 
 	/**
 	 * Render
 	 */
-	const renderDraggableRow = (row, rowIndex, level, isLast, collapse = false) => {
+	const renderDraggableRow = (row, rowIndex, level, collapse = false, parentIsDragging = false) => {
 		const expanded = isRowExpanded(row);
 		const id = path([dataKey])(row);
 
@@ -88,24 +97,28 @@ const Table = ({
 				// Key can NOT be based on index because this will cause issues with react-dnd's
 				// ability to set the current item which is being dragged over/hovered
 				key={`table-row-${level}-${id}`}
+				allowHorizontalDrag={allowHorizontalDrag}
 				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
-				accept={[`${DND_ITEM_TYPE}-${level}`, `${DND_ITEM_TYPE}-${level + 1}`]}
+				accept={[DND_ITEM_TYPE]}
 			>
 				{({ dragDropRef, isDragging }) => (
 					<>
 						<TableRow
+							className="a-table__row"
 							collapseOnDrag={collapse}
 							hasClickAction={hasClickAction}
 							onClick={() => onRowClick(row)}
 							isDragging={isDragging}
-							isLast={isLast}
 							level={level}
-							trRef={dragDropRef}
+							innerRef={dragDropRef}
 						>
-							{columns.map((col) => (
-								<TableCell {...getCellProps(col, row, rowIndex)} />
+							{columns.map((col, colIndex) => (
+								<TableCell
+									{...getCellProps(col, colIndex, row, rowIndex, indentSize, level)}
+									className="a-table__cell"
+								/>
 							))}
 						</TableRow>
 						{expanded && (
@@ -123,8 +136,8 @@ const Table = ({
 								subRow,
 								subRowIndex,
 								level + 1,
-								row.rows.length - 1 === subRowIndex,
-								level === 1 && isDragging,
+								level >= 1 && (isDragging || parentIsDragging),
+								isDragging || parentIsDragging,
 							),
 						) : null}
 					</>
@@ -133,23 +146,21 @@ const Table = ({
 		);
 	};
 
-	const renderStaticRow = (row, rowIndex, level, isLast) => {
+	const renderStaticRow = (row, rowIndex, level) => {
 		const expanded = isRowExpanded(row);
 
 		return (
 			<Fragment key={`table-row-${level}-${rowIndex}`}>
 				<TableRow
-					className={classnames(pathOr('', ['classList'], row))}
+					className={classnames(['a-table__row', ...pathOr('', ['classList'], row)])}
 					hasClickAction={hasClickAction}
 					onClick={() => onRowClick(row)}
-					level={level}
-					isLast={isLast}
 				>
-					{columns.map((col) => (
-						<TableCell {...getCellProps(col, row, rowIndex)} />
+					{columns.map((col, colIndex) => (
+						<TableCell {...getCellProps(col, colIndex, row, rowIndex, indentSize, level)} />
 					))}
 				</TableRow>
-				{expanded && (
+				{expanded && !!rowExpansionTemplate() && (
 					<tr
 						key={`table-row-expanded-${level}-${rowIndex}`}
 						className="a-table-expanded-row"
@@ -159,14 +170,19 @@ const Table = ({
 						</td>
 					</tr>
 				)}
-				{row?.rows?.length
-					? row.rows.map((subRow, subRowIndex) => renderStaticRow(
-						subRow,
-						subRowIndex,
-						level + 1,
-						row.rows.length - 1 === subRowIndex,
-					))
-					: null}
+				{
+					nestedLoadingId && nestedLoadingId.toString() === row.id.toString()
+						? (
+							<tr>
+								<td colSpan={columns.length}>{renderLoader(false)}</td>
+							</tr>
+						) : (expandNested || expanded)
+							? (row.rows || []).map((subRow, subRowIndex) => renderStaticRow(
+								subRow,
+								subRowIndex,
+								level + 1,
+							)) : null
+				}
 			</Fragment>
 		);
 	};
@@ -195,9 +211,11 @@ const Table = ({
 							</TableRow>
 						</thead>
 					)}
-					<tbody>
-						{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
-					</tbody>
+					{
+						<tbody className="a-table__body">
+							{showLoader ? renderLoader() : rows.map((row, index) => renderTableRow(row, index))}
+						</tbody>
+					}
 				</table>
 			</div>
 		</DndContainer>
@@ -262,6 +280,9 @@ Table.propTypes = {
 	striped: PropTypes.bool,
 	type: PropTypes.oneOf(['primary', 'secondary']),
 	moveRow: PropTypes.func,
+	allowHorizontalDrag: PropTypes.bool,
+	nestedLoadingId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	expandNested: PropTypes.bool,
 };
 
 export default Table;

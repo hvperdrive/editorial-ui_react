@@ -51,20 +51,35 @@ export const getHeaderProps = (col, activeSorting, onSortClick, columnIndex) => 
 	};
 };
 
-export const getCellProps = (col, rowData, rowIndex) => {
-	const keyPrefix = 'table-cell';
+export const getCellProps = (col, colIndex, rowData, rowIndex, indentSize, level = 1) => {
+	const suffix = isString(col) && col ? col : col.label ? col.label : colIndex;
+	const key = `table-cell-${suffix}`;
+	let style = {};
 
 	if (isString(col)) {
-		return { key: `${keyPrefix}-${col}-${rowData.id}`, label: col };
+		return { key, label: col };
+	}
+
+	if (!col.indentingComponent) {
+		const indentStyle = { borderLeft: `${(level - 1) * (indentSize / 16)}rem solid white` };
+		style = colIndex === 0 && level > 1 ? indentStyle : {};
+	} else {
+		style = {
+			display: 'flex',
+			flexDirection: 'row',
+		};
 	}
 
 	return {
-		key: `${keyPrefix}-${col.label}-${rowData.id}`,
-		classList: col.classList,
+		key,
+		classList: [...col.classList || [], ...col.tdClassList || []],
+		indentingComponent: col.indentingComponent,
 		component: col.component,
 		ellipsis: col.ellipsis,
 		rowData,
 		rowIndex,
 		value: getFormatValue(rowData, col, rowIndex),
+		style,
+		level,
 	};
 };

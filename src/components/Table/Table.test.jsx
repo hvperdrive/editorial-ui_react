@@ -94,8 +94,8 @@ describe('<Table />', () => {
 		const firstNestedDataRow = TABLE_MOCK_NESTED_ROWS.find((row) => (row.rows || []).length);
 		const firstNestedDataCell = firstNestedDataRow.rows[0];
 		const { container } = render(<Table rows={TABLE_MOCK_NESTED_ROWS} columns={columns} />);
-		const firstNestedRowEl = container.querySelector('.a-table__row--level-2');
-		const nestedCells = firstNestedRowEl.querySelectorAll('td');
+		const rows = container.querySelectorAll('.a-table__row');
+		const nestedCells = rows[2].querySelectorAll('td');
 
 		expect(nestedCells[0]).toHaveTextContent(firstNestedDataCell.id);
 		expect(nestedCells[1]).toHaveTextContent(firstNestedDataCell.firstName);
