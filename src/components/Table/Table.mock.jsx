@@ -88,7 +88,6 @@ export const TABLE_MOCK_ROWS = [
 		firstName: 'Griffin',
 		lastName: 'Navarro',
 	},
-
 ];
 
 export const TABLE_MOCK_NESTED_ROWS = [
@@ -154,6 +153,7 @@ export const TABLE_MOCK_NESTED_ROWS = [
 		lastName: 'Michael',
 	},
 ];
+
 export const EXPANDABLE_NESTED_TABLE_MOCK_COLUMNS = (
 	expandRow,
 ) => [

@@ -78,10 +78,12 @@ const Table = ({
 		return findExpandedRowIndex(row) !== -1;
 	};
 
-	const renderLoader = (inTableRow) => (
+	const renderLoader = (inTableRow, indentingComponent, level) => (
 		<TableLoader
 			loadDataMessage={loadDataMessage}
 			inTableRow={inTableRow}
+			indentingComponent={indentingComponent}
+			level={level}
 		/>
 	);
 
@@ -174,7 +176,9 @@ const Table = ({
 					nestedLoadingId && nestedLoadingId.toString() === row.id.toString()
 						? (
 							<tr>
-								<td colSpan={columns.length}>{renderLoader(false)}</td>
+								<td colSpan={columns.length} style={{ padding: 0 }}>
+									{renderLoader(false, columns[0].indentingComponent, level)}
+								</td>
 							</tr>
 						) : (expandNested || expanded)
 							? (row.rows || []).map((subRow, subRowIndex) => renderStaticRow(

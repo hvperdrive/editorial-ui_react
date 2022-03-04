@@ -7,6 +7,8 @@ import '../Table.scss';
 const TableLoader = ({
 	loadDataMessage,
 	inTableRow = true,
+	indentingComponent,
+	level = 1,
 }) => (
 	inTableRow ? (
 		<tr>
@@ -19,7 +21,11 @@ const TableLoader = ({
 		</tr>
 	) : (
 		<div className="a-table--loading">
-			<Spinner className="u-margin-right-xs" style={{ display: 'inline' }} />
+			{
+				indentingComponent
+			&& new Array(level + 1).fill(0).map(() => indentingComponent())
+			}
+			<Spinner className={`u-margin-right-xs ${!!indentingComponent && 'u-margin-left-xs'}`} style={{ display: 'inline' }} />
 			<span>{loadDataMessage}</span>
 		</div>
 	)
@@ -28,6 +34,8 @@ const TableLoader = ({
 TableLoader.propTypes = {
 	loadDataMessage: PropTypes.string,
 	inTableRow: PropTypes.bool,
+	indentingComponent: PropTypes.func,
+	level: PropTypes.number,
 };
 
 export default TableLoader;
