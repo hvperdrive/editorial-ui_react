@@ -22,8 +22,7 @@ const TableLoader = ({
 	) : (
 		<div className="a-table--loading">
 			{
-				indentingComponent
-			&& new Array(level + 1).fill(0).map(() => indentingComponent())
+				indentingComponent && new Array(level + 1).fill(0).map(() => indentingComponent())
 			}
 			<Spinner className={`u-margin-right-xs ${!!indentingComponent && 'u-margin-left-xs'}`} style={{ display: 'inline' }} />
 			<span>{loadDataMessage}</span>
