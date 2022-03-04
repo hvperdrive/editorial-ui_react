@@ -12,14 +12,15 @@ const cx = classNames.bind(styles);
 const MultilanguageField = ({
 	activeLanguage, languages, setFieldValue, ...props
 }) => {
-	const activeLang = activeLanguage.toLowerCase();
-
 	const getFieldValue = () => {
 		// TODO: remove value if languages does not contain key of value
+		if (!activeLanguage) {
+			return;
+		}
 
 		// if multilanguage, get value for active language
 		if (pathOr(false, ['multilanguage'], props.value)) {
-			const val = pathOr('', [activeLang], props.value);
+			const val = pathOr('', [activeLanguage.key], props.value);
 
 			return val;
 		}
@@ -27,7 +28,7 @@ const MultilanguageField = ({
 		// else, create multilanguage object and set empty value for active language
 		setFieldValue(props.name, {
 			multilanguage: true,
-			[activeLang]: props.value || '',
+			[activeLanguage.key]: props.value || '',
 		});
 
 		return props.value || '';
@@ -35,18 +36,25 @@ const MultilanguageField = ({
 	return (
 		<div className={cx('u-bg-light', 'o-multilanguage-field')}>
 			<Icon name="globe" className={cx('o-multilanguage-field__icon')} />
-			<Field
-				{...props}
-				name={`${props.name}.${activeLang}`}
-				value={getFieldValue()}
-			/>
+			{activeLanguage && (
+				<Field
+					{...props}
+					name={`${props.name}.${activeLanguage.key}`}
+					value={getFieldValue()}
+				/>
+			)}
 		</div>
 	);
 };
 
+const languageType = PropTypes.shape({
+	key: PropTypes.string.isRequired,
+	primary: PropTypes.bool,
+});
+
 MultilanguageField.propTypes = {
-	activeLanguage: PropTypes.string.isRequired,
-	languages: PropTypes.arrayOf(PropTypes.string).isRequired,
+	activeLanguage: languageType,
+	languages: PropTypes.arrayOf(languageType).isRequired,
 	name: PropTypes.string.isRequired,
 	// eslint-disable-next-line react/forbid-prop-types
 	value: PropTypes.any,

@@ -1,13 +1,22 @@
-export const LANGUAGE_HEADER_MOCK_LANGUAGES = ['NL', 'FR', 'DE', 'EN'];
+/* eslint-disable max-len */
 
-// TODO: map languages to object
-/* [
+export const LANGUAGE_HEADER_MOCK_LANGUAGES = [
 	{
 		key: 'nl',
 		primary: true,
 	},
-]; */
+	{
+		key: 'fr',
+	},
+	{
+		key: 'de',
+	},
+	{
+		key: 'en',
+	},
+];
 
 export const LANGUAGE_HEADER_MOCK_TOOLTIP = 'Er zijn opties voor meerder talen in dit formulier. Selecteer een taal om specifieke instellingen te configureren.';
 
-export const INITIAL_VALUES_MOCK = { title: '', description: { nl: 'nederlands', fr: 'frans', multilanguage: true } };
+// export const INITIAL_VALUES_MOCK = { title: '', description: { nl: 'nederlands', fr: 'frans', multilanguage: true } };
+export const INITIAL_VALUES_MOCK = { title: '', description: 'test' };

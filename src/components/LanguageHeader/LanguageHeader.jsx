@@ -21,13 +21,11 @@ const LanguageHeader = ({
 }) => {
 	const buttonRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
-	const [availableLanguages, setLanguages] = useState([]);
+	const [availableLanguages, setLanguages] = useState(null);
 
 	useEffect(() => {
-		if (!activeLanguage) {
-			setLanguages(setActiveLanguage(languages, 0));
-		} else {
-			const i = languages.findIndex((l) => l === activeLanguage);
+		if (activeLanguage) {
+			const i = languages.findIndex((l) => l.key === activeLanguage.key);
 			setLanguages(setActiveLanguage(languages, i));
 		}
 	}, [languages, activeLanguage]);
@@ -87,6 +85,11 @@ const LanguageHeader = ({
 	);
 };
 
+const languageType = PropTypes.shape({
+	key: PropTypes.string.isRequired,
+	primary: PropTypes.bool,
+});
+
 LanguageHeader.propTypes = {
 	/**
 	 * Class name that will be added to the root element
@@ -98,8 +101,8 @@ LanguageHeader.propTypes = {
 		PropTypes.node,
 	]),
 	/** languages, which are shown on the top of the component */
-	languages: PropTypes.arrayOf(PropTypes.string),
-	activeLanguage: PropTypes.string,
+	languages: PropTypes.arrayOf(languageType).isRequired,
+	activeLanguage: languageType,
 	tooltipText: PropTypes.string,
 	onChangeLanguage: PropTypes.func,
 };
