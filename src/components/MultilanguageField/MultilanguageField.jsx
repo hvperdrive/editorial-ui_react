@@ -27,10 +27,10 @@ const MultilanguageField = ({
 		// else, create multilanguage object and set empty value for active language
 		setFieldValue(props.name, {
 			multilanguage: true,
-			[activeLang]: '',
+			[activeLang]: props.value || '',
 		});
 
-		return '';
+		return props.value || '';
 	};
 	return (
 		<div className={cx('u-bg-light', 'o-multilanguage-field')}>
@@ -50,7 +50,7 @@ MultilanguageField.propTypes = {
 	name: PropTypes.string.isRequired,
 	// eslint-disable-next-line react/forbid-prop-types
 	value: PropTypes.any,
-	setFieldValue: PropTypes.func,
+	setFieldValue: PropTypes.func.isRequired,
 };
 
 export default MultilanguageField;

@@ -1,7 +1,7 @@
 import { TextField } from "@acpaas-ui/react-components";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { Formik } from 'formik';
+import { Formik } from "formik";
 
 import MultilanguageField from "./MultilanguageField";
 
@@ -15,14 +15,19 @@ Multilanguage field for forms, indicates which fields are multilingual
 
 <Preview>
 	<Story name="Base">
-		<Formik onSubmit={console.log} initialValues={{label: 'test'}}>
-			<MultilanguageField
-				as={TextField}
-				disabled={false}
-				label="Naam"
-				name="label"
-				required={true}
-			/>
+		<Formik onSubmit={console.log} initialValues={{label: { nl: 'nederlands', multilanguage: true }}}>
+			{({ errors, submitForm, values, resetForm, setFieldValue }) => {
+				return (
+					<MultilanguageField
+						as={TextField}
+						label="Omschrijving"
+						name="description"
+						value={values.description}
+						setFieldValue={setFieldValue}
+						languages={['nl']}
+						activeLanguage={'nl'}/>
+				)
+			}}
 		</Formik>
 	</Story>
 </Preview>

@@ -18,7 +18,6 @@ The language header can be used as a language selector on top of a form.
 	<Story name='Base'>
 		{() => {
 			const [activeLanguage, setActiveLanguage] = useState(LANGUAGE_HEADER_MOCK_LANGUAGES[1]);
-			const languages = LANGUAGE_HEADER_MOCK_LANGUAGES;
 			const onSave = (newValue) => {
 				console.log(newValue);
 			};
@@ -33,36 +32,68 @@ The language header can be used as a language selector on top of a form.
 					tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
 					onChangeLanguage={setActiveLanguage}>
 					<div className="u-margin-top">
-						<Formik
-							onSubmit={onSave}
-							initialValues={INITIAL_VALUES_MOCK}>
-							{({ errors, submitForm, values, resetForm, setFieldValue }) => {
-								onChange(values);
-								return (
-									<div>
-										<div className="row u-margin-bottom">
-											<div className="col-xs-12">
-												<Field as={TextField} label="Titel" name="title"/>
-											</div>
-										</div>
-										<div className="row u-margin-bottom">
-											<div className="col-xs-12">
-												<MultilanguageField
-													as={Textarea}
-													label="Omschrijving"
-													name="description"
-													value={values.description}
-													setFieldValue={setFieldValue}
-													languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
-													activeLanguage={activeLanguage}/>
-											</div>
-										</div>
-									</div>
-								)
-							}}
-						</Formik>
+						<p>Formik form placeholder</p>
+						<p>Selected language: <b>{activeLanguage}</b></p>
 					</div>
 				</LanguageHeader>
+			)
+		}}
+	</Story>
+</Preview>
+
+## In action
+
+<Preview>
+	<Story name='In action'>
+		{() => {
+			const [activeLanguage, setActiveLanguage] = useState(LANGUAGE_HEADER_MOCK_LANGUAGES[1]);
+			const languages = LANGUAGE_HEADER_MOCK_LANGUAGES;
+			const [formValues, setFormValues] = useState()
+			const onChange = (newValue) => {
+				setFormValues(newValue);
+			};
+			return (
+				<>
+					<LanguageHeader
+						className="u-margin"
+						languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
+						activeLanguage={activeLanguage}
+						tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
+						onChangeLanguage={setActiveLanguage}>
+						<div className="u-margin-top">
+							<Formik
+								onSubmit={console.log}
+								initialValues={INITIAL_VALUES_MOCK}>
+								{({ errors, submitForm, values, resetForm, setFieldValue }) => {
+									onChange(values);
+									return (
+										<div>
+											<div className="row u-margin-bottom">
+												<div className="col-xs-12">
+													<Field as={TextField} label="Titel" name="title"/>
+												</div>
+											</div>
+											<div className="row u-margin-bottom">
+												<div className="col-xs-12">
+													<MultilanguageField
+														as={Textarea}
+														label="Omschrijving"
+														name="description"
+														value={values.description}
+														setFieldValue={setFieldValue}
+														languages={LANGUAGE_HEADER_MOCK_LANGUAGES}
+														activeLanguage={activeLanguage}/>
+												</div>
+											</div>
+										</div>
+									)
+								}}
+							</Formik>
+						</div>
+					</LanguageHeader>
+					<p><b>Form values:</b></p>
+					<p>{JSON.stringify(formValues)}</p>
+				</>
 			)
 		}}
 	</Story>
