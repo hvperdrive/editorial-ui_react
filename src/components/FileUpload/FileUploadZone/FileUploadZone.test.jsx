@@ -75,7 +75,7 @@ describe('<FileUploadZone/>', () => {
 
 	describe('upload a file by clicking on the file upload zone', () => {
 		describe('upload an invalid file', () => {
-			it('should call the `invalidFiles` callback with the invalid files', () => {
+			it('should call the `invalidFiles` callback with the invalid files', async () => {
 				const invalidFiles = [
 					{
 						reasons: ['INVALID_FILE_TYPE'],
@@ -92,18 +92,18 @@ describe('<FileUploadZone/>', () => {
 					uploader,
 					invalidFiles: handleInvalidFiles,
 				});
-				fireFileUpload(container, file);
+				await fireFileUpload(container, file);
 				expect(validateFilesSpy).toHaveBeenCalledWith([file]);
 				expect(handleInvalidFiles).toHaveBeenCalledWith(invalidFiles);
 			});
 		});
 
-		describe('upload a valid file', () => {
+		describe('upload a valid file', async () => {
 			const validFiles = [file];
 			let validateFilesSpy;
 			let uploadFilesSpy;
 
-			beforeEach(() => {
+			await beforeEach(() => {
 				uploader.validateFiles.mockReturnValueOnce({
 					invalidFiles: [],
 					validFiles,
@@ -188,7 +188,7 @@ describe('<FileUploadZone/>', () => {
 			expect(validateFilesSpy).not.toHaveBeenCalled();
 		});
 
-		it('should call custom drop handler when given', () => {
+		it('should call custom drop handler when given', async () => {
 			uploader.validateFiles.mockReturnValueOnce({
 				invalidFiles: [],
 				validFiles: [file],
@@ -201,7 +201,7 @@ describe('<FileUploadZone/>', () => {
 				uploader,
 				onCustomDrop,
 			});
-			fireFileUploadOnDrop(container, file);
+			await fireFileUploadOnDrop(container, file);
 			expect(onCustomDrop).toHaveBeenCalledTimes(1);
 			expect(onCustomDrop).toHaveBeenCalledWith([file]);
 		});
