@@ -41,6 +41,7 @@ const Table = ({
 	allowHorizontalDrag = true,
 	nestedLoadingId,
 	expandNested = true,
+	hideHeader = false,
 }) => {
 	// Computed
 	const hasCols = !loading && columns.length > 0;
@@ -207,7 +208,7 @@ const Table = ({
 						[`a-table--${type}`]: type,
 					})}
 				>
-					{columns.length > 0 && (
+					{columns.length > 0 && !hideHeader && (
 						<thead>
 							<TableRow>
 								{columns.map((col, index) => (
@@ -288,6 +289,7 @@ Table.propTypes = {
 	allowHorizontalDrag: PropTypes.bool,
 	nestedLoadingId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	expandNested: PropTypes.bool,
+	hideHeader: PropTypes.bool,
 };
 
 export default Table;
