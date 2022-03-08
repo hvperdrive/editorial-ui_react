@@ -9,6 +9,7 @@ const DndDragDroppable = ({
 	index,
 	children,
 	id,
+	level,
 }) => {
 	const dragDropRef = useRef(null);
 
@@ -20,7 +21,9 @@ const DndDragDroppable = ({
 			}
 
 			const dragged = item;
-			const hovered = { index, id, type: accept[0] };
+			const hovered = {
+				index, id, type: accept[0], level,
+			};
 
 			// Don't replace items with themselves
 			if (!allowHorizontalDrag && dragged.id === hovered.id) {
@@ -67,7 +70,9 @@ const DndDragDroppable = ({
 	});
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: accept[0], id, index },
+		item: {
+			type: accept[0], id, index, level,
+		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),
@@ -88,6 +93,7 @@ DndDragDroppable.propTypes = {
 	moveRow: PropTypes.func,
 	children: PropTypes.func,
 	id: PropTypes.any, // eslint-disable-line
+	level: PropTypes.number,
 };
 
 export default DndDragDroppable;
