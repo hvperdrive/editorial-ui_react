@@ -103,6 +103,7 @@ const Table = ({
 				id={id}
 				moveRow={moveRow}
 				index={rowIndex}
+				level={level}
 				accept={[DND_ITEM_TYPE]}
 			>
 				{({ dragDropRef, isDragging }) => (

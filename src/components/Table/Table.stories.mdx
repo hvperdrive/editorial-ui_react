@@ -207,7 +207,7 @@ Group stories based on props
 				const rowToMove = sourceRow.splice(sourceIndex, 1)[0];
 				if (rowToMove) {
 					const [, targetRow] = findIndexAndRow(newRows, target.id);
-					if (source.type === 'row-2' && target.type === 'row-1') {
+					if (source.level === 2 && target.level === 1) {
 						const rootItem = newRows.find((r) => r.id === target.id);
 						if (!rootItem.rows) {
 							rootItem.rows = [];
