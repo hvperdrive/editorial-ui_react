@@ -7,6 +7,7 @@ import { EllipsisWithTooltip } from '../../EllipsisWithTooltip';
 
 const TableCell = ({
 	as: HTMLTag = 'td',
+	tdClassList,
 	classList,
 	className,
 	component,
@@ -15,8 +16,14 @@ const TableCell = ({
 	value,
 	ellipsis = false,
 	style,
+	indentingComponent,
+	level,
 }) => (
-	<HTMLTag className={classnames(className, classList)} style={style}>
+	<HTMLTag className={classnames(className, classList, tdClassList)} style={style}>
+		{
+			indentingComponent
+			&& new Array(level).fill(0).map(() => indentingComponent(value, rowData, rowIndex))
+		}
 		{ ellipsis && !isNil(value) ? (
 			<EllipsisWithTooltip type="primary">
 				{component ? component(value, rowData, rowIndex) : value}
@@ -31,6 +38,7 @@ const TableCell = ({
 
 TableCell.propTypes = {
 	as: PropTypes.string,
+	tdClassList: PropTypes.arrayOf(PropTypes.string),
 	classList: PropTypes.arrayOf(PropTypes.string),
 	className: PropTypes.string,
 	ellipsis: PropTypes.bool,
@@ -39,6 +47,8 @@ TableCell.propTypes = {
 	rowIndex: PropTypes.number,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]),
 	style: PropTypes.shape(),
+	indentingComponent: PropTypes.func,
+	level: PropTypes.number,
 };
 
 export default TableCell;

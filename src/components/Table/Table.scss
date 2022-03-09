@@ -1,30 +1,13 @@
 @import '~@a-ui/core/dist/assets/styles/_quarks';
 
-.a-table__wrapper-responsive {
-	border: none;
-	border-top: 1px solid #949494;
-	border-bottom: 1px solid #949494;
-
-	tbody tr {
-		border-bottom: none;
-	}
-
-	td {
-		position: relative;
-
-		&::after {
-			content: '';
-			width: 100%;
-			height: 1px;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			border-bottom: 1px solid #949494;
-		}
-	}
-}
-
 .a-table {
+	border-collapse: separate !important;
+	border-spacing: 0;
+
+	tr {
+		position: relative;
+	}
+
 	&.a-table--fixed {
 		table-layout: fixed;
 	}
@@ -68,57 +51,11 @@
 		background-color: $white !important;
 	}
 
-	.a-table__row--level-1 {
-		td {
-			&:first-child {
-				&::after {
-					left: 0;
-				}
-			}
-		}
-	}
-
-	.a-table__row--level-2 {
-		td:first-child {
-			padding-left: $spacer-md + $spacer;
-
-			&::before {
-				content: '';
-				background: white;
-				width: $spacer-md;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-
-			&::after {
-				left: $spacer-md;
-			}
-		}
-
-		&.a-table__row--last-in-level {
-			td {
-				&:first-child {
-					&::after {
-						left: 0;
-					}
-				}
-			}
-		}
-	}
-
-	.a-table__row--hovered {
+	.a-table__cell {
 		position: relative;
-		background: transparent;
-		color: transparent;
-
-		&.a-table__row--level-2 {
-			&::before,
-			&::after {
-				left: $spacer-md;
-			}
-		}
+		display: table-cell;
+		padding: $table-padding;
+		vertical-align: middle;
 
 		&::before,
 		&::after {
@@ -126,21 +63,73 @@
 			position: absolute;
 			left: 0;
 			width: 100%;
-			background: $brand-primary;
-			height: 4px;
+			height: 1px;
+			background: $table-border;
+		}
+
+		&::before {
+			top: -1px;
 		}
 
 		&::after {
 			bottom: 0;
 		}
+	}
 
-		> * {
-			opacity: 0;
+	.a-table__row {
+		display: table-row;
+		height: $spacer-lg;
+		transition: background-color $animation-duration $animation-easing;
+
+		&--collapsed {
+			display: none;
+		}
+
+		&--hovered {
+			.a-table__cell {
+				background: transparent;
+				color: transparent;
+
+				&::before,
+				&::after {
+					background: $brand-primary;
+					height: 4px;
+				}
+
+				> * {
+					opacity: 0;
+				}
+			}
 		}
 	}
 
 	.a-table__row--collapse {
 		display: none;
+	}
+}
+
+.a-table__wrapper-responsive {
+	border: none !important;
+	border-top: 1px solid #949494 !important;
+	border-bottom: 1px solid #949494 !important;
+
+	tbody tr {
+		border-bottom: none;
+	}
+
+	td,
+	thead {
+		position: relative;
+
+		&::after {
+			content: '';
+			width: 100%;
+			height: 1px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			border-bottom: 1px solid #949494;
+		}
 	}
 }
 
