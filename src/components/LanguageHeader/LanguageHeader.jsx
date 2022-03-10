@@ -8,6 +8,7 @@ import { Tooltip, TooltipTypeMap } from '../Tooltip';
 
 import { setActiveLanguage } from './LanguageHeader.helpers';
 import styles from './LanguageHeader.module.scss';
+import { LanguageHeaderContext } from './LanguageHeaderContext';
 
 const cx = classNames.bind(styles);
 
@@ -79,7 +80,9 @@ const LanguageHeader = ({
 				)}
 			</div>
 			<div className={cx('o-language-header__form-section')}>
-				{children}
+				<LanguageHeaderContext.Provider value={{ languages, activeLanguage }}>
+					{children}
+				</LanguageHeaderContext.Provider>
 			</div>
 		</div>
 	);
