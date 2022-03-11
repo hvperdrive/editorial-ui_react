@@ -1,4 +1,4 @@
-import { Icon } from '@acpaas-ui/react-components';
+import { Icon, TextField } from '@acpaas-ui/react-components';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
@@ -13,7 +13,7 @@ const MultilanguageField = ({ asComponent, ...props }) => {
 	return (
 		<div className={cx('u-bg-light', 'o-multilanguage-field')}>
 			<Icon name="globe" className={cx('o-multilanguage-field__icon')} />
-			<FormField />
+			<TextField {...props} />
 		</div>
 	);
 };
