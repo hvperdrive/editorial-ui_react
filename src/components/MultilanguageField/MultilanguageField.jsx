@@ -7,10 +7,10 @@ import styles from './MultilanguageField.module.scss';
 
 const cx = classNames.bind(styles);
 
-const MultilanguageField = ({ as, ...props }) => {
-	console.log({ as, ...props });
+const MultilanguageField = ({ asComponent, ...props }) => {
+	console.log({ asComponent, ...props });
 
-	const FormField = () => React.createElement(as, props);
+	const FormField = () => React.createElement(asComponent, props);
 
 	return (
 		<div className={cx('u-bg-light', 'o-multilanguage-field')}>
@@ -21,7 +21,7 @@ const MultilanguageField = ({ as, ...props }) => {
 };
 
 MultilanguageField.propTypes = {
-	as: PropTypes.node,
+	asComponent: PropTypes.node,
 };
 
 export default MultilanguageField;
