@@ -1,13 +1,14 @@
-import { Icon, TextField } from '@acpaas-ui/react-components';
+/* eslint-disable react/forbid-prop-types */
+import { Icon } from '@acpaas-ui/react-components';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import styles from './MultilanguageField.module.scss';
 
 const cx = classNames.bind(styles);
 
-const FormField = ({ asComponent, ...props }) => React.createElement(asComponent, props);
+const FormField = ({ asComponent, ...props }) => React.createElement(asComponent, { ref: props.innerRef, ...props });
 
 const MultilanguageField = ({ asComponent, ...props }) => (
 	<div className={cx('u-bg-light', 'o-multilanguage-field')}>
@@ -17,11 +18,12 @@ const MultilanguageField = ({ asComponent, ...props }) => (
 );
 
 FormField.propTypes = {
-	asComponent: PropTypes.element,
+	asComponent: PropTypes.any,
+	innerRef: PropTypes.any,
 };
 
 MultilanguageField.propTypes = {
-	asComponent: PropTypes.element,
+	asComponent: PropTypes.any,
 };
 
 export default MultilanguageField;
