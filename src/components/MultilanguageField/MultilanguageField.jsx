@@ -8,6 +8,8 @@ import styles from './MultilanguageField.module.scss';
 const cx = classNames.bind(styles);
 
 const MultilanguageField = ({ as, ...props }) => {
+	console.log({ as, ...props });
+
 	const FormField = () => React.createElement(as, props);
 
 	return (
