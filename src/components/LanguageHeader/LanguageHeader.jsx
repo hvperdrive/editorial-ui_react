@@ -24,9 +24,7 @@ const LanguageHeader = ({
 	const buttonRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
 	const [availableLanguages, setLanguages] = useState(null);
-	const [errors, setErrors] = useState({
-		nl: ['description'],
-	});
+	const [errors, setErrors] = useState({});
 
 	useEffect(() => {
 		if (activeLanguage) {
