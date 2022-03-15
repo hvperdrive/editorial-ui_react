@@ -148,6 +148,7 @@ const ScrollableTabs = ({
 								className={cx({
 									'is-active': item.active,
 									'is-disabled': item.disabled,
+									'has-errors': item.hasErrors,
 								})}
 								onClick={() => onChange(item, index)}
 							>
@@ -169,6 +170,7 @@ ScrollableTabs.propTypes = {
 			target: PropTypes.string,
 			active: PropTypes.bool,
 			disabled: PropTypes.bool,
+			hasErrors: PropTypes.bool,
 		}),
 	),
 	tabStyle: PropTypes.oneOf(['link', 'button']),
