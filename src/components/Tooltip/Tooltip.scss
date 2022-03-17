@@ -50,6 +50,12 @@
 		}
 	}
 
+	&[data-popper-placement^="bottom-end"] {
+		.arrow {
+			right: 0.75rem;
+		}
+	}
+
 	&.a-tooltip--primary {
 		&[data-popper-placement^="top"] {
 			.arrow {

@@ -10,11 +10,12 @@ export const MOCK_TABS = [
 	{
 		name: 'Sites',
 		target: '#sites',
+		active: true,
 	},
 	{
 		name: 'Configuratie',
 		target: '#configuratie',
-		active: true,
+		hasErrors: true,
 	},
 	{
 		name: 'Validatie',
