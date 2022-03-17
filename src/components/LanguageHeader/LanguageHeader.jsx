@@ -1,6 +1,7 @@
 import { Icon } from '@acpaas-ui/react-components';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import { propOr } from 'ramda';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { ScrollableTabs } from '../ScrollableTabs';
@@ -23,6 +24,7 @@ const LanguageHeader = ({
 	const buttonRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
 	const [availableLanguages, setLanguages] = useState(null);
+	const [errors, setErrors] = useState({});
 
 	useEffect(() => {
 		if (activeLanguage) {
@@ -41,7 +43,12 @@ const LanguageHeader = ({
 			return (
 				<ScrollableTabs
 					className={cx('o-language-header__tabs')}
-					items={availableLanguages}
+					items={availableLanguages.map((l) => {
+						if (propOr([], l.name, errors).length) {
+							return { ...l, hasErrors: true };
+						}
+						return l;
+					})}
 					tabStyle="button"
 					onChange={handleChangeLanguage}
 				/>
@@ -80,7 +87,10 @@ const LanguageHeader = ({
 				)}
 			</div>
 			<div className={cx('o-language-header__form-section')}>
-				<LanguageHeaderContext.Provider value={{ languages, activeLanguage }}>
+				<LanguageHeaderContext.Provider value={{
+					languages, activeLanguage, errors, setErrors,
+				}}
+				>
 					{children}
 				</LanguageHeaderContext.Provider>
 			</div>
