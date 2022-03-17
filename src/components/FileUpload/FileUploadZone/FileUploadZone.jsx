@@ -88,8 +88,8 @@ const FileUploadZone = ({
 		);
 	};
 
-	const handleFiles = (files, customHandler) => {
-		const response = uploader.validateFiles(files);
+	const handleFiles = async (files, customHandler) => {
+		const response = await Promise.resolve(uploader.validateFiles(files));
 		invalidFiles(response.invalidFiles);
 
 		if (customHandler) {
