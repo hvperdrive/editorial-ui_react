@@ -88,7 +88,7 @@ const LanguageHeader = ({
 			</div>
 			<div className={cx('o-language-header__form-section')}>
 				<LanguageHeaderContext.Provider value={{
-					languages, activeLanguage, errors, setErrors,
+					languages, activeLanguage, setErrors,
 				}}
 				>
 					{children}
