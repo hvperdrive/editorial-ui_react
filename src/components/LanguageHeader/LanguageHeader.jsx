@@ -61,31 +61,33 @@ const LanguageHeader = ({
 	const classNameRoot = cx(className, 'u-bg-white', 'o-language-header');
 	return (
 		<div className={classNameRoot}>
-			<div className={cx('o-language-header__top-section')}>
-				{renderTabs()}
-				{tooltipText && (
-					<div>
-						<button
-							type="button"
-							className="a-button a-button-transparent has-icon"
-							ref={buttonRef}
-							onMouseEnter={() => setVisibility(true)}
-							onMouseLeave={() => setVisibility(false)}
-						>
-							<Icon name="globe" />
-
-							<Tooltip
-								isVisible={isVisible}
-								targetRef={buttonRef}
-								type={TooltipTypeMap.PRIMARY}
-								placement="bottom-end"
+			{ languages.length > 1 && (
+				<div className={cx('o-language-header__top-section')}>
+					{renderTabs()}
+					{tooltipText && (
+						<div>
+							<button
+								type="button"
+								className="a-button a-button-transparent has-icon"
+								ref={buttonRef}
+								onMouseEnter={() => setVisibility(true)}
+								onMouseLeave={() => setVisibility(false)}
 							>
-								{tooltipText}
-							</Tooltip>
-						</button>
-					</div>
-				)}
-			</div>
+								<Icon name="globe" />
+
+								<Tooltip
+									isVisible={isVisible}
+									targetRef={buttonRef}
+									type={TooltipTypeMap.PRIMARY}
+									placement="bottom-end"
+								>
+									{tooltipText}
+								</Tooltip>
+							</button>
+						</div>
+					)}
+				</div>
+			)}
 			<div className={cx('o-language-header__form-section')}>
 				<LanguageHeaderContext.Provider value={{
 					languages, activeLanguage, setErrors,

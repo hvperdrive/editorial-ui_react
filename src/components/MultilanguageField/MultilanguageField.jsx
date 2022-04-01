@@ -8,21 +8,25 @@ import styles from './MultilanguageField.module.scss';
 
 const cx = classNames.bind(styles);
 
-const FormField = ({ asComponent, ...props }) => React.createElement(asComponent, props);
+const FormField = ({ asComponent, fieldClassName, ...props }) => React.createElement(
+	asComponent, props,
+);
 
-const MultilanguageField = ({ asComponent, ...props }) => (
+const MultilanguageField = ({ asComponent, fieldClassName, ...props }) => (
 	<div className={cx('u-bg-light', 'o-multilanguage-field')}>
 		<Icon name="globe" className={cx('o-multilanguage-field__icon')} />
-		<FormField asComponent={asComponent} {...props} />
+		<FormField className={cx(fieldClassName)} asComponent={asComponent} {...props} />
 	</div>
 );
 
 FormField.propTypes = {
 	asComponent: PropTypes.any,
+	fieldClassName: PropTypes.string,
 };
 
 MultilanguageField.propTypes = {
 	asComponent: PropTypes.any,
+	fieldClassName: PropTypes.string,
 };
 
 export default MultilanguageField;
