@@ -16,13 +16,14 @@ const cx = classNames.bind(styles);
 const LanguageHeader = ({
 	className,
 	children,
+	isVisible,
 	languages = [],
 	activeLanguage,
 	tooltipText,
 	onChangeLanguage,
 }) => {
 	const buttonRef = useRef(null);
-	const [isVisible, setVisibility] = useState(false);
+	const [visibility, setVisibility] = useState(false);
 	const [availableLanguages, setLanguages] = useState(null);
 	const [errors, setErrors] = useState({});
 
@@ -61,7 +62,7 @@ const LanguageHeader = ({
 	const classNameRoot = cx(className, 'u-bg-white', 'o-language-header');
 	return (
 		<div className={classNameRoot}>
-			{ languages.length > 1 && (
+			{ isVisible && languages.length > 1 && (
 				<div className={cx('o-language-header__top-section')}>
 					{renderTabs()}
 					{tooltipText && (
@@ -76,7 +77,7 @@ const LanguageHeader = ({
 								<Icon name="globe" />
 
 								<Tooltip
-									isVisible={isVisible}
+									isVisible={visibility}
 									targetRef={buttonRef}
 									type={TooltipTypeMap.PRIMARY}
 									placement="bottom-end"
@@ -120,6 +121,7 @@ LanguageHeader.propTypes = {
 	activeLanguage: languageType,
 	tooltipText: PropTypes.string,
 	onChangeLanguage: PropTypes.func,
+	isVisible: PropTypes.bool,
 };
 
 export default LanguageHeader;

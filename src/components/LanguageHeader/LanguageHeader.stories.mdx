@@ -40,6 +40,7 @@ The language header can be used as a language selector on top of a form.
 					className="u-margin"
 					languages={languages}
 					activeLanguage={activeLanguage}
+					isVisible={true}
 					tooltipText={LANGUAGE_HEADER_MOCK_TOOLTIP}
 					onChangeLanguage={handleChangeLanguage}>
 					{activeLanguage &&
@@ -48,7 +49,7 @@ The language header can be used as a language selector on top of a form.
 							<p>Selected language: <b>{activeLanguage.key}</b></p>
 						</div>
 					}
-					<MultilanguageField asComponent={TextField} fieldClassName={'col-xs-12 col-sm-5'}/>
+					<MultilanguageField asComponent={TextField} />
 				</LanguageHeader>
 			)
 		}}
