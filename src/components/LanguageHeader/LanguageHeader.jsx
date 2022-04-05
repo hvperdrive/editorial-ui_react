@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 const LanguageHeader = ({
 	className,
 	children,
-	isVisible,
+	isVisible = true,
 	languages = [],
 	activeLanguage,
 	tooltipText,
