@@ -15,6 +15,7 @@ const ContextHeader = ({
 	className,
 	children,
 	title = '',
+	language,
 	linkProps = (props) => props,
 	badges = [],
 	tabs = [],
@@ -60,7 +61,9 @@ const ContextHeader = ({
 
 	const classNameRoot = cx(className, 'u-bg-light', 'o-context-header');
 	const classNameTopSection = cx('o-context-header__top-section');
+	const classNameBottomSection = cx('o-context-header__bottom-section');
 	const classNameBody = cx('o-context-header__body');
+	const classNameLanguage = cx('o-context-header__language');
 	const classNameBodyTitle = cx('o-context-header__body__title');
 
 	return (
@@ -86,7 +89,10 @@ const ContextHeader = ({
 						)
 					}
 				</div>
-				{renderTabs()}
+				<div className={classNameBottomSection}>
+					{renderTabs()}
+					{language && (<div className={classNameLanguage}>{language}</div>)}
+				</div>
 			</div>
 		</div>
 	);
@@ -98,6 +104,7 @@ ContextHeader.propTypes = {
 	 * of the component
 	 */
 	className: PropTypes.string,
+	language: PropTypes.string,
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,

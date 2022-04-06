@@ -53,11 +53,13 @@ describe('<ContextHeader/>', () => {
 		it('should show a title with tabs', () => {
 			const { queryByText, container } = renderContextHeader({
 				tabs: CONTEXT_HEADER_MOCK_TABS,
+				language: 'nl',
 			});
 
 			const title = queryByText(CONTEXT_HEADER_MOCK_TITLE);
 			const wrapperTabs = container.querySelector('ul');
 			const tabs = wrapperTabs.querySelectorAll('a');
+			const language = container.querySelectorAll('.o-context-header__language');
 
 			expect(getNodeText(title)).toBe(CONTEXT_HEADER_MOCK_TITLE);
 			expect(wrapperTabs).toBeDefined();
@@ -66,6 +68,7 @@ describe('<ContextHeader/>', () => {
 			expect(getNodeText(tabs[1])).toBe(CONTEXT_HEADER_MOCK_TABS[1].name);
 			expect(getNodeText(tabs[2])).toBe(CONTEXT_HEADER_MOCK_TABS[2].name);
 			expect(getNodeText(tabs[3])).toBe(CONTEXT_HEADER_MOCK_TABS[3].name);
+			expect(getNodeText(language[0])).toBe('nl');
 		});
 
 		it('should override the default a tag with a given component', () => {

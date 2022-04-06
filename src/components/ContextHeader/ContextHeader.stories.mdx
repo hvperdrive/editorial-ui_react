@@ -20,7 +20,7 @@ The context header can be used as a secondary header.
 
 <Preview>
 	<Story name='Base'>
-		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title={CONTEXT_HEADER_MOCK_TITLE}>
+		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title={CONTEXT_HEADER_MOCK_TITLE} language="nl">
 			<ContextHeaderTopSection>
 				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
 			</ContextHeaderTopSection>
@@ -48,6 +48,12 @@ The context header can be used as a secondary header.
 	</Story>
 	<Story name="title with tabs">
 		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} tabs={CONTEXT_HEADER_MOCK_TABS} />
+	</Story>
+	<Story name="title with tabs and lang">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} tabs={CONTEXT_HEADER_MOCK_TABS} language="nl" />
+	</Story>
+	<Story name="title with lang">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} language="nl" />
 	</Story>
 </Preview>
 
