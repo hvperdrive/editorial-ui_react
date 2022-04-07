@@ -1,2 +1,2 @@
 export { default as ContextHeader } from './ContextHeader';
-export { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
+export { ContextHeaderActionsSection, ContextHeaderTopSection, ContextHeaderLabelSection } from './ContextHeader.slots';
