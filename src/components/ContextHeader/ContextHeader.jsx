@@ -7,7 +7,7 @@ import { useSlot } from '../../hooks';
 import { ScrollableTabs } from '../ScrollableTabs';
 
 import styles from './ContextHeader.module.scss';
-import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
+import { ContextHeaderActionsSection, ContextHeaderLabelSection, ContextHeaderTopSection } from './ContextHeader.slots';
 
 const cx = classNames.bind(styles);
 
@@ -15,13 +15,13 @@ const ContextHeader = ({
 	className,
 	children,
 	title = '',
-	language,
 	linkProps = (props) => props,
 	badges = [],
 	tabs = [],
 }) => {
 	const topSectionSlot = useSlot(ContextHeaderTopSection, children);
 	const actionsSlot = useSlot(ContextHeaderActionsSection, children);
+	const labelSlot = useSlot(ContextHeaderLabelSection, children);
 
 	const renderBadges = () => {
 		if (badges && badges.length > 0) {
@@ -63,7 +63,7 @@ const ContextHeader = ({
 	const classNameTopSection = cx('o-context-header__top-section');
 	const classNameBottomSection = cx('o-context-header__bottom-section');
 	const classNameBody = cx('o-context-header__body');
-	const classNameLanguage = cx('o-context-header__language');
+	const classNameLabel = cx('o-context-header__label');
 	const classNameBodyTitle = cx('o-context-header__body__title');
 
 	return (
@@ -91,7 +91,7 @@ const ContextHeader = ({
 				</div>
 				<div className={classNameBottomSection}>
 					{renderTabs()}
-					{language && (<div className={classNameLanguage}>{language}</div>)}
+					{labelSlot && (<div className={classNameLabel}>{labelSlot}</div>)}
 				</div>
 			</div>
 		</div>
@@ -104,7 +104,6 @@ ContextHeader.propTypes = {
 	 * of the component
 	 */
 	className: PropTypes.string,
-	language: PropTypes.string,
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,

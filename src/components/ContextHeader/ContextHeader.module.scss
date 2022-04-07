@@ -23,10 +23,10 @@
 		display: flex;
 	}
 
-	&__language {
+	&__label {
 		margin-left: auto;
 		padding: $spacer-sm $spacer;
-		font-weight: bold;
+		font-weight: $label-font-weight;
 		background-color: $white;
 	}
 
