@@ -19,12 +19,20 @@
 		padding-bottom: $spacer;
 	}
 
-	&__bottom-section {
+	&__wrapper {
 		display: flex;
+		flex: 1;
+	}
+
+	&__right-section{
+		display: flex;
+		margin-left: auto;
+		flex-direction: column;
 	}
 
 	&__label {
-		margin-left: auto;
+		margin-top: auto;
+		align-self: flex-end;
 		padding: $spacer-sm $spacer;
 		font-weight: $label-font-weight;
 		background-color: $white;
