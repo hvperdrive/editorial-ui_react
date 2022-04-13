@@ -19,6 +19,17 @@
 		padding-bottom: $spacer;
 	}
 
+	&__bottom-section {
+		display: flex;
+	}
+
+	&__label {
+		margin-left: auto;
+		padding: $spacer-sm $spacer;
+		font-weight: $label-font-weight;
+		background-color: $white;
+	}
+
 	&__tabs {
 		&::before {
 			background: linear-gradient(to right, $background-color-light, rgba($background-color-light, 0.1));

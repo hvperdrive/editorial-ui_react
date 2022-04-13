@@ -7,9 +7,14 @@ import {
 	CONTEXT_HEADER_MOCK_TABS,
 	CONTEXT_HEADER_MOCK_TITLE,
 } from './ContextHeader.mock';
-import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
+import { ContextHeaderActionsSection, ContextHeaderLabelSection, ContextHeaderTopSection } from './ContextHeader.slots';
 
-const renderContextHeader = (props, TopSectionComponent, ActionSectionComponent) => {
+const renderContextHeader = (
+	props,
+	TopSectionComponent,
+	ActionSectionComponent,
+	LabelSectionComponent,
+) => {
 	const defaultProps = {
 		title: CONTEXT_HEADER_MOCK_TITLE,
 	};
@@ -25,12 +30,18 @@ const renderContextHeader = (props, TopSectionComponent, ActionSectionComponent)
 					<ActionSectionComponent />
 				</ContextHeaderActionsSection>
 			)}
+			{ LabelSectionComponent && (
+				<ContextHeaderLabelSection>
+					<LabelSectionComponent />
+				</ContextHeaderLabelSection>
+			)}
 		</ContextHeader>));
 };
 
 const TopSectionComponent = () => (<div data-testid="top-section-component" />);
 const ActionSectionComponent = () => (<div data-testid="action-section-component" />);
 const CustomLinkComponent = () => (<div data-testid="custom-link-component" />);
+const LabelSectionComponent = () => (<div data-testid="label-section-component" />);
 
 describe('<ContextHeader/>', () => {
 	it('should show a title with badges', () => {
@@ -93,5 +104,12 @@ describe('<ContextHeader/>', () => {
 		const actionSectionNode = findByTestId('action-section-component');
 
 		expect(actionSectionNode).toBeDefined();
+	});
+
+	it('should show a component in the label section slot', () => {
+		const { findByTestId } = renderContextHeader({}, undefined, undefined, LabelSectionComponent);
+		const labelSectionNode = findByTestId('label-section-component');
+
+		expect(labelSectionNode).toBeDefined();
 	});
 });

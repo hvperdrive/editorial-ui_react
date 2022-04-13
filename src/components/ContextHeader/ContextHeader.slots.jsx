@@ -7,3 +7,6 @@ ContextHeaderTopSection.propTypes = SLOT_PROP_TYPES;
 
 export const ContextHeaderActionsSection = ({ children }) => <>{children}</>;
 ContextHeaderActionsSection.propTypes = SLOT_PROP_TYPES;
+
+export const ContextHeaderLabelSection = ({ children }) => <>{children}</>;
+ContextHeaderLabelSection.propTypes = SLOT_PROP_TYPES;

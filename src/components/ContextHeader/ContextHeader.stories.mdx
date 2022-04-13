@@ -8,7 +8,7 @@ import {
 	CONTEXT_HEADER_MOCK_TITLE,
 } from './ContextHeader.mock';
 import ContextHeader from './ContextHeader';
-import { ContextHeaderActionsSection, ContextHeaderTopSection } from './ContextHeader.slots';
+import { ContextHeaderActionsSection, ContextHeaderTopSection, ContextHeaderLabelSection } from './ContextHeader.slots';
 
 <Meta title="ContextHeader" component={ContextHeader} />
 
@@ -20,13 +20,16 @@ The context header can be used as a secondary header.
 
 <Preview>
 	<Story name='Base'>
-		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title={CONTEXT_HEADER_MOCK_TITLE}>
+		<ContextHeader tabs={CONTEXT_HEADER_MOCK_TABS} badges={CONTEXT_HEADER_MOCK_BADGES} title={CONTEXT_HEADER_MOCK_TITLE} language="nl">
 			<ContextHeaderTopSection>
 				<Breadcrumbs items={CONTEXT_HEADER_MOCK_BREAD_CRUMB_ITEMS}/>
 			</ContextHeaderTopSection>
 			<ContextHeaderActionsSection>
 				<Button>Action</Button>
 			</ContextHeaderActionsSection>
+			<ContextHeaderLabelSection>
+				<b>nl</b>
+			</ContextHeaderLabelSection>
 		</ContextHeader>
 	</Story>
 </Preview>
@@ -49,6 +52,13 @@ The context header can be used as a secondary header.
 	<Story name="title with tabs">
 		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} tabs={CONTEXT_HEADER_MOCK_TABS} />
 	</Story>
+	<Story name="title with tabs and lang">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE} tabs={CONTEXT_HEADER_MOCK_TABS}>
+			<ContextHeaderLabelSection>
+				<b>nl</b>
+			</ContextHeaderLabelSection>
+		</ContextHeader>
+	</Story>
 </Preview>
 
 ### Slots
@@ -66,6 +76,13 @@ The context header can be used as a secondary header.
 			<ContextHeaderActionsSection>
 				<Button>Action</Button>
 			</ContextHeaderActionsSection>
+		</ContextHeader>
+	</Story>
+	<Story name="label section">
+		<ContextHeader title={CONTEXT_HEADER_MOCK_TITLE}>
+			<ContextHeaderLabelSection>
+				<b>nl</b>
+			</ContextHeaderLabelSection>
 		</ContextHeader>
 	</Story>
 </Preview>
