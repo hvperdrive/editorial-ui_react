@@ -15,23 +15,20 @@
 		flex-wrap: wrap;
 	}
 
+	&__content {
+		flex: 1;
+	}
+
 	&__body {
 		padding-bottom: $spacer;
 	}
 
 	&__wrapper {
 		display: flex;
-		flex: 1;
-	}
-
-	&__right-section{
-		display: flex;
-		margin-left: auto;
-		flex-direction: column;
 	}
 
 	&__label {
-		margin-top: auto;
+		margin-left: auto;
 		align-self: flex-end;
 		padding: $spacer-sm $spacer;
 		font-weight: $label-font-weight;

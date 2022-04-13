@@ -61,17 +61,17 @@ const ContextHeader = ({
 
 	const classNameRoot = cx(className, 'u-bg-light', 'o-context-header');
 	const classNameTopSection = cx('o-context-header__top-section');
-	const classNameRightSection = cx('o-context-header__right-section');
 	const classNameWrapper = cx('o-context-header__wrapper');
 	const classNameBody = cx('o-context-header__body');
 	const classNameLabel = cx('o-context-header__label');
+	const classNameContent = cx('o-context-header__content');
 	const classNameBodyTitle = cx('o-context-header__body__title');
 
 	return (
 		<div className={classNameRoot}>
 			<div className="u-container u-wrapper">
 				<div className={classNameWrapper}>
-					<div>
+					<div className={classNameContent}>
 						{
 							topSectionSlot && (
 								<div className={classNameTopSection}>
@@ -84,20 +84,17 @@ const ContextHeader = ({
 								<h1 className="h2 u-margin-right-xs">{title}</h1>
 								{renderBadges()}
 							</div>
+							{
+								actionsSlot && (
+									<div>
+										{actionsSlot}
+									</div>
+								)
+							}
 						</div>
 						{renderTabs()}
 					</div>
-					<div className={classNameRightSection}>
-						{
-							actionsSlot && (
-								<div>
-									{actionsSlot}
-								</div>
-							)
-						}
-						{labelSlot && (<div className={classNameLabel}>{labelSlot}</div>)}
-
-					</div>
+					{labelSlot && (<div className={classNameLabel}>{labelSlot}</div>)}
 				</div>
 			</div>
 		</div>
