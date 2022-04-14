@@ -15,16 +15,21 @@
 		flex-wrap: wrap;
 	}
 
+	&__content {
+		flex: 1;
+	}
+
 	&__body {
 		padding-bottom: $spacer;
 	}
 
-	&__bottom-section {
+	&__wrapper {
 		display: flex;
 	}
 
 	&__label {
 		margin-left: auto;
+		align-self: flex-end;
 		padding: $spacer-sm $spacer;
 		font-weight: $label-font-weight;
 		background-color: $white;

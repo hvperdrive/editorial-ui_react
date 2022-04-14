@@ -61,36 +61,39 @@ const ContextHeader = ({
 
 	const classNameRoot = cx(className, 'u-bg-light', 'o-context-header');
 	const classNameTopSection = cx('o-context-header__top-section');
-	const classNameBottomSection = cx('o-context-header__bottom-section');
+	const classNameWrapper = cx('o-context-header__wrapper');
 	const classNameBody = cx('o-context-header__body');
 	const classNameLabel = cx('o-context-header__label');
+	const classNameContent = cx('o-context-header__content');
 	const classNameBodyTitle = cx('o-context-header__body__title');
 
 	return (
 		<div className={classNameRoot}>
 			<div className="u-container u-wrapper">
-				{
-					topSectionSlot && (
-						<div className={classNameTopSection}>
-							{topSectionSlot}
-						</div>
-					)
-				}
-				<div className={classNameBody}>
-					<div className={classNameBodyTitle}>
-						<h1 className="h2 u-margin-right-xs">{title}</h1>
-						{renderBadges()}
-					</div>
-					{
-						actionsSlot && (
-							<div>
-								{actionsSlot}
+				<div className={classNameWrapper}>
+					<div className={classNameContent}>
+						{
+							topSectionSlot && (
+								<div className={classNameTopSection}>
+									{topSectionSlot}
+								</div>
+							)
+						}
+						<div className={classNameBody}>
+							<div className={classNameBodyTitle}>
+								<h1 className="h2 u-margin-right-xs">{title}</h1>
+								{renderBadges()}
 							</div>
-						)
-					}
-				</div>
-				<div className={classNameBottomSection}>
-					{renderTabs()}
+							{
+								actionsSlot && (
+									<div>
+										{actionsSlot}
+									</div>
+								)
+							}
+						</div>
+						{renderTabs()}
+					</div>
 					{labelSlot && (<div className={classNameLabel}>{labelSlot}</div>)}
 				</div>
 			</div>
