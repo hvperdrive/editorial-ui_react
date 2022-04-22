@@ -48,10 +48,12 @@
 						&:hover,
 						&:active {
 							color: #da291c;
+
 							&::after {
 								content: " *";
 							}
 						}
+
 						&:hover,
 						&:active {
 							border-color: #da291c;
