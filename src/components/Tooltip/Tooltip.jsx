@@ -12,6 +12,7 @@ import './Tooltip.scss';
 
 const Tooltip = ({
 	children,
+	className,
 	targetRef,
 	container,
 	isVisible,
@@ -19,7 +20,7 @@ const Tooltip = ({
 	disablePortal = false,
 	placement = 'bottom-start',
 }) => {
-	const tooltipClasses = classnames('a-tooltip', 'a-tooltip--no-arrow', {
+	const tooltipClasses = classnames(className, 'a-tooltip', 'a-tooltip--no-arrow', {
 		'a-tooltip--primary': type === TooltipTypeMap.PRIMARY,
 		'a-tooltip--secondary': type === TooltipTypeMap.SECONDARY,
 		'a-tooltip--white': type === TooltipTypeMap.WHITE,
@@ -88,6 +89,7 @@ Tooltip.propTypes = {
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]).isRequired,
+	className: PropTypes.string,
 	type: PropTypes.oneOf([
 		TooltipTypeMap.DEFAULT,
 		TooltipTypeMap.PRIMARY,
