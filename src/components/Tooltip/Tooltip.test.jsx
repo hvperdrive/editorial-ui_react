@@ -9,6 +9,8 @@ import React, { useRef, useState } from 'react';
 import Tooltip from './Tooltip';
 import { TooltipTypeMap } from './Tooltip.const';
 
+const tooltipText = 'Some tooltip info';
+
 const ButtonWithTooltip = (props = {}) => {
 	const buttonRef = useRef(null);
 	const [isVisible, setVisibility] = useState(false);
@@ -16,7 +18,7 @@ const ButtonWithTooltip = (props = {}) => {
 	return (
 		<>
 			<button type="button" ref={buttonRef} onClick={() => act(() => setVisibility(true))}>Click me</button>
-			<Tooltip isVisible={isVisible} targetRef={buttonRef} {...props}>Some tooltip info</Tooltip>
+			<Tooltip isVisible={isVisible} targetRef={buttonRef} {...props}>{tooltipText}</Tooltip>
 		</>
 	);
 };
@@ -31,7 +33,7 @@ describe('<Tooltip/>', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			const tooltipNode = queryByText('Some tooltip info');
+			const tooltipNode = queryByText(tooltipText);
 			expect(tooltipNode).toBeDefined();
 		});
 	});
@@ -45,8 +47,8 @@ describe('<Tooltip/>', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			const tooltipNode = queryByText('Some tooltip info');
-			expect(tooltipNode.classList.contains('a-tooltip--primary')).toBe(true);
+			const tooltipNode = queryByText(tooltipText);
+			expect(tooltipNode).toHaveClass('a-tooltip--primary');
 		});
 	});
 
@@ -59,8 +61,16 @@ describe('<Tooltip/>', () => {
 		fireEvent.click(button);
 
 		await waitFor(() => {
-			const tooltipNode = queryByText('Some tooltip info');
-			expect(tooltipNode.classList.contains('a-tooltip--secondary')).toBe(true);
+			const tooltipNode = queryByText(tooltipText);
+			expect(tooltipNode).toHaveClass('a-tooltip--secondary');
 		});
+	});
+
+	it('Should set a className when given', () => {
+		const className = 'c-custom-tooltip';
+		const { queryByText } = renderButtonWithTooltip({ className, isVisible: true });
+
+		const tooltipNode = queryByText(tooltipText);
+		expect(tooltipNode).toHaveClass(className);
 	});
 });
