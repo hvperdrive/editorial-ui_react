@@ -73,4 +73,12 @@ describe('<Tooltip/>', () => {
 		const tooltipNode = queryByText(tooltipText);
 		expect(tooltipNode).toHaveClass(className);
 	});
+
+	it('Should pass a ref to the tooltip element', () => {
+		const tooltipRef = jest.fn();
+		const { queryByText } = renderButtonWithTooltip({ tooltipRef, isVisible: true });
+
+		const tooltipNode = queryByText(tooltipText);
+		expect(tooltipRef).toHaveBeenLastCalledWith(tooltipNode);
+	});
 });
