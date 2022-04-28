@@ -7,6 +7,8 @@ import React, {
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
+import { mergeRefs } from '../../helpers';
+
 import { TooltipTypeMap } from './Tooltip.const';
 import './Tooltip.scss';
 
@@ -14,6 +16,7 @@ const Tooltip = ({
 	children,
 	className,
 	targetRef,
+	tooltipRef = null,
 	container,
 	isVisible,
 	type = TooltipTypeMap.DEFAULT,
@@ -69,7 +72,7 @@ const Tooltip = ({
 		<div
 			className={tooltipClasses}
 			style={styles.popper}
-			ref={popperElement}
+			ref={mergeRefs([popperElement, tooltipRef])}
 			{...attributes.popper}
 		>
 			<div ref={setArrowRef} className="arrow">
@@ -97,6 +100,10 @@ Tooltip.propTypes = {
 		TooltipTypeMap.WHITE,
 	]),
 	targetRef: PropTypes.oneOfType([
+		PropTypes.func,
+		PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+	]).isRequired,
+	tooltipRef: PropTypes.oneOfType([
 		PropTypes.func,
 		PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
 	]).isRequired,
