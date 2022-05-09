@@ -106,7 +106,7 @@ Tooltip.propTypes = {
 	tooltipRef: PropTypes.oneOfType([
 		PropTypes.func,
 		PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-	]).isRequired,
+	]),
 	isVisible: PropTypes.bool.isRequired,
 	disablePortal: PropTypes.bool,
 	container: PropTypes.node,
