@@ -102,7 +102,7 @@ const ControlledModal = ({
 };
 
 ControlledModal.propTypes = {
-	children: PropTypes.element,
+	children: PropTypes.node,
 	className: PropTypes.string,
 	overlayClassName: PropTypes.string,
 	node: PropTypes.instanceOf(Element),
