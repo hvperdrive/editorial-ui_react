@@ -112,10 +112,7 @@ LanguageHeader.propTypes = {
 	 * of the component
 	 */
 	className: PropTypes.string,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.node,
 	/** languages, which are shown on the top of the component */
 	languages: PropTypes.arrayOf(languageType).isRequired,
 	activeLanguage: languageType,

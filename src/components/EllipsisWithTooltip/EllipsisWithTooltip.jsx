@@ -59,10 +59,7 @@ const EllipsisWithTooltip = ({
 EllipsisWithTooltip.propTypes = {
 	className: PropTypes.string,
 	value: PropTypes.string,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]).isRequired,
+	children: PropTypes.node.isRequired,
 	style: PropTypes.shape(),
 	type: PropTypes.oneOf([TooltipTypeMap.DEFAULT, TooltipTypeMap.PRIMARY, TooltipTypeMap.SECONDARY]),
 	delayShow: PropTypes.number,

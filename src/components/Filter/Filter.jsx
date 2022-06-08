@@ -106,10 +106,7 @@ const Filter = ({
 
 Filter.propTypes = {
 	actionsClassName: PropTypes.string,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.node,
 	className: PropTypes.string,
 	title: PropTypes.string,
 	noFilterText: PropTypes.string,

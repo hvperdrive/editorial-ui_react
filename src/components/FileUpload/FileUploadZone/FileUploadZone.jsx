@@ -216,10 +216,7 @@ FileUploadZone.propTypes = {
 	onCustomDrop: PropTypes.func,
 	allowedMimeTypes: PropTypes.arrayOf(PropTypes.string),
 	allowedFileTypes: PropTypes.arrayOf(PropTypes.string),
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.node,
 };
 
 export default FileUploadZone;
