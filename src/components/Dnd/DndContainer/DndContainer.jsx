@@ -21,10 +21,7 @@ const DndContainer = ({ draggable, children }) => {
 
 DndContainer.propTypes = {
 	draggable: PropTypes.bool,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.node,
 };
 
 export default DndContainer;

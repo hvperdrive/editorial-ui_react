@@ -153,10 +153,7 @@ FileUpload.propTypes = {
 	})),
 	selectUploadedFiles: PropTypes.func,
 	removeFile: PropTypes.func,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.node,
 };
 
 export default FileUpload;

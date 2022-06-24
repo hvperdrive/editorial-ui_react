@@ -107,10 +107,7 @@ ContextHeader.propTypes = {
 	 * of the component
 	 */
 	className: PropTypes.string,
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]),
+	children: PropTypes.node,
 	title: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.node,

@@ -88,10 +88,7 @@ const Tooltip = ({
 };
 
 Tooltip.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node,
-	]).isRequired,
+	children: PropTypes.node.isRequired,
 	className: PropTypes.string,
 	type: PropTypes.oneOf([
 		TooltipTypeMap.DEFAULT,
