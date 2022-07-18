@@ -11,6 +11,16 @@
 		}
 	}
 
+	&.a-tooltip--small {
+		.arrow {
+			display: none;
+		}
+
+		padding: $spacer-xs / 2 $spacer-sm / 2;
+		min-height: auto;
+		font-size: .8rem;
+	}
+
 	.arrow {
 		width: 0;
 		height: 0;
@@ -104,6 +114,35 @@
 		&[data-popper-placement^="bottom"] {
 			.arrow {
 				border-color: transparent transparent $tooltip-secondary-bg transparent;
+			}
+		}
+	}
+
+	&.a-tooltip--dark {
+		background-color: #424242;
+		color: $white;
+
+		&[data-popper-placement^="top"] {
+			.arrow {
+				border-color: #424242 transparent transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="left"] {
+			.arrow {
+				border-color: transparent transparent transparent #424242;
+			}
+		}
+
+		&[data-popper-placement^="right"] {
+			.arrow {
+				border-color: transparent #424242 transparent transparent;
+			}
+		}
+
+		&[data-popper-placement^="bottom"] {
+			.arrow {
+				border-color: transparent transparent #424242 transparent;
 			}
 		}
 	}

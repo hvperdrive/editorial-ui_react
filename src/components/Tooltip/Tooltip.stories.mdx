@@ -4,7 +4,7 @@ import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 
 import Tooltip from './Tooltip';
-import { TooltipTypeMap } from './Tooltip.const';
+import { TooltipTypeMap, TooltipSizeMap } from './Tooltip.const';
 
 <Meta title="Tooltip" component={Tooltip} />
 
@@ -83,6 +83,42 @@ Some explanation about our Tooltip component
 						White tooltip
 					</button>
 					<Tooltip placement="bottom-end" type={TooltipTypeMap.WHITE} isVisible={true} targetRef={buttonRef}> Some tooltip info </Tooltip>
+				</div>
+			);
+		}}
+	</Story>
+	<Story name="Dark">
+		{() => {
+			const buttonRef = useRef(null);
+			const [isVisible, setVisibility] = useState(false);
+			return (
+				<div style={{marginLeft: "200px", marginTop: "500px"}} className="u-margin-top-lg">
+					<button
+						ref={buttonRef}
+						onMouseEnter={() => setVisibility(true)}
+						onMouseLeave={() => setVisibility(false)}
+					>
+						Dark tooltip
+					</button>
+					<Tooltip placement="bottom-end" type={TooltipTypeMap.DARK} isVisible={true} targetRef={buttonRef}> Some tooltip info </Tooltip>
+				</div>
+			);
+		}}
+	</Story>
+	<Story name="Small">
+		{() => {
+			const buttonRef = useRef(null);
+			const [isVisible, setVisibility] = useState(true);
+			return (
+				<div className="u-margin-top-lg u-margin-left-lg">
+					<button
+						ref={buttonRef}
+						onMouseEnter={() => setVisibility(true)}
+						onMouseLeave={() => setVisibility(false)}
+					>
+						Small tooltip
+					</button>
+					<Tooltip size={TooltipSizeMap.SMALL} type={TooltipTypeMap.DARK} isVisible={isVisible} targetRef={buttonRef}> Some tooltip info </Tooltip>
 				</div>
 			);
 		}}
