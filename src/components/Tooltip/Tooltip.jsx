@@ -9,7 +9,7 @@ import { usePopper } from 'react-popper';
 
 import { mergeRefs } from '../../helpers';
 
-import { TooltipTypeMap } from './Tooltip.const';
+import { TooltipSizeMap, TooltipTypeMap } from './Tooltip.const';
 import './Tooltip.scss';
 
 const Tooltip = ({
@@ -22,11 +22,14 @@ const Tooltip = ({
 	type = TooltipTypeMap.DEFAULT,
 	disablePortal = false,
 	placement = 'bottom-start',
+	size = 'normal',
 }) => {
 	const tooltipClasses = classnames(className, 'a-tooltip', 'a-tooltip--no-arrow', {
 		'a-tooltip--primary': type === TooltipTypeMap.PRIMARY,
 		'a-tooltip--secondary': type === TooltipTypeMap.SECONDARY,
 		'a-tooltip--white': type === TooltipTypeMap.WHITE,
+		'a-tooltip--dark': type === TooltipTypeMap.DARK,
+		'a-tooltip--small': size === TooltipSizeMap.SMALL,
 	});
 	const [mountNode, setMountNode] = useState(null);
 	const popperElement = useRef(null);
@@ -95,6 +98,10 @@ Tooltip.propTypes = {
 		TooltipTypeMap.PRIMARY,
 		TooltipTypeMap.SECONDARY,
 		TooltipTypeMap.WHITE,
+	]),
+	size: PropTypes.oneOf([
+		TooltipSizeMap.SMALL,
+		TooltipSizeMap.NORMAL,
 	]),
 	targetRef: PropTypes.oneOfType([
 		PropTypes.func,
