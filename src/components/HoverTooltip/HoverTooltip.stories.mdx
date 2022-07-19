@@ -1,0 +1,37 @@
+import { useRef, useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import HoverTooltip from './HoverTooltip';
+
+<Meta title="HoverTooltip" component={HoverTooltip} />
+
+# HoverTooltip
+
+Some explanation about our HoverTooltip component
+
+### Different variations
+
+<Preview isColumn>
+	<Story name="Default">
+		<div>
+			<div style={{width: '200px'}}>
+				<HoverTooltip value="This value will be rendererd inside the tooltip component on hover"><button>Hello World</button></HoverTooltip>
+			</div>
+		</div>
+	</Story>
+</Preview>
+
+<Preview isColumn>
+	<Story name="Small">
+		<div>
+			<div style={{width: '200px'}}>
+				<HoverTooltip size="small" value="This value will be rendererd inside the tooltip component on hover"><button>Hello World</button></HoverTooltip>
+			</div>
+		</div>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={HoverTooltip} />
