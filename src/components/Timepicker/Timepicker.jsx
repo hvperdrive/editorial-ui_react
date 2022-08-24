@@ -17,6 +17,7 @@ const Timepicker = ({
 	value,
 	label = 'Tijd',
 	description,
+	placeholder,
 	// eslint-disable-next-line no-unused-vars
 	hourStep = 1,
 	// eslint-disable-next-line no-unused-vars
@@ -45,7 +46,7 @@ const Timepicker = ({
 				type="time"
 				name="time-field"
 				id={id}
-				value={timeString || '00:00'}
+				value={timeString || placeholder}
 				aria-describedby="time-field-description"
 				onChange={(event) => handleChange(event.target.value)}
 				required={required}
@@ -57,12 +58,13 @@ const Timepicker = ({
 };
 
 Timepicker.propTypes = {
-	label: PropTypes.string,
-	description: PropTypes.string,
 	id: PropTypes.string.isRequired,
 	className: PropTypes.string,
 	required: PropTypes.bool,
 	disabled: PropTypes.bool,
+	label: PropTypes.string,
+	description: PropTypes.string,
+	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	hourStep: PropTypes.number,
 	minuteStep: PropTypes.number,
