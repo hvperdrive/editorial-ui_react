@@ -1,13 +1,11 @@
-import { Select } from '@acpaas-ui/react-components';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { isUndefined } from '../../helpers';
-
 import { TIME_UNIT_AMOUNTS } from './Timepicker.const';
 import {
-	generateTimeSelectOptions, getTimeArray, getTimeString, setInitialValues,
+	getTimeArray,
+	getTimeString,
 } from './Timepicker.helpers';
 import './Timepicker.scss';
 
@@ -17,124 +15,57 @@ const Timepicker = ({
 	required,
 	disabled = false,
 	value,
-	hourLabel = 'Uren',
-	minuteLabel = 'Minuten',
-	secondLabel = 'Seconden',
-	millisecondLabel = 'Milliseconden',
-	hourPlaceholder = 'hh',
-	minutePlaceholder = 'mm',
-	secondPlaceholder = 'ss',
-	millisecondPlaceholder = 'ms',
+	label = 'Tijd',
+	description,
+	// eslint-disable-next-line no-unused-vars
 	hourStep = 1,
+	// eslint-disable-next-line no-unused-vars
 	minuteStep = 5,
-	secondStep,
-	millisecondStep,
 	onChange,
 }) => {
-	const roundedSecondStep = !isUndefined(secondStep) ? Math.round(secondStep) : null;
-	const roundedMillisecondSecondStep = !isUndefined(millisecondStep)
-		? Math.round(millisecondStep)
-		: null;
-	const [hours, minutes, seconds, milliseconds] = TIME_UNIT_AMOUNTS;
 	const timeArray = getTimeArray(value, TIME_UNIT_AMOUNTS) || [];
-
+	let timeString = getTimeString(timeArray);
 	/**
-	* Methods
-	*/
-	const handleChange = (indexValue, index) => {
-		let prevValue = getTimeArray(value, TIME_UNIT_AMOUNTS);
+	 * Methods
+	 */
+	const handleChange = (indexValue) => {
+		timeString = indexValue;
 
-		if (timeArray.length < index - 1) {
-			prevValue = setInitialValues(index);
-		}
-
-		prevValue[index] = indexValue;
-
-		onChange(getTimeString(prevValue));
+		onChange(indexValue);
 	};
-
 	/**
-	* Render
-	*/
+	 * Render
+	 */
 	return (
-		<div className={classnames('a-timepicker', className)}>
-			<Select
-				id={`${id}-hours`}
-				required={required}
-				label={hourLabel}
-				disabled={disabled}
-				options={generateTimeSelectOptions(hours, hourStep, disabled)}
-				placeholder={hourPlaceholder}
-				value={timeArray[0]}
-				onChange={(event) => handleChange(event.target.value, 0)}
-			/>
-			<span className="a-timepicker__separator">:</span>
-			<Select
-				id={`${id}-minutes`}
+		<div className={classnames('a-input a-timepicker', className)}>
+			<label className="a-input__label" htmlFor="time-field">
+				{label}
+			</label>
+			<input
+				type="time"
+				name="time-field"
+				id={id}
+				value={timeString || '00:00'}
+				aria-describedby="time-field-description"
+				onChange={(event) => handleChange(event.target.value)}
 				required={required}
 				disabled={disabled}
-				label={minuteLabel}
-				options={generateTimeSelectOptions(minutes, minuteStep, disabled)}
-				placeholder={minutePlaceholder}
-				value={timeArray[1]}
-				onChange={(event) => handleChange(event.target.value, 1)}
 			/>
-			{roundedSecondStep && roundedSecondStep > 0 ? (
-				<>
-					<span className="a-timepicker__separator">:</span>
-					<Select
-						id={`${id}-seconds`}
-						required={required}
-						disabled={disabled}
-						label={secondLabel}
-						options={generateTimeSelectOptions(seconds, roundedSecondStep, disabled)}
-						placeholder={secondPlaceholder}
-						value={timeArray[2]}
-						onChange={(event) => handleChange(event.target.value, 2)}
-					/>
-				</>
-			) : null}
-			{roundedMillisecondSecondStep && roundedMillisecondSecondStep > 0 ? (
-				<>
-					<span className="a-timepicker__separator">:</span>
-					<Select
-						id={`${id}-milliseconds`}
-						required={required}
-						disabled={disabled}
-						label={millisecondLabel}
-						options={generateTimeSelectOptions(
-							milliseconds,
-							roundedMillisecondSecondStep,
-							disabled,
-						)}
-						placeholder={millisecondPlaceholder}
-						value={timeArray[3]}
-						onChange={(event) => handleChange(event.target.value, 3)}
-					/>
-				</>
-			) : null}
+			<small id="time-field-description">{description}</small>
 		</div>
 	);
 };
 
 Timepicker.propTypes = {
+	label: PropTypes.string,
+	description: PropTypes.string,
 	id: PropTypes.string.isRequired,
 	className: PropTypes.string,
 	required: PropTypes.bool,
 	disabled: PropTypes.bool,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	hourLabel: PropTypes.string,
-	minuteLabel: PropTypes.string,
-	secondLabel: PropTypes.string,
-	millisecondLabel: PropTypes.string,
-	hourPlaceholder: PropTypes.string,
-	minutePlaceholder: PropTypes.string,
-	secondPlaceholder: PropTypes.string,
-	millisecondPlaceholder: PropTypes.string,
 	hourStep: PropTypes.number,
 	minuteStep: PropTypes.number,
-	secondStep: PropTypes.number,
-	millisecondStep: PropTypes.number,
 	onChange: PropTypes.func,
 };
 
