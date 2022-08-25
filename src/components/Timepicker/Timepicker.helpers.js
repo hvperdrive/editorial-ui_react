@@ -49,8 +49,9 @@ export const getTimeArray = (timeString, timeUnitAmounts) => {
 	}
 
 	const timeArray = timeString.split(':');
+	const slicedArray = timeArray.slice(0, 2);
 
-	return timeArray.map((time, index) => getTimeOption(time, timeUnitAmounts[index])?.value ?? '');
+	return slicedArray.map((time, index) => getTimeOption(time, timeUnitAmounts[index])?.value ?? '');
 };
 
 export const getTimeString = (timeArray) => timeArray.join(':');
