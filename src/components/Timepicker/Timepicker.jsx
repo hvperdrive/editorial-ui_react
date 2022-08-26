@@ -15,7 +15,7 @@ const Timepicker = ({
 	required,
 	disabled = false,
 	value,
-	label = 'Tijd',
+	label,
 	description,
 	placeholder = '00:00',
 	// eslint-disable-next-line no-unused-vars
