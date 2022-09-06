@@ -98,6 +98,7 @@ Tooltip.propTypes = {
 		TooltipTypeMap.PRIMARY,
 		TooltipTypeMap.SECONDARY,
 		TooltipTypeMap.WHITE,
+		TooltipTypeMap.DARK,
 	]),
 	size: PropTypes.oneOf([
 		TooltipSizeMap.SMALL,
