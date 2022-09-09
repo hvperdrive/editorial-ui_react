@@ -1,0 +1,29 @@
+import { useEffect, useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import CharacterCount from './CharacterCount';
+
+<Meta title="CharacterCount" component={CharacterCount} />
+
+# CharacterCount
+
+A vertically scrollable tab bar
+
+## Preview of component
+
+<Preview>
+	<Story name='Base'>
+		<CharacterCount />
+	</Story>
+	<Story name='Error'>
+		<CharacterCount count={100} max={80} />
+	</Story>
+	<Story name='Warning'>
+		<CharacterCount count={65} max={80} warningLimit={20} />
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={CharacterCount} />
