@@ -26,25 +26,30 @@ const Timepicker = ({
 }) => {
 	const timeArray = getTimeArray(value, TIME_UNIT_AMOUNTS) || [];
 	let timeString = getTimeString(timeArray);
+
 	/**
 	 * Methods
 	 */
+
 	const handleChange = (indexValue) => {
 		timeString = indexValue;
-
 		onChange(indexValue);
 	};
+
 	/**
 	 * Render
 	 */
+
 	return (
 		<div className={classnames(className, 'a-input a-timepicker', {
 			'is-required': !!required,
 		})}
 		>
-			<label className="a-input__label" htmlFor="time-field">
-				{label}
-			</label>
+			{label && (
+				<label className="a-input__label" htmlFor="time-field">
+					{label}
+				</label>
+			)}
 			<input
 				type="time"
 				name="time-field"
@@ -56,7 +61,7 @@ const Timepicker = ({
 				required={required}
 				disabled={disabled}
 			/>
-			<small id="time-field-description">{description}</small>
+			{description && <small id="time-field-description">{description}</small>}
 		</div>
 	);
 };
