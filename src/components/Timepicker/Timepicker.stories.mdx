@@ -27,6 +27,23 @@ Some explanation about our Timepicker component
 			);
 		}}
 	</Story>
+	<Story name='Required'>
+		{() => {
+			const [value, setValue] = useState('10:30:0:0');
+			return (
+				<Timepicker
+					id="time"
+					label="Time"
+					value={value}
+					onChange={(newValue) => {
+						action()(newValue);
+						setValue(newValue);
+					}}
+					required
+				/>
+			);
+		}}
+	</Story>
 </Preview>
 
 ## Props

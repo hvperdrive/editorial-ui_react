@@ -38,7 +38,10 @@ const Timepicker = ({
 	 * Render
 	 */
 	return (
-		<div className={classnames('a-input a-timepicker', className)}>
+		<div className={classnames(className, 'a-input a-timepicker', {
+			'is-required': !!required,
+		})}
+		>
 			<label className="a-input__label" htmlFor="time-field">
 				{label}
 			</label>
