@@ -1,9 +1,16 @@
 @import "~@a-ui/core/dist/assets/styles/_quarks";
 
 .a-tooltip {
-	z-index: 100;
+	z-index: layer('tooltip');
 	white-space: normal;
 	height: auto;
+
+	.arrow {
+		width: 0;
+		height: 0;
+		border-style: solid;
+		position: absolute;
+	}
 
 	&.a-tooltip--no-arrow {
 		&::before {
@@ -18,14 +25,7 @@
 
 		padding: $spacer-xs / 2 $spacer-sm / 2;
 		min-height: auto;
-		font-size: .8rem;
-	}
-
-	.arrow {
-		width: 0;
-		height: 0;
-		border-style: solid;
-		position: absolute;
+		font-size: 0.8rem;
 	}
 
 	&[data-popper-placement^="top"] {
