@@ -60,6 +60,7 @@ const LanguageHeader = ({
 	};
 
 	const classNameRoot = cx(className, 'u-bg-white', 'o-language-header');
+
 	return (
 		<div className={classNameRoot}>
 			{ isVisible && languages.length > 1 && (

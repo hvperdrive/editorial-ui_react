@@ -18,10 +18,7 @@ const Timepicker = ({
 	label,
 	description,
 	placeholder = '00:00',
-	// eslint-disable-next-line no-unused-vars
-	hourStep = 1,
-	// eslint-disable-next-line no-unused-vars
-	minuteStep = 5,
+	step = 60,
 	onChange,
 }) => {
 	const timeArray = getTimeArray(value, TIME_UNIT_AMOUNTS) || [];
@@ -60,6 +57,7 @@ const Timepicker = ({
 				onChange={(event) => handleChange(event.target.value)}
 				required={required}
 				disabled={disabled}
+				step={step}
 			/>
 			{description && <small id="time-field-description">{description}</small>}
 		</div>
@@ -75,8 +73,7 @@ Timepicker.propTypes = {
 	description: PropTypes.string,
 	placeholder: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	hourStep: PropTypes.number,
-	minuteStep: PropTypes.number,
+	step: PropTypes.number,
 	onChange: PropTypes.func,
 };
 
