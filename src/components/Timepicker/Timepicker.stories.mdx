@@ -44,6 +44,24 @@ Some explanation about our Timepicker component
 			);
 		}}
 	</Story>
+	<Story name='Stepped'>
+		{() => {
+			const [value, setValue] = useState('10:30:0:0');
+			return (
+				<Timepicker
+					id="time"
+					label="Time"
+					value={value}
+					step={900}
+					onChange={(newValue) => {
+						action()(newValue);
+						setValue(newValue);
+					}}
+					required
+				/>
+			);
+		}}
+	</Story>
 </Preview>
 
 ## Props
