@@ -4,4 +4,9 @@
 
 .ellipsis__text {
 	display: inline;
+
+	&::after {
+		content: '';
+		display: block;
+	  }
 }
