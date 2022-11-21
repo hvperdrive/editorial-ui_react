@@ -55,4 +55,14 @@ describe('<CharacterCount />', () => {
 		const componentEl = queryByText(count);
 		expect(componentEl.classList.contains('c-character-count--warning')).toBeTruthy();
 	});
+
+	it('Should not show a warning state when the count is not between min and max', () => {
+		const count = 90;
+		const { queryByText } = renderCharacterCount({
+			count, min: 100, max: 200, warningLimit: 25,
+		});
+
+		const componentEl = queryByText(count);
+		expect(componentEl.classList.contains('c-character-count--warning')).toBeFalsy();
+	});
 });
