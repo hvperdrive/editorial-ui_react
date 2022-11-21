@@ -11,7 +11,7 @@ const CharacterCount = ({
 }) => {
 	const clx = cx(className, 'c-character-count', {
 		'c-character-count--error': count < min || count > max,
-		'c-character-count--warning': warningLimit && (count < min + warningLimit || count > max - warningLimit),
+		'c-character-count--warning': warningLimit && ((count > min && count < min + warningLimit) || (count < max && count > max - warningLimit)),
 	});
 
 	return <div className={clx}>{children || count}</div>;
