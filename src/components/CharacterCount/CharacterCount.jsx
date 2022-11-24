@@ -24,6 +24,7 @@ const CharacterCount = ({
 			min: 'minstens',
 			max: 'maximaal',
 			characters: 'karakters',
+			and: 'en',
 		},
 	},
 }) => {
@@ -42,7 +43,7 @@ const CharacterCount = ({
 	}
 
 	return (
-		<HoverTooltip value={`${labels.tooltip.start} ${min ? `${labels.tooltip.min} ${min}` : ''}${max ? min ? ` en ${labels.tooltip.max} ${max}` : `${labels.tooltip.max} ${max}` : ''} ${labels.tooltip.characters}.`}>
+		<HoverTooltip value={`${labels.tooltip.start} ${min ? `${labels.tooltip.min} ${min}` : ''}${max ? min ? ` ${labels.tooltip.and} ${labels.tooltip.max} ${max}` : `${labels.tooltip.max} ${max}` : ''} ${labels.tooltip.characters}.`}>
 			<div className={clx}>
 				<Icon
 					name={isInvalid ? 'exclamation-triangle' : 'check-circle'}
