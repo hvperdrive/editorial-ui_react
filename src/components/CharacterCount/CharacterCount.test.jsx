@@ -46,10 +46,4 @@ describe('<CharacterCount />', () => {
 		const componentEl = queryByText('(20 tot 50)');
 		expect(componentEl).toBeTruthy();
 	});
-
-	it('Should render warning state', () => {
-		const { container } = renderCharacterCount({ count: 10, min: 20, max: 50 });
-
-		expect(container.firstChild.classList.contains('c-character-count--warning')).toBeTruthy();
-	});
 });
