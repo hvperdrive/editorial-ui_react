@@ -29,7 +29,7 @@ const CharacterCount = ({
 		return <div className={clx}>{children}</div>;
 	}
 
-	if (!min && !max) {
+	if ((!min && !max) || !count) {
 		return <></>;
 	}
 
