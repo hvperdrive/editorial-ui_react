@@ -36,7 +36,7 @@ const CharacterCount = ({
 	return (
 		<div className={clx}>
 			<Icon
-				name={isInvalid ? 'check-circle' : 'exclamation-triangle'}
+				name={isInvalid ? 'exclamation-triangle' : 'check-circle'}
 				className={cx('a-character-count-icon', {
 					'a-character-count-icon--warning': isInvalid,
 				})}
