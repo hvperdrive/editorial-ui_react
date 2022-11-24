@@ -94,6 +94,12 @@ CharacterCount.propTypes = {
 		until: PropTypes.string,
 		min: PropTypes.string,
 		max: PropTypes.string,
+		tooltip: {
+			min: PropTypes.string,
+			max: PropTypes.string,
+			start: PropTypes.string,
+			characters: PropTypes.string,
+		},
 	},
 };
 
