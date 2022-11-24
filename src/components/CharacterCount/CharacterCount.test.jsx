@@ -6,12 +6,11 @@ import CharacterCount from './CharacterCount';
 const renderCharacterCount = (props) => render(<CharacterCount {...props} />);
 
 describe('<CharacterCount />', () => {
-	it('Should pass `className`', () => {
+	it('Should not render when min and max are undefined', () => {
 		const className = 'custom-char-count';
-		const { queryByText } = renderCharacterCount({ className });
+		const { container } = renderCharacterCount({ className });
 
-		const componentEl = queryByText('0');
-		expect(componentEl.classList.contains(className)).toBeTruthy();
+		expect(container.firstChild).toEqual(null);
 	});
 
 	it('Should pass `children` over `count`', () => {
@@ -24,45 +23,33 @@ describe('<CharacterCount />', () => {
 		expect(queryByText(count)).toBeNull();
 	});
 
-	it('Should show an error state when `count` is smaller than `min` ', () => {
+	it('Should render min value', () => {
 		const count = 20;
 		const { queryByText } = renderCharacterCount({ count, min: 50 });
 
-		const componentEl = queryByText(count);
-		expect(componentEl.classList.contains('c-character-count--error')).toBeTruthy();
+		const componentEl = queryByText('(min 50)');
+		expect(componentEl).toBeTruthy();
 	});
 
-	it('Should show an error state when `count` is greate than `max` ', () => {
-		const count = 100;
-		const { queryByText } = renderCharacterCount({ count, max: 80 });
+	it('Should render max value', () => {
+		const count = 20;
+		const { queryByText } = renderCharacterCount({ count, max: 50 });
 
-		const componentEl = queryByText(count);
-		expect(componentEl.classList.contains('c-character-count--error')).toBeTruthy();
+		const componentEl = queryByText('(max 50)');
+		expect(componentEl).toBeTruthy();
 	});
 
-	it('Should show a warning state when `count` nears `min`', () => {
-		const count = 35;
-		const { queryByText } = renderCharacterCount({ count, min: 20, warningLimit: 20 });
+	it('Should render min and max value', () => {
+		const count = 20;
+		const { queryByText } = renderCharacterCount({ count, min: 20, max: 50 });
 
-		const componentEl = queryByText(count);
-		expect(componentEl.classList.contains('c-character-count--warning')).toBeTruthy();
+		const componentEl = queryByText('(20 tot 50)');
+		expect(componentEl).toBeTruthy();
 	});
 
-	it('Should show a warning state when `count` nears `max`', () => {
-		const count = 65;
-		const { queryByText } = renderCharacterCount({ count, max: 80, warningLimit: 20 });
+	it('Should render warning state', () => {
+		const { container } = renderCharacterCount({ count: 10, min: 20, max: 50 });
 
-		const componentEl = queryByText(count);
-		expect(componentEl.classList.contains('c-character-count--warning')).toBeTruthy();
-	});
-
-	it('Should not show a warning state when the count is not between min and max', () => {
-		const count = 90;
-		const { queryByText } = renderCharacterCount({
-			count, min: 100, max: 200, warningLimit: 25,
-		});
-
-		const componentEl = queryByText(count);
-		expect(componentEl.classList.contains('c-character-count--warning')).toBeFalsy();
+		expect(container.firstChild.classList.contains('c-character-count--warning')).toBeTruthy();
 	});
 });
