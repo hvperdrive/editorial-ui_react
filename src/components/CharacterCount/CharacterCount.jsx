@@ -28,7 +28,21 @@ const CharacterCount = ({
 		},
 	},
 }) => {
-	const isInvalid = useMemo(() => (count < min || count > max), [count, min, max]);
+	const isInvalid = useMemo(() => {
+		if (min && max) {
+			return (count < min || count > max);
+		}
+
+		if (min) {
+			return count < min;
+		}
+
+		if (max) {
+			return count > max;
+		}
+
+		return false;
+	}, [count, min, max]);
 
 	const clx = useMemo(() => cx(className, 'c-character-count', {
 		'c-character-count--warning': isInvalid,
